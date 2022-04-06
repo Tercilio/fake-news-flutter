@@ -1,6 +1,6 @@
 # DeteccaoDeFakeNews
 
-![Imagem 1](https://www.aberje.com.br/wp-content/uploads/2021/08/Fake-news.jpg)
+![Imagem 1](https://www.pmg-ssi.com/wp-content/uploads/2019/08/Fake-news.jpg)
 
 # Detecção de FAke News (API)
 [![NPM](https://img.shields.io/npm/l/react)](https://github.com/WelissonLima/api-de-recomendacao/blob/master/LICENSE)
