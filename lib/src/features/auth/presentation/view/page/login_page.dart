@@ -27,12 +27,12 @@ class _LoginPageState extends ModularState<LoginPage, LoginViewModel> {
   Widget get _username => Container(
         margin: const EdgeInsets.fromLTRB(25, 15, 25, 5),
         width: double.infinity,
-        height: 56,
         child: TextFormField(
           keyboardType: TextInputType.emailAddress,
           textInputAction: TextInputAction.next,
           decoration: InputDecoration(
             errorText: store.error.username,
+            errorStyle: const TextStyle(fontWeight: FontWeight.bold),
             hintText: 'username_hint'.i18n(),
             prefixIcon: const Icon(Icons.person),
             contentPadding: const EdgeInsets.all(20),
@@ -49,13 +49,13 @@ class _LoginPageState extends ModularState<LoginPage, LoginViewModel> {
   Widget get _password => Container(
         margin: const EdgeInsets.fromLTRB(25, 15, 25, 5),
         width: double.infinity,
-        height: 56,
         child: TextFormField(
           obscureText: true,
           textInputAction: TextInputAction.next,
           keyboardType: TextInputType.text,
           decoration: InputDecoration(
             errorText: store.error.password,
+            errorStyle: const TextStyle(fontWeight: FontWeight.bold),
             hintText: 'password_hint'.i18n(),
             contentPadding: const EdgeInsets.all(20),
             prefixIcon: const Icon(Icons.lock_rounded),
