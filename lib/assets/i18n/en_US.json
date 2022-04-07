@@ -1,0 +1,14 @@
+{
+    "app_name" : "Example App",
+
+    "username" : "User",
+    "username_hint": "Type your username",
+    "password": "Password",
+    "password_hint": "Type your password",
+    "login" : "Login",
+    "forgot_password" : "Forgot password!",
+    "username_required" : "Username is required!",
+    "password_required" : "Password is required!",
+    "divider_text" : "or",
+    "signup" : "Sign Up"
+}
