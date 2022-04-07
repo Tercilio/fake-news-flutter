@@ -24,34 +24,58 @@ class _LoginPageState extends ModularState<LoginPage, LoginViewModel> {
         visible: store.isLoading,
       );
 
-  Widget get _username => widget.createFormField(
-        title: 'username'.i18n(),
-        theme: _theme,
-        keyboardType: TextInputType.emailAddress,
-        textInputAction: TextInputAction.next,
-        hint: 'username_hint'.i18n(),
-        enabled: !store.isLoading,
-        errorText: store.error.username,
-        onChange: (value) => store.username = value,
+  Widget get _username => Container(
+        margin: const EdgeInsets.fromLTRB(25, 15, 25, 5),
+        width: double.infinity,
+        height: 56,
+        child: TextFormField(
+          keyboardType: TextInputType.emailAddress,
+          textInputAction: TextInputAction.next,
+          decoration: InputDecoration(
+            errorText: store.error.username,
+            hintText: 'username_hint'.i18n(),
+            prefixIcon: const Icon(Icons.person),
+            contentPadding: const EdgeInsets.all(20),
+            border: OutlineInputBorder(
+              borderSide: const BorderSide(color: Colors.black, width: 4.0),
+              borderRadius: BorderRadius.circular(10),
+            ),
+          ),
+          enabled: !store.isLoading,
+          onChanged: (value) => store.username = value,
+        ),
       );
 
-  Widget get _password => widget.createFormField(
-        title: 'password'.i18n(),
-        theme: _theme,
-        keyboardType: TextInputType.text,
-        obscureText: true,
-        hint: 'password_hint'.i18n(),
-        enabled: !store.isLoading,
-        errorText: store.error.password,
-        onChange: (value) => store.password = value,
+  Widget get _password => Container(
+        margin: const EdgeInsets.fromLTRB(25, 15, 25, 5),
+        width: double.infinity,
+        height: 56,
+        child: TextFormField(
+          obscureText: true,
+          textInputAction: TextInputAction.next,
+          keyboardType: TextInputType.text,
+          decoration: InputDecoration(
+            errorText: store.error.password,
+            hintText: 'password_hint'.i18n(),
+            contentPadding: const EdgeInsets.all(20),
+            prefixIcon: const Icon(Icons.lock_rounded),
+            border: OutlineInputBorder(
+              borderSide: const BorderSide(color: Colors.black, width: 4.0),
+              borderRadius: BorderRadius.circular(10),
+            ),
+          ),
+          enabled: !store.isLoading,
+          onChanged: (value) => store.password = value,
+        ),
       );
 
   Widget get _loginButton => Container(
-        margin: const EdgeInsets.fromLTRB(30, 15, 30, 5),
-        width: double.infinity,
         height: 56,
+        width: double.infinity,
+        margin: const EdgeInsets.fromLTRB(70, 15, 70, 5),
         child: ElevatedButton(
           style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(6),
@@ -63,57 +87,36 @@ class _LoginPageState extends ModularState<LoginPage, LoginViewModel> {
         ),
       );
 
-  Widget get _forgotPasswordButton => Container(
-        margin: const EdgeInsets.fromLTRB(30, 30, 30, 20),
+  Widget get _forgotPassword => Container(
         width: double.infinity,
-        height: 56,
+        margin: const EdgeInsets.fromLTRB(30, 0, 30, 0),
         child: TextButton(
-          style: TextButton.styleFrom(splashFactory: NoSplash.splashFactory),
-          onPressed: store.isLoading ? null : () {},
+          style: TextButton.styleFrom(
+              splashFactory: NoSplash.splashFactory, primary: Colors.grey),
+          onPressed: store.isLoading
+              ? null
+              : () {
+                  Navigator.pop(context);
+                  Modular.to.pushNamed('/forgotpassword');
+                },
           child: Text('forgot_password'.i18n()),
         ),
       );
 
   Widget get _signUp => Container(
-        margin: const EdgeInsets.fromLTRB(30, 40, 30, 30),
-        height: 56,
         width: double.infinity,
-        child: OutlinedButton(
-          style: ButtonStyle(
-            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(6),
-              ),
-            ),
-          ),
+        margin: const EdgeInsets.fromLTRB(30, 0, 30, 0),
+        child: TextButton(
+          style: TextButton.styleFrom(
+              splashFactory: NoSplash.splashFactory, primary: Colors.grey),
           onPressed: store.isLoading
               ? null
               : () {
                   Navigator.pop(context);
-                  Modular.to.pushNamed('/signup/');
+                  Modular.to.pushNamed('/signup');
                 },
           child: Text('signup'.i18n()),
         ),
-      );
-
-  Widget get _divider => Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          const Expanded(
-              child: Divider(thickness: 1, indent: 25, endIndent: 10)),
-          Text(
-            'divider_text'.i18n(),
-            style: _theme.textTheme.headline6,
-          ),
-          const Expanded(
-            child: Divider(
-              thickness: 1,
-              indent: 10,
-              endIndent: 25,
-            ),
-          ),
-        ],
       );
 
   @override
@@ -122,7 +125,8 @@ class _LoginPageState extends ModularState<LoginPage, LoginViewModel> {
     _colors = _theme.colorScheme;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Login')),
+      // appBar: AppBar(title: const Text('Login')),
+      backgroundColor: Colors.grey[200],
       body: Center(
         child: SingleChildScrollView(
           child: Observer(builder: (_) {
@@ -137,8 +141,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginViewModel> {
                   _username,
                   _password,
                   _loginButton,
-                  _forgotPasswordButton,
-                  _divider,
+                  _forgotPassword,
                   _signUp
                 ],
               ),
