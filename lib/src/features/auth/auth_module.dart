@@ -4,6 +4,7 @@ import '../home/home_module.dart';
 import 'data/repository/login_repository.dart';
 import 'domain/repository/login_interface.dart';
 import 'domain/usecase/login_usecase.dart';
+import 'presentation/view/page/forgot_password_page.dart';
 import 'presentation/view/page/login_page.dart';
 import 'presentation/view/page/signup_page.dart';
 import 'presentation/viewmodel/login_viewmodel.dart';
@@ -20,6 +21,7 @@ class AuthModule extends Module {
   List<ModularRoute> get routes => [
         ChildRoute('/', child: (_, __) => const LoginPage()),
         ChildRoute('/signup', child: (_, __) => const SignUpPage()),
+        ChildRoute('/forgotpassword', child: (_, __) => const ForgotPassword()),
         ModuleRoute('/home', module: HomeModule())
       ];
 }
