@@ -1,3 +1,4 @@
+import 'package:basearch/src/features/auth/presentation/viewmodel/signup_viewmodel.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../home/home_module.dart';
@@ -13,6 +14,7 @@ class AuthModule extends Module {
   @override
   List<Bind<Object>> get binds => [
         Bind.factory((i) => LoginViewModel()),
+        Bind.factory((i) => SignUpViewModel()),
         Bind.factory((i) => LoginUseCase()),
         Bind.factory<ILogin>((i) => LoginRepository()),
       ];

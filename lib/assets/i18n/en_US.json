@@ -7,8 +7,16 @@
     "password_hint": "Type your password",
     "login" : "Login",
     "forgot_password" : "Forgot password!",
+
+    "saveuser" : "Join",
+    "firstname": "First name",
+    "firstname_hint": "Type your first name",
+    "email": "email",
+    "email_hint": "Type your email",
+
+    "questionlogin_text": "Do you have an account? ",
+    
     "username_required" : "Username is required!",
     "password_required" : "Password is required!",
-    "divider_text" : "or",
     "signup" : "Sign Up"
 }

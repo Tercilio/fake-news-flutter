@@ -7,8 +7,16 @@
     "password_hint" : "Informe a sua senha",
     "login" : "Login",
     "forgot_password" : "Esqueci a senha!",
+
+    "saveuser" : "Salvar",
+    "firstname": "Nome",
+    "firstname_hint": "Informe o seu nome",
+    "email": "email",
+    "email_hint": "Informe o seu e-mail",
+
+    "questionlogin_text": "Você já tem uma conta? ",
+    
     "username_required" : "O usuário é obrigatório",
     "password_required" : "A senha é obrigatória",
-    "divider_text" : "ou",
     "signup" : "Cadastrar"
 }
