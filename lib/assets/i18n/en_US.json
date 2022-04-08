@@ -1,8 +1,8 @@
 {
     "app_name" : "Example App",
 
-    "username" : "User",
-    "username_hint": "Type your username",
+    "email": "email",
+    "email_hint": "Type your email",
     "password": "Password",
     "password_hint": "Type your password",
     "login" : "Login",
@@ -11,16 +11,14 @@
     "saveuser" : "Join",
     "fullname": "Full name",
     "fullname_hint": "Type your full name",
-    "email": "email",
-    "email_hint": "Type your email",
 
     "questionlogin_text": "Do you have an account? ",
     
-    "username_required" : "Username is required!",
+    "email_required" : "Email is required!",
     "password_required" : "Password is required!",
     "fullname_required" : "Full name is required!",
 
-    "username_invalid" : "Email is invalid!",
+    "email_invalid" : "Email is invalid!",
     "password_invalid" : "Password is invalid!",
 
     "signup" : "Sign Up"

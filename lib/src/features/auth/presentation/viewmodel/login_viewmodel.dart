@@ -12,7 +12,7 @@ abstract class _LoginViewModelBase with Store {
   final _usecase = Modular.get<LoginUseCase>();
 
   @observable
-  String username = '';
+  String email = '';
 
   @observable
   String password = '';
@@ -22,7 +22,7 @@ abstract class _LoginViewModelBase with Store {
 
   @action
   void validateUsername() {
-    error.username = _usecase.validateUsername(username);
+    error.email = _usecase.validateUsername(email);
   }
 
   @action
@@ -36,17 +36,17 @@ abstract class _LoginViewModelBase with Store {
     validateUsername();
     validatePassword();
 
-    if (!error.hasErrors) {
-      isLoading = true;
-      try {
-        await _usecase.login(username, password);
-      } on UnimplementedError {
-        // TODO: Fix!!!
-        error.login = 'Função não implementada!';
-      } finally {
-        isLoading = false;
-      }
-    }
+    // if (!error.hasErrors) {
+    //   isLoading = true;
+    //   try {
+    //     await _usecase.login(email, password);
+    //   } on UnimplementedError {
+    //     // TODO: Fix!!!
+    //     error.login = 'Função não implementada!';
+    //   } finally {
+    //     isLoading = false;
+    //   }
+    // }
   }
 }
 
@@ -54,7 +54,7 @@ class LoginError = _LoginErrorBase with _$LoginError;
 
 abstract class _LoginErrorBase with Store {
   @observable
-  String? username;
+  String? email;
 
   @observable
   String? password;
@@ -63,10 +63,10 @@ abstract class _LoginErrorBase with Store {
   String? login;
 
   @computed
-  bool get hasErrors => username != null || password != null || login != null;
+  bool get hasErrors => email != null || password != null || login != null;
 
   void clear() {
-    username = null;
+    email = null;
     password = null;
     login = null;
   }

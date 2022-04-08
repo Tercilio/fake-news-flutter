@@ -14,9 +14,9 @@ class SignUpUseCase {
     RegExp regExp = RegExp(pattern);
 
     if (email.isEmpty) {
-      return 'username_required'.i18n();
+      return 'email_required'.i18n();
     } else if (!regExp.hasMatch(email)) {
-      return 'username_invalid'.i18n();
+      return 'email_invalid'.i18n();
     }
 
     return null;

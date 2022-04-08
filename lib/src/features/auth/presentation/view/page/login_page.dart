@@ -1,4 +1,3 @@
-import 'package:basearch/src/common/form_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -24,17 +23,17 @@ class _LoginPageState extends ModularState<LoginPage, LoginViewModel> {
         visible: store.isLoading,
       );
 
-  Widget get _username => Container(
+  Widget get _email => Container(
         margin: const EdgeInsets.fromLTRB(25, 15, 25, 5),
         width: double.infinity,
         child: TextFormField(
           keyboardType: TextInputType.emailAddress,
           textInputAction: TextInputAction.next,
           decoration: InputDecoration(
-            errorText: store.error.username,
+            errorText: store.error.email,
             errorStyle: const TextStyle(fontWeight: FontWeight.bold),
-            hintText: 'username_hint'.i18n(),
-            prefixIcon: const Icon(Icons.person),
+            hintText: 'email_hint'.i18n(),
+            prefixIcon: const Icon(Icons.email_rounded),
             contentPadding: const EdgeInsets.all(20),
             border: OutlineInputBorder(
               borderSide: const BorderSide(color: Colors.black, width: 4.0),
@@ -42,7 +41,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginViewModel> {
             ),
           ),
           enabled: !store.isLoading,
-          onChanged: (value) => store.username = value,
+          onChanged: (value) => store.email = value,
         ),
       );
 
@@ -138,7 +137,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginViewModel> {
                 children: [
                   _loadingIndicator,
                   const SizedBox(height: 5),
-                  _username,
+                  _email,
                   _password,
                   _loginButton,
                   _forgotPassword,

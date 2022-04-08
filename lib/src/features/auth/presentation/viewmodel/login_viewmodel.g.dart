@@ -9,18 +9,18 @@ part of 'login_viewmodel.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$LoginViewModel on _LoginViewModelBase, Store {
-  final _$usernameAtom = Atom(name: '_LoginViewModelBase.username');
+  final _$emailAtom = Atom(name: '_LoginViewModelBase.email');
 
   @override
-  String get username {
-    _$usernameAtom.reportRead();
-    return super.username;
+  String get email {
+    _$emailAtom.reportRead();
+    return super.email;
   }
 
   @override
-  set username(String value) {
-    _$usernameAtom.reportWrite(value, super.username, () {
-      super.username = value;
+  set email(String value) {
+    _$emailAtom.reportWrite(value, super.email, () {
+      super.email = value;
     });
   }
 
@@ -82,7 +82,7 @@ mixin _$LoginViewModel on _LoginViewModelBase, Store {
   @override
   String toString() {
     return '''
-username: ${username},
+email: ${email},
 password: ${password},
 isLoading: ${isLoading}
     ''';
@@ -98,18 +98,18 @@ mixin _$LoginError on _LoginErrorBase, Store {
               name: '_LoginErrorBase.hasErrors'))
           .value;
 
-  final _$usernameAtom = Atom(name: '_LoginErrorBase.username');
+  final _$emailAtom = Atom(name: '_LoginErrorBase.email');
 
   @override
-  String? get username {
-    _$usernameAtom.reportRead();
-    return super.username;
+  String? get email {
+    _$emailAtom.reportRead();
+    return super.email;
   }
 
   @override
-  set username(String? value) {
-    _$usernameAtom.reportWrite(value, super.username, () {
-      super.username = value;
+  set email(String? value) {
+    _$emailAtom.reportWrite(value, super.email, () {
+      super.email = value;
     });
   }
 
@@ -146,7 +146,7 @@ mixin _$LoginError on _LoginErrorBase, Store {
   @override
   String toString() {
     return '''
-username: ${username},
+email: ${email},
 password: ${password},
 login: ${login},
 hasErrors: ${hasErrors}

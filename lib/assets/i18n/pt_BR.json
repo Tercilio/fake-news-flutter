@@ -1,8 +1,8 @@
 {
     "app_name" : "Aplicativo de Exemplo",
     
-    "username" : "Usuário",
-    "username_hint" : "Informe o nome do seu usuário",
+    "email" : "Email",
+    "email_hint" : "Informe o seu email",
     "password" : "Senha",
     "password_hint" : "Informe a sua senha",
     "login" : "Login",
@@ -11,13 +11,15 @@
     "saveuser" : "Salvar",
     "fullname": "Nome completo",
     "fullname_hint": "Informe o seu nome completo",
-    "email": "email",
-    "email_hint": "Informe o seu e-mail",
-
+    
     "questionlogin_text": "Você já tem uma conta? ",
     
-    "username_required" : "O usuário é obrigatório!",
+    "email_required" : "O email é obrigatório!",
     "password_required" : "A senha é obrigatória!",
     "fullname_required" : "O nome completo é obrigatório!",
+
+    "email_invalid" : "O email é inválido!",
+    "password_invalid" : "O senha é inválida!",
+    
     "signup" : "Cadastrar"
 }
