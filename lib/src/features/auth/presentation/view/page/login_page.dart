@@ -78,7 +78,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginViewModel> {
             backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
               RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(6),
+                borderRadius: BorderRadius.circular(40),
               ),
             ),
           ),
