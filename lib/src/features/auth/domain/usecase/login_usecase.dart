@@ -7,9 +7,14 @@ import '../repository/login_interface.dart';
 class LoginUseCase {
   final repository = Modular.get<ILogin>();
 
-  String? validateUsername(String email) {
+  String? validateEmail(String email) {
+    String pattern = r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$';
+    RegExp regExp = RegExp(pattern);
+
     if (email.isEmpty) {
       return 'email_required'.i18n();
+    } else if (!regExp.hasMatch(email)) {
+      return 'email_invalid'.i18n();
     }
 
     return null;

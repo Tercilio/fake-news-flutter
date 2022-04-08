@@ -21,8 +21,8 @@ abstract class _LoginViewModelBase with Store {
   bool isLoading = false;
 
   @action
-  void validateUsername() {
-    error.email = _usecase.validateUsername(email);
+  void validateEmail() {
+    error.email = _usecase.validateEmail(email);
   }
 
   @action
@@ -33,7 +33,7 @@ abstract class _LoginViewModelBase with Store {
   void login() async {
     error.clear();
 
-    validateUsername();
+    validateEmail();
     validatePassword();
 
     // if (!error.hasErrors) {

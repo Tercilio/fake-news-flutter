@@ -58,11 +58,11 @@ mixin _$LoginViewModel on _LoginViewModelBase, Store {
       ActionController(name: '_LoginViewModelBase');
 
   @override
-  void validateUsername() {
+  void validateEmail() {
     final _$actionInfo = _$_LoginViewModelBaseActionController.startAction(
-        name: '_LoginViewModelBase.validateUsername');
+        name: '_LoginViewModelBase.validateEmail');
     try {
-      return super.validateUsername();
+      return super.validateEmail();
     } finally {
       _$_LoginViewModelBaseActionController.endAction(_$actionInfo);
     }
