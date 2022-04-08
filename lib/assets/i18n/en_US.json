@@ -9,8 +9,8 @@
     "forgot_password" : "Forgot password!",
 
     "saveuser" : "Join",
-    "firstname": "First name",
-    "firstname_hint": "Type your first name",
+    "fullname": "Full name",
+    "fullname_hint": "Type your full name",
     "email": "email",
     "email_hint": "Type your email",
 

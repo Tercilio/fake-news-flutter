@@ -23,16 +23,16 @@ class _SignUpPageState extends ModularState<SignUpPage, SignUpViewModel> {
         visible: store.isLoading,
       );
 
-  Widget get _firstname => Container(
+  Widget get _fullname => Container(
         margin: const EdgeInsets.fromLTRB(25, 15, 25, 5),
         width: double.infinity,
         child: TextFormField(
           keyboardType: TextInputType.name,
           textInputAction: TextInputAction.next,
           decoration: InputDecoration(
-            // errorText: store.error.firstname,
+            // errorText: store.error.fullname,
             errorStyle: const TextStyle(fontWeight: FontWeight.bold),
-            hintText: 'firstname_hint'.i18n(),
+            hintText: 'fullname_hint'.i18n(),
             prefixIcon: const Icon(Icons.person_rounded),
             contentPadding: const EdgeInsets.all(20),
             border: OutlineInputBorder(
@@ -41,7 +41,7 @@ class _SignUpPageState extends ModularState<SignUpPage, SignUpViewModel> {
             ),
           ),
           enabled: !store.isLoading,
-          onChanged: (value) => store.firstname = value,
+          onChanged: (value) => store.fullname = value,
         ),
       );
 
@@ -147,7 +147,7 @@ class _SignUpPageState extends ModularState<SignUpPage, SignUpViewModel> {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   _loadingIndicator,
-                  _firstname,
+                  _fullname,
                   _email,
                   _password,
                   _saveButton,

@@ -6,7 +6,7 @@ class SignUpViewModel = _SignUpViewModelBase with _$SignUpViewModel;
 
 abstract class _SignUpViewModelBase with Store {
   @observable
-  String firstname = '';
+  String fullname = '';
 
   @observable
   String email = '';
@@ -18,10 +18,7 @@ abstract class _SignUpViewModelBase with Store {
   bool isLoading = false;
 
   @action
-  void validateFirstUsername() {}
-
-  @action
-  void validateLastUsername() {}
+  void validateFullname() {}
 
   @action
   void validateEmail() {}

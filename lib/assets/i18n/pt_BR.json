@@ -9,8 +9,8 @@
     "forgot_password" : "Esqueci a senha!",
 
     "saveuser" : "Salvar",
-    "firstname": "Nome",
-    "firstname_hint": "Informe o seu nome",
+    "fullname": "Nome completo",
+    "fullname_hint": "Informe o seu nome completo",
     "email": "email",
     "email_hint": "Informe o seu e-mail",
 

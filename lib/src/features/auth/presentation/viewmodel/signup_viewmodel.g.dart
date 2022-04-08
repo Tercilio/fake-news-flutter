@@ -9,18 +9,18 @@ part of 'signup_viewmodel.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$SignUpViewModel on _SignUpViewModelBase, Store {
-  final _$firstnameAtom = Atom(name: '_SignUpViewModelBase.firstname');
+  final _$fullnameAtom = Atom(name: '_SignUpViewModelBase.fullname');
 
   @override
-  String get firstname {
-    _$firstnameAtom.reportRead();
-    return super.firstname;
+  String get fullname {
+    _$fullnameAtom.reportRead();
+    return super.fullname;
   }
 
   @override
-  set firstname(String value) {
-    _$firstnameAtom.reportWrite(value, super.firstname, () {
-      super.firstname = value;
+  set fullname(String value) {
+    _$fullnameAtom.reportWrite(value, super.fullname, () {
+      super.fullname = value;
     });
   }
 
@@ -73,22 +73,11 @@ mixin _$SignUpViewModel on _SignUpViewModelBase, Store {
       ActionController(name: '_SignUpViewModelBase');
 
   @override
-  void validateFirstUsername() {
+  void validateFullname() {
     final _$actionInfo = _$_SignUpViewModelBaseActionController.startAction(
-        name: '_SignUpViewModelBase.validateFirstUsername');
+        name: '_SignUpViewModelBase.validateFullname');
     try {
-      return super.validateFirstUsername();
-    } finally {
-      _$_SignUpViewModelBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void validateLastUsername() {
-    final _$actionInfo = _$_SignUpViewModelBaseActionController.startAction(
-        name: '_SignUpViewModelBase.validateLastUsername');
-    try {
-      return super.validateLastUsername();
+      return super.validateFullname();
     } finally {
       _$_SignUpViewModelBaseActionController.endAction(_$actionInfo);
     }
@@ -119,7 +108,7 @@ mixin _$SignUpViewModel on _SignUpViewModelBase, Store {
   @override
   String toString() {
     return '''
-firstname: ${firstname},
+fullname: ${fullname},
 email: ${email},
 password: ${password},
 isLoading: ${isLoading}
