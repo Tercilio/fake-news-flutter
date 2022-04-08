@@ -115,3 +115,68 @@ isLoading: ${isLoading}
     ''';
   }
 }
+
+mixin _$LoginError on _LoginErrorBase, Store {
+  Computed<bool>? _$hasErrorsComputed;
+
+  @override
+  bool get hasErrors =>
+      (_$hasErrorsComputed ??= Computed<bool>(() => super.hasErrors,
+              name: '_LoginErrorBase.hasErrors'))
+          .value;
+
+  final _$fullnameAtom = Atom(name: '_LoginErrorBase.fullname');
+
+  @override
+  String? get fullname {
+    _$fullnameAtom.reportRead();
+    return super.fullname;
+  }
+
+  @override
+  set fullname(String? value) {
+    _$fullnameAtom.reportWrite(value, super.fullname, () {
+      super.fullname = value;
+    });
+  }
+
+  final _$emailAtom = Atom(name: '_LoginErrorBase.email');
+
+  @override
+  String? get email {
+    _$emailAtom.reportRead();
+    return super.email;
+  }
+
+  @override
+  set email(String? value) {
+    _$emailAtom.reportWrite(value, super.email, () {
+      super.email = value;
+    });
+  }
+
+  final _$passwordAtom = Atom(name: '_LoginErrorBase.password');
+
+  @override
+  String? get password {
+    _$passwordAtom.reportRead();
+    return super.password;
+  }
+
+  @override
+  set password(String? value) {
+    _$passwordAtom.reportWrite(value, super.password, () {
+      super.password = value;
+    });
+  }
+
+  @override
+  String toString() {
+    return '''
+fullname: ${fullname},
+email: ${email},
+password: ${password},
+hasErrors: ${hasErrors}
+    ''';
+  }
+}

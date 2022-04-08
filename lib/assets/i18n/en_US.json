@@ -18,5 +18,10 @@
     
     "username_required" : "Username is required!",
     "password_required" : "Password is required!",
+    "fullname_required" : "Full name is required!",
+
+    "username_invalid" : "Email is invalid!",
+    "password_invalid" : "Password is invalid!",
+
     "signup" : "Sign Up"
 }

@@ -30,7 +30,7 @@ class _SignUpPageState extends ModularState<SignUpPage, SignUpViewModel> {
           keyboardType: TextInputType.name,
           textInputAction: TextInputAction.next,
           decoration: InputDecoration(
-            // errorText: store.error.fullname,
+            errorText: store.error.fullname,
             errorStyle: const TextStyle(fontWeight: FontWeight.bold),
             hintText: 'fullname_hint'.i18n(),
             prefixIcon: const Icon(Icons.person_rounded),
@@ -52,7 +52,7 @@ class _SignUpPageState extends ModularState<SignUpPage, SignUpViewModel> {
           keyboardType: TextInputType.emailAddress,
           textInputAction: TextInputAction.next,
           decoration: InputDecoration(
-            // errorText: store.error.email,
+            errorText: store.error.email,
             errorStyle: const TextStyle(fontWeight: FontWeight.bold),
             hintText: 'email_hint'.i18n(),
             prefixIcon: const Icon(Icons.email_rounded),
@@ -75,7 +75,7 @@ class _SignUpPageState extends ModularState<SignUpPage, SignUpViewModel> {
           textInputAction: TextInputAction.next,
           keyboardType: TextInputType.text,
           decoration: InputDecoration(
-            // errorText: store.error.password,
+            errorText: store.error.password,
             errorStyle: const TextStyle(fontWeight: FontWeight.bold),
             hintText: 'password_hint'.i18n(),
             contentPadding: const EdgeInsets.all(20),

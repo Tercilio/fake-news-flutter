@@ -16,7 +16,8 @@
 
     "questionlogin_text": "Você já tem uma conta? ",
     
-    "username_required" : "O usuário é obrigatório",
-    "password_required" : "A senha é obrigatória",
+    "username_required" : "O usuário é obrigatório!",
+    "password_required" : "A senha é obrigatória!",
+    "fullname_required" : "O nome completo é obrigatório!",
     "signup" : "Cadastrar"
 }
