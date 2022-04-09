@@ -16,6 +16,22 @@ class _LoginPageState extends ModularState<LoginPage, LoginViewModel> {
   late ColorScheme _colors;
   late ThemeData _theme;
 
+  Widget get _logo => Container(
+      margin: const EdgeInsets.fromLTRB(25, 15, 25, 5),
+      width: double.infinity,
+      child: Column(
+        children: const [
+          Image(
+            image: AssetImage('lib/assets/images/logo.png'),
+            height: 140,
+          ),
+          Image(
+            image: AssetImage('lib/assets/images/removebg_blue.png'),
+            height: 55,
+          )
+        ],
+      ));
+
   Widget get _loadingIndicator => Visibility(
         child: const LinearProgressIndicator(
           backgroundColor: Colors.blueGrey,
@@ -135,8 +151,8 @@ class _LoginPageState extends ModularState<LoginPage, LoginViewModel> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.max,
                 children: [
+                  _logo,
                   _loadingIndicator,
-                  const SizedBox(height: 5),
                   _email,
                   _password,
                   _loginButton,
