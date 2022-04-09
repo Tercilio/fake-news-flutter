@@ -98,7 +98,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginViewModel> {
                   Navigator.pop(context);
                   Modular.to.pushNamed('/forgotpassword');
                 },
-          child: Text('forgot_password'.i18n()),
+          child: Text('reset_password'.i18n()),
         ),
       );
 

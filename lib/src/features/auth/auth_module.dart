@@ -1,4 +1,5 @@
 import 'package:basearch/src/features/auth/domain/usecase/signup_usecase.dart';
+import 'package:basearch/src/features/auth/presentation/viewmodel/forgotpassword_viewmodel.dart';
 import 'package:basearch/src/features/auth/presentation/viewmodel/signup_viewmodel.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -16,6 +17,7 @@ class AuthModule extends Module {
   List<Bind<Object>> get binds => [
         Bind.factory((i) => LoginViewModel()),
         Bind.factory((i) => SignUpViewModel()),
+        Bind.factory((i) => ForgotPasswordViewModel()),
         Bind.factory((i) => LoginUseCase()),
         Bind.factory((i) => SignUpUseCase()),
         Bind.factory<ILogin>((i) => LoginRepository()),
