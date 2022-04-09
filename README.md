@@ -8,10 +8,9 @@
 
 -- > Link da API  no Heroku 
 
- Detecção de Fake News é uma aplicação backEnd construída durante o 6° semestre da Faculdade, na Disciplina de Programação para Dispositivos Móveis.
+ Detecção de Fake News é uma aplicação back-end construída durante o 6° semestre da Faculdade, na disciplina de Programação para Dispositivos Móveis.
 
-A aplicação consiste em ...
-
+A aplicação consiste em:
 
 # Modelo Conceitual do Projeto
 ![Modelo%20conceitual]
@@ -23,13 +22,13 @@ A aplicação consiste em ...
 -  Spring Boot (versão 2.4.4)
 -  JPA/ Hibernate
 -  Maven
--  QUal banco ?
+-  Qual banco ?
 
 ## Implantação em Produção
 - BackEnd: Heroku (Ao finalizar o projeto)
 - Banco de dados: MySQL
 
-# Como executar o projeto
+Como executar o projeto?
 
 ## BackEnd
 Pré-requisitos: Java 11
