@@ -30,6 +30,8 @@
     "new_password_hint": "Type your new password",
     "new_password_confirm_hint":"Confirm your new password",
     "change_Password" : "Confirm",
+    "forgot_password_code": "Forgot my password",
+
 
     "signup" : "Sign Up"
 }

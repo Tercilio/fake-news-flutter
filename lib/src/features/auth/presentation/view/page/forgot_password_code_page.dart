@@ -24,11 +24,11 @@ class _ForgotPasswordCodeState
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           const Image(
-            image: AssetImage('lib/assets/images/signup.png'),
+            image: AssetImage('lib/assets/images/password.png'),
             height: 80,
           ),
           Text(
-            'signup'.i18n(),
+            'forgot_password_code'.i18n(),
             style: const TextStyle(fontSize: 28, color: Colors.black87),
             textAlign: TextAlign.center,
           )
