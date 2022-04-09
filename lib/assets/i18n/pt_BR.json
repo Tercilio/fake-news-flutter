@@ -30,6 +30,8 @@
 
     "email_invalid" : "O email é inválido!",
     "password_invalid" : "O senha é inválida!",
-    
-    "signup" : "Cadastrar"
+    "continue": "Continuar",
+    "signup" : "Cadastrar",
+    "diferent_password":"Senhas diferentes"
+
 }

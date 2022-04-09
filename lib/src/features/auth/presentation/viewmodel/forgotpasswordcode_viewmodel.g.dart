@@ -44,11 +44,11 @@ mixin _$ForgotPasswordCodeViewModel on _ForgotPasswordCodeViewModelBase, Store {
       ActionController(name: '_ForgotPasswordCodeViewModelBase');
 
   @override
-  void validateEmail() {
+  void validateCode() {
     final _$actionInfo = _$_ForgotPasswordCodeViewModelBaseActionController
-        .startAction(name: '_ForgotPasswordCodeViewModelBase.validateEmail');
+        .startAction(name: '_ForgotPasswordCodeViewModelBase.validateCode');
     try {
-      return super.validateEmail();
+      return super.validateCode();
     } finally {
       _$_ForgotPasswordCodeViewModelBaseActionController
           .endAction(_$actionInfo);
@@ -60,6 +60,39 @@ mixin _$ForgotPasswordCodeViewModel on _ForgotPasswordCodeViewModelBase, Store {
     return '''
 code: ${code},
 isLoading: ${isLoading}
+    ''';
+  }
+}
+
+mixin _$LoginError on _LoginErrorBase, Store {
+  Computed<bool>? _$hasErrorsComputed;
+
+  @override
+  bool get hasErrors =>
+      (_$hasErrorsComputed ??= Computed<bool>(() => super.hasErrors,
+              name: '_LoginErrorBase.hasErrors'))
+          .value;
+
+  final _$codeAtom = Atom(name: '_LoginErrorBase.code');
+
+  @override
+  String? get code {
+    _$codeAtom.reportRead();
+    return super.code;
+  }
+
+  @override
+  set code(String? value) {
+    _$codeAtom.reportWrite(value, super.code, () {
+      super.code = value;
+    });
+  }
+
+  @override
+  String toString() {
+    return '''
+code: ${code},
+hasErrors: ${hasErrors}
     ''';
   }
 }

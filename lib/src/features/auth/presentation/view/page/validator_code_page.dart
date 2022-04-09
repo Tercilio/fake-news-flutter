@@ -49,7 +49,7 @@ Widget get _logo => Container(
           keyboardType: TextInputType.emailAddress,
           textInputAction: TextInputAction.next,
           decoration: InputDecoration(
-            //errorText: store.error.username,
+            errorText: store.error.password,
             hintText: 'new_password_hint'.i18n(),
             prefixIcon: const Icon(Icons.person),
             contentPadding: const EdgeInsets.all(20),
@@ -71,7 +71,7 @@ Widget get _logo => Container(
           keyboardType: TextInputType.emailAddress,
           textInputAction: TextInputAction.next,
           decoration: InputDecoration(
-            //errorText: store.error.username,
+            errorText: store.error.confirmePassword,
             hintText: 'new_password_confirm_hint'.i18n(),
             prefixIcon: const Icon(Icons.person),
             contentPadding: const EdgeInsets.all(20),
@@ -98,11 +98,14 @@ Widget get _logo => Container(
               ),
             ),
           ),
-          onPressed: store.isLoading
+           onPressed: store.isLoading
               ? null
               : () {
-                  Navigator.pop(context);
-                  Modular.to.pushNamed('/');
+                  if (store.error.password != null || store.error.confirmePassword != null ) {
+                    Navigator.pop(context);
+                    Modular.to.pushNamed('/');
+                  }
+                  store.changePassword();
                 },
           child: Text('continue'.i18n()),
         ),
