@@ -30,7 +30,7 @@ A aplicação consiste em:
 
 Como executar o projeto?
 
-## BackEnd
+## Back-End
 Pré-requisitos: Java 11
 
 ### Rodar direto pelo cmd
