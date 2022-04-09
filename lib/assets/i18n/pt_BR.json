@@ -7,6 +7,8 @@
     "password_hint" : "Informe a sua senha",
     "login" : "Login",
     "forgot_password" : "Esqueci a senha!",
+    "birthdate" : "Data de nascimento",
+    "birthdate_hint" : "Informe a sua data de nascimento",
 
     "saveuser" : "Salvar",
     "fullname": "Nome completo",
@@ -17,6 +19,7 @@
     "email_required" : "O email é obrigatório!",
     "password_required" : "A senha é obrigatória!",
     "fullname_required" : "O nome completo é obrigatório!",
+    "birth_required" : "A data de nascimento é obrigatória!",
 
     "email_invalid" : "O email é inválido!",
     "password_invalid" : "O senha é inválida!",

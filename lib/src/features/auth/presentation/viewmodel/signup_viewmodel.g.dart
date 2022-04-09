@@ -24,6 +24,21 @@ mixin _$SignUpViewModel on _SignUpViewModelBase, Store {
     });
   }
 
+  final _$birthdateAtom = Atom(name: '_SignUpViewModelBase.birthdate');
+
+  @override
+  String get birthdate {
+    _$birthdateAtom.reportRead();
+    return super.birthdate;
+  }
+
+  @override
+  set birthdate(String value) {
+    _$birthdateAtom.reportWrite(value, super.birthdate, () {
+      super.birthdate = value;
+    });
+  }
+
   final _$emailAtom = Atom(name: '_SignUpViewModelBase.email');
 
   @override
@@ -69,6 +84,22 @@ mixin _$SignUpViewModel on _SignUpViewModelBase, Store {
     });
   }
 
+  final _$isDateSelectedAtom =
+      Atom(name: '_SignUpViewModelBase.isDateSelected');
+
+  @override
+  bool get isDateSelected {
+    _$isDateSelectedAtom.reportRead();
+    return super.isDateSelected;
+  }
+
+  @override
+  set isDateSelected(bool value) {
+    _$isDateSelectedAtom.reportWrite(value, super.isDateSelected, () {
+      super.isDateSelected = value;
+    });
+  }
+
   final _$_SignUpViewModelBaseActionController =
       ActionController(name: '_SignUpViewModelBase');
 
@@ -78,6 +109,17 @@ mixin _$SignUpViewModel on _SignUpViewModelBase, Store {
         name: '_SignUpViewModelBase.validateFullname');
     try {
       return super.validateFullname();
+    } finally {
+      _$_SignUpViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void validateBirthdate() {
+    final _$actionInfo = _$_SignUpViewModelBaseActionController.startAction(
+        name: '_SignUpViewModelBase.validateBirthdate');
+    try {
+      return super.validateBirthdate();
     } finally {
       _$_SignUpViewModelBaseActionController.endAction(_$actionInfo);
     }
@@ -109,9 +151,11 @@ mixin _$SignUpViewModel on _SignUpViewModelBase, Store {
   String toString() {
     return '''
 fullname: ${fullname},
+birthdate: ${birthdate},
 email: ${email},
 password: ${password},
-isLoading: ${isLoading}
+isLoading: ${isLoading},
+isDateSelected: ${isDateSelected}
     ''';
   }
 }
@@ -137,6 +181,21 @@ mixin _$LoginError on _LoginErrorBase, Store {
   set fullname(String? value) {
     _$fullnameAtom.reportWrite(value, super.fullname, () {
       super.fullname = value;
+    });
+  }
+
+  final _$birthdateAtom = Atom(name: '_LoginErrorBase.birthdate');
+
+  @override
+  String? get birthdate {
+    _$birthdateAtom.reportRead();
+    return super.birthdate;
+  }
+
+  @override
+  set birthdate(String? value) {
+    _$birthdateAtom.reportWrite(value, super.birthdate, () {
+      super.birthdate = value;
     });
   }
 
@@ -170,12 +229,29 @@ mixin _$LoginError on _LoginErrorBase, Store {
     });
   }
 
+  final _$signupAtom = Atom(name: '_LoginErrorBase.signup');
+
+  @override
+  String? get signup {
+    _$signupAtom.reportRead();
+    return super.signup;
+  }
+
+  @override
+  set signup(String? value) {
+    _$signupAtom.reportWrite(value, super.signup, () {
+      super.signup = value;
+    });
+  }
+
   @override
   String toString() {
     return '''
 fullname: ${fullname},
+birthdate: ${birthdate},
 email: ${email},
 password: ${password},
+signup: ${signup},
 hasErrors: ${hasErrors}
     ''';
   }

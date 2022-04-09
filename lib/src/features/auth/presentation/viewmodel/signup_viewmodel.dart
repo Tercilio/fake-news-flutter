@@ -14,6 +14,9 @@ abstract class _SignUpViewModelBase with Store {
   String fullname = '';
 
   @observable
+  String birthdate = '';
+
+  @observable
   String email = '';
 
   @observable
@@ -22,9 +25,17 @@ abstract class _SignUpViewModelBase with Store {
   @observable
   bool isLoading = false;
 
+  @observable
+  bool isDateSelected = false;
+
   @action
   void validateFullname() {
     error.fullname = _usecase.validateFullname(fullname);
+  }
+
+  @action
+  void validateBirthdate() {
+    error.birthdate = _usecase.validateBirthdate(birthdate);
   }
 
   @action
@@ -37,12 +48,24 @@ abstract class _SignUpViewModelBase with Store {
     error.password = _usecase.validatePassword(password);
   }
 
-  void saveUser() {
+  Future<void> saveUser() async {
     error.clear();
 
     validateFullname();
     validateEmail();
     validatePassword();
+    validateBirthdate();
+
+    if (!error.hasErrors) {
+      isLoading = true;
+      try {
+        await Future.delayed(const Duration(seconds: 10));
+      } on UnimplementedError {
+        error.signup = 'Função não implementada!';
+      } finally {
+        isLoading = false;
+      }
+    }
   }
 }
 
@@ -53,17 +76,30 @@ abstract class _LoginErrorBase with Store {
   String? fullname;
 
   @observable
+  String? birthdate;
+
+  @observable
   String? email;
 
   @observable
   String? password;
 
+  @observable
+  String? signup;
+
   @computed
-  bool get hasErrors => fullname != null || password != null || email != null;
+  bool get hasErrors =>
+      fullname != null ||
+      password != null ||
+      email != null ||
+      birthdate != null ||
+      signup != null;
 
   void clear() {
     fullname = null;
     email = null;
     password = null;
+    birthdate = null;
+    signup = null;
   }
 }
