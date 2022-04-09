@@ -1,25 +1,22 @@
-import 'package:basearch/src/common/form_text_field.dart';
-import 'package:basearch/src/features/auth/presentation/viewmodel/forgotpassword_viewmodel.dart';
+import 'package:basearch/src/features/auth/presentation/viewmodel/validatorcode_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:localization/localization.dart';
-import 'package:flutter/material.dart';
-import '../../viewmodel/login_viewmodel.dart';
 
-class ForgotPassword extends StatefulWidget {
-  const ForgotPassword({Key? key}) : super(key: key);
+class ValidatorCode extends StatefulWidget {
+  const ValidatorCode({Key? key}) : super(key: key);
 
   @override
-  State<ForgotPassword> createState() => _ForgotPasswordState();
+  State<ValidatorCode> createState() => _validatorCodeState();
 }
 
-class _ForgotPasswordState
-    extends ModularState<ForgotPassword, ForgotPasswordViewModel> {
+class _validatorCodeState
+    extends ModularState<ValidatorCode, ValidatorCodeViewModel> {
   late ColorScheme _colors;
   late ThemeData _theme;
 
-    Widget get _logo => Container(
+Widget get _logo => Container(
       margin: const EdgeInsets.fromLTRB(25, 15, 25, 5),
       width: double.infinity,
       child: Column(
@@ -44,7 +41,7 @@ class _ForgotPasswordState
         visible: store.isLoading,
       );
 
-  Widget get _insert_email=> Container(
+  Widget get _newPassword => Container(
         margin: const EdgeInsets.fromLTRB(25, 15, 25, 5),
         width: double.infinity,
         //height: 56,
@@ -53,8 +50,8 @@ class _ForgotPasswordState
           textInputAction: TextInputAction.next,
           decoration: InputDecoration(
             //errorText: store.error.username,
-            hintText: 'reset_password_hint'.i18n(),
-            prefixIcon: const Icon(Icons.email_rounded),
+            hintText: 'new_password_hint'.i18n(),
+            prefixIcon: const Icon(Icons.person),
             contentPadding: const EdgeInsets.all(20),
             border: OutlineInputBorder(
               borderSide: const BorderSide(color: Colors.black, width: 4.0),
@@ -62,11 +59,33 @@ class _ForgotPasswordState
             ),
           ),
           enabled: !store.isLoading,
-          onChanged: (value) => store.email = value,
+          onChanged: (value) => store.password = value,
         ),
       );
 
-  Widget get _forgotButton => Container(
+      Widget get _confirmNewPassword => Container(
+        margin: const EdgeInsets.fromLTRB(25, 15, 25, 5),
+        width: double.infinity,
+        //height: 56,
+        child: TextFormField(
+          keyboardType: TextInputType.emailAddress,
+          textInputAction: TextInputAction.next,
+          decoration: InputDecoration(
+            //errorText: store.error.username,
+            hintText: 'new_password_confirm_hint'.i18n(),
+            prefixIcon: const Icon(Icons.person),
+            contentPadding: const EdgeInsets.all(20),
+            border: OutlineInputBorder(
+              borderSide: const BorderSide(color: Colors.black, width: 4.0),
+              borderRadius: BorderRadius.circular(10),
+            ),
+          ),
+          enabled: !store.isLoading,
+          onChanged: (value) => store.confirmePassword = value,
+        ),
+      );
+
+  Widget get _changeButton => Container(
         height: 56,
         width: double.infinity,
         margin: const EdgeInsets.fromLTRB(70, 15, 70, 5),
@@ -83,9 +102,9 @@ class _ForgotPasswordState
               ? null
               : () {
                   Navigator.pop(context);
-                  Modular.to.pushNamed('/forgotpassowordcode');
+                  Modular.to.pushNamed('/');
                 },
-          child: Text('send_email'.i18n()),
+          child: Text('continue'.i18n()),
         ),
       );
   @override
@@ -108,8 +127,9 @@ class _ForgotPasswordState
                   _loadingIndicator,
                   const SizedBox(height: 5),
                   _logo,
-                  _insert_email,
-                  _forgotButton,
+                  _newPassword,
+                  _confirmNewPassword,
+                  _changeButton,
                 ],
               ),
             );

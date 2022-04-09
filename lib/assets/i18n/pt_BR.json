@@ -9,7 +9,12 @@
     "forgot_password" : "Esqueci a senha!",
     "reset_password_hint":"Informe o e-mail cadastrado",
     "send_email":"Enviar e-mail",
-    "cpf_hint":"Informe o seu CPF",
+    "birthdate" : "Data de nascimento",
+    "birthdate_hint" : "Informe a sua data de nascimento",
+    "insert_code_hint": "Código",
+    "new_password_hint": "Infrome sua nova senha",
+    "new_password_confirm_hint":"Confirma a nova senha",
+    "change_Password" : "Confirmar", 
 
     "saveuser" : "Salvar",
     "fullname": "Nome completo",
@@ -20,6 +25,7 @@
     "email_required" : "O email é obrigatório!",
     "password_required" : "A senha é obrigatória!",
     "fullname_required" : "O nome completo é obrigatório!",
+    "birth_required" : "A data de nascimento é obrigatória!",
 
     "email_invalid" : "O email é inválido!",
     "password_invalid" : "O senha é inválida!",

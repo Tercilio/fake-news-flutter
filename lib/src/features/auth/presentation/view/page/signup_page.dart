@@ -16,6 +16,24 @@ class _SignUpPageState extends ModularState<SignUpPage, SignUpViewModel> {
   late ColorScheme _colors;
   late ThemeData _theme;
 
+  Widget get _logoSignUp => Container(
+      margin: const EdgeInsets.fromLTRB(25, 15, 25, 5),
+      width: double.infinity,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const Image(
+            image: AssetImage('lib/assets/images/signup.png'),
+            height: 80,
+          ),
+          Text(
+            'signup'.i18n(),
+            style: const TextStyle(fontSize: 28, color: Colors.black87),
+            textAlign: TextAlign.center,
+          )
+        ],
+      ));
+
   Widget get _loadingIndicator => Visibility(
         child: const LinearProgressIndicator(
           backgroundColor: Colors.blueGrey,
@@ -64,6 +82,41 @@ class _SignUpPageState extends ModularState<SignUpPage, SignUpViewModel> {
           ),
           enabled: !store.isLoading,
           onChanged: (value) => store.email = value,
+        ),
+      );
+
+  Widget get _birthdate => Container(
+        margin: const EdgeInsets.fromLTRB(25, 15, 25, 5),
+        width: double.infinity,
+        child: TextFormField(
+          key: Key(store.birthdate),
+          initialValue: store.birthdate,
+          decoration: InputDecoration(
+            errorText: store.error.birthdate,
+            errorStyle: const TextStyle(fontWeight: FontWeight.bold),
+            hintText: 'birthdate_hint'.i18n(),
+            prefixIcon: const Icon(Icons.date_range_rounded),
+            contentPadding: const EdgeInsets.all(20),
+            border: OutlineInputBorder(
+              borderSide: const BorderSide(color: Colors.black, width: 4.0),
+              borderRadius: BorderRadius.circular(10),
+            ),
+          ),
+          enabled: !store.isLoading,
+          onTap: () async {
+            final dataPick = await showDatePicker(
+                context: context,
+                initialDate: DateTime.now(),
+                firstDate: DateTime(1900),
+                lastDate: DateTime.now());
+            if (dataPick != null && dataPick != store.birthdate) {
+              setState(() {
+                store.isDateSelected = true;
+                store.birthdate =
+                    dataPick.toString().replaceAll('-', '/').substring(0, 10);
+              });
+            }
+          },
         ),
       );
 
@@ -135,7 +188,6 @@ class _SignUpPageState extends ModularState<SignUpPage, SignUpViewModel> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(title: const Text('Sign Up')),
       backgroundColor: Colors.grey[200],
       body: Center(
         child: SingleChildScrollView(
@@ -146,8 +198,10 @@ class _SignUpPageState extends ModularState<SignUpPage, SignUpViewModel> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.max,
                 children: [
+                  _logoSignUp,
                   _loadingIndicator,
                   _fullname,
+                  _birthdate,
                   _email,
                   _password,
                   _saveButton,

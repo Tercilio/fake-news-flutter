@@ -1,25 +1,23 @@
-import 'package:basearch/src/common/form_text_field.dart';
-import 'package:basearch/src/features/auth/presentation/viewmodel/forgotpassword_viewmodel.dart';
+import 'package:basearch/src/features/auth/presentation/viewmodel/forgotpasswordcode_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:localization/localization.dart';
-import 'package:flutter/material.dart';
-import '../../viewmodel/login_viewmodel.dart';
 
-class ForgotPassword extends StatefulWidget {
-  const ForgotPassword({Key? key}) : super(key: key);
+
+class ForgotPasswordCode extends StatefulWidget {
+  const ForgotPasswordCode({Key? key}) : super(key: key);
 
   @override
-  State<ForgotPassword> createState() => _ForgotPasswordState();
+  State<ForgotPasswordCode> createState() => _ForgotPasswordCodeState();
 }
 
-class _ForgotPasswordState
-    extends ModularState<ForgotPassword, ForgotPasswordViewModel> {
+class _ForgotPasswordCodeState
+    extends ModularState<ForgotPasswordCode, ForgotPasswordCodeViewModel> {
   late ColorScheme _colors;
   late ThemeData _theme;
 
-    Widget get _logo => Container(
+  Widget get _logo => Container(
       margin: const EdgeInsets.fromLTRB(25, 15, 25, 5),
       width: double.infinity,
       child: Column(
@@ -37,6 +35,7 @@ class _ForgotPasswordState
         ],
       ));
 
+
   Widget get _loadingIndicator => Visibility(
         child: const LinearProgressIndicator(
           backgroundColor: Colors.blueGrey,
@@ -44,7 +43,7 @@ class _ForgotPasswordState
         visible: store.isLoading,
       );
 
-  Widget get _insert_email=> Container(
+  Widget get _code => Container(
         margin: const EdgeInsets.fromLTRB(25, 15, 25, 5),
         width: double.infinity,
         //height: 56,
@@ -53,8 +52,8 @@ class _ForgotPasswordState
           textInputAction: TextInputAction.next,
           decoration: InputDecoration(
             //errorText: store.error.username,
-            hintText: 'reset_password_hint'.i18n(),
-            prefixIcon: const Icon(Icons.email_rounded),
+            hintText: 'insert_code_hint'.i18n(),
+            prefixIcon: const Icon(Icons.person),
             contentPadding: const EdgeInsets.all(20),
             border: OutlineInputBorder(
               borderSide: const BorderSide(color: Colors.black, width: 4.0),
@@ -62,11 +61,11 @@ class _ForgotPasswordState
             ),
           ),
           enabled: !store.isLoading,
-          onChanged: (value) => store.email = value,
+          onChanged: (value) => store.code = value,
         ),
       );
 
-  Widget get _forgotButton => Container(
+  Widget get _continueButton => Container(
         height: 56,
         width: double.infinity,
         margin: const EdgeInsets.fromLTRB(70, 15, 70, 5),
@@ -83,9 +82,9 @@ class _ForgotPasswordState
               ? null
               : () {
                   Navigator.pop(context);
-                  Modular.to.pushNamed('/forgotpassowordcode');
+                  Modular.to.pushNamed('/validatorcode');
                 },
-          child: Text('send_email'.i18n()),
+          child: Text('continue'.i18n()),
         ),
       );
   @override
@@ -108,8 +107,8 @@ class _ForgotPasswordState
                   _loadingIndicator,
                   const SizedBox(height: 5),
                   _logo,
-                  _insert_email,
-                  _forgotButton,
+                  _code,
+                  _continueButton,
                 ],
               ),
             );

@@ -9,6 +9,13 @@ class SignUpUseCase {
     return null;
   }
 
+  String? validateBirthdate(String birthdate) {
+    if (birthdate.isEmpty) {
+      return 'birthdate_required'.i18n();
+    }
+    return null;
+  }
+
   String? validateEmail(String email) {
     String pattern = r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$';
     RegExp regExp = RegExp(pattern);

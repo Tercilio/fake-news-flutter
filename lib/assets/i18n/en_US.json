@@ -7,6 +7,8 @@
     "password_hint": "Type your password",
     "login" : "Login",
     "forgot_password" : "Forgot password!",
+    "birthdate" : "Birth date",
+    "birthdate_hint" : "Type your birth date",
 
     "saveuser" : "Join",
     "fullname": "Full name",
@@ -17,13 +19,17 @@
     "email_required" : "Email is required!",
     "password_required" : "Password is required!",
     "fullname_required" : "Full name is required!",
+    "birth_required" : "Birth date is required!",
 
     "email_invalid" : "Email is invalid!",
     "password_invalid" : "Password is invalid!",
 
     "reset_password_hint":"Type your e-mail",
     "send_email":"Send e-mail",
-    "cpf_hint":"Type your CPF",
+    "insert_code_hint": "Code",
+    "new_password_hint": "Type your new password",
+    "new_password_confirm_hint":"Confirm your new password",
+    "change_Password" : "Confirm",
 
     "signup" : "Sign Up"
 }
