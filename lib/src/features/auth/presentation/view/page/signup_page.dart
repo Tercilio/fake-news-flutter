@@ -179,7 +179,7 @@ class _SignUpPageState extends ModularState<SignUpPage, SignUpViewModel> {
                       ? null
                       : () {
                           Navigator.pop(context);
-                          Modular.to.pushNamed('/');
+                          Modular.to.pushNamed('/login');
                         },
               ),
             ])),
