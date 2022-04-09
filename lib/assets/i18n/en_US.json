@@ -21,5 +21,9 @@
     "email_invalid" : "Email is invalid!",
     "password_invalid" : "Password is invalid!",
 
+    "reset_password_hint":"Type your e-mail",
+    "send_email":"Send e-mail",
+    "cpf_hint":"Type your CPF",
+
     "signup" : "Sign Up"
 }

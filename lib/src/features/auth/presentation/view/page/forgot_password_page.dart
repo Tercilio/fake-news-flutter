@@ -7,18 +7,15 @@ import 'package:localization/localization.dart';
 import 'package:flutter/material.dart';
 import '../../viewmodel/login_viewmodel.dart';
 
-
-
 class ForgotPassword extends StatefulWidget {
-  
   const ForgotPassword({Key? key}) : super(key: key);
 
   @override
   State<ForgotPassword> createState() => _ForgotPasswordState();
 }
 
-class _ForgotPasswordState extends ModularState<ForgotPassword, ForgotPasswordViewModel> {
-
+class _ForgotPasswordState
+    extends ModularState<ForgotPassword, ForgotPasswordViewModel> {
   late ColorScheme _colors;
   late ThemeData _theme;
 
@@ -38,7 +35,7 @@ class _ForgotPasswordState extends ModularState<ForgotPassword, ForgotPasswordVi
           textInputAction: TextInputAction.next,
           decoration: InputDecoration(
             //errorText: store.error.username,
-            hintText: 'forgot_hint'.i18n(),
+            hintText: 'reset_password_hint'.i18n(),
             prefixIcon: const Icon(Icons.person),
             contentPadding: const EdgeInsets.all(20),
             border: OutlineInputBorder(
@@ -50,7 +47,30 @@ class _ForgotPasswordState extends ModularState<ForgotPassword, ForgotPasswordVi
           onChanged: (value) => store.email = value,
         ),
       );
-Widget get _forgotButton => Container(
+
+      Widget get _cpf => Container(
+        margin: const EdgeInsets.fromLTRB(25, 15, 25, 5),
+        width: double.infinity,
+        //height: 56,
+        child: TextFormField(
+          keyboardType: TextInputType.emailAddress,
+          textInputAction: TextInputAction.next,
+          decoration: InputDecoration(
+            //errorText: store.error.username,
+            hintText: 'cpf_hint'.i18n(),
+            prefixIcon: const Icon(Icons.person),
+            contentPadding: const EdgeInsets.all(20),
+            border: OutlineInputBorder(
+              borderSide: const BorderSide(color: Colors.black, width: 4.0),
+              borderRadius: BorderRadius.circular(10),
+            ),
+          ),
+          enabled: !store.isLoading,
+          onChanged: (value) => store.email = value,
+        ),
+      );
+
+  Widget get _forgotButton => Container(
         height: 56,
         width: double.infinity,
         margin: const EdgeInsets.fromLTRB(70, 15, 70, 5),
@@ -64,10 +84,10 @@ Widget get _forgotButton => Container(
             ),
           ),
           onPressed: store.isLoading ? null : store.send,
-          child: Text('reset_password'.i18n()),
+          child: Text('send_email'.i18n()),
         ),
       );
-      @override
+  @override
   Widget build(BuildContext context) {
     _theme = Theme.of(context);
     _colors = _theme.colorScheme;
@@ -87,6 +107,8 @@ Widget get _forgotButton => Container(
                   _loadingIndicator,
                   const SizedBox(height: 5),
                   _username,
+                   _cpf,
+                  _forgotButton,
                 ],
               ),
             );
@@ -95,8 +117,4 @@ Widget get _forgotButton => Container(
       ),
     );
   }
-
 }
-
-  
-

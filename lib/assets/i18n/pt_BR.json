@@ -7,6 +7,9 @@
     "password_hint" : "Informe a sua senha",
     "login" : "Login",
     "forgot_password" : "Esqueci a senha!",
+    "reset_password_hint":"Informe o e-mail cadastrado",
+    "send_email":"Enviar e-mail",
+    "cpf_hint":"Informe o seu CPF",
 
     "saveuser" : "Salvar",
     "fullname": "Nome completo",
