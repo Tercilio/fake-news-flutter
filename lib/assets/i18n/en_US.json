@@ -1,6 +1,7 @@
 {
     "app_name" : "Example App",
 
+    "skip" : "Skip",
     "email": "email",
     "email_hint": "Type your email",
     "password": "Password",

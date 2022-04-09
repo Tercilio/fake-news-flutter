@@ -31,11 +31,11 @@ class AuthModule extends Module {
 
   @override
   List<ModularRoute> get routes => [
-        ChildRoute('/', child: (_, __) => const LoginPage()),
-        ChildRoute('/signup', child: (_, __) => const SignUpPage()),
-        ChildRoute('/forgotpassword', child: (_, __) => const ForgotPassword()),
         ChildRoute('/forgotpassowordcode', child: (_, __) => const ForgotPasswordCode()),
+        ChildRoute('/forgotpassword', child: (_, __) => const ForgotPassword()),
         ChildRoute('/validatorcode', child: (_, __) => const ValidatorCode()),
-        ModuleRoute('/home', module: HomeModule())
+        ChildRoute('/signup', child: (_, __) => const SignUpPage()),
+        ChildRoute('/login', child: (_, __) => const LoginPage()),
+        ModuleRoute('/', module: HomeModule())
       ];
 }

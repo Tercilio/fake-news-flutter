@@ -1,6 +1,7 @@
 {
     "app_name" : "Aplicativo de Exemplo",
     
+    "skip" : "Pular",
     "email" : "Email",
     "email_hint" : "Informe o seu email",
     "password" : "Senha",

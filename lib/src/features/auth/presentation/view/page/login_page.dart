@@ -140,7 +140,6 @@ class _LoginPageState extends ModularState<LoginPage, LoginViewModel> {
     _colors = _theme.colorScheme;
 
     return Scaffold(
-      // appBar: AppBar(title: const Text('Login')),
       backgroundColor: Colors.grey[200],
       body: Center(
         child: SingleChildScrollView(
