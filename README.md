@@ -17,7 +17,7 @@ A aplicação consiste em:
 
 # Tecnologias utilizadas 
 
-## BackEnd
+## No back-end:
 - Java (versão 11)
 -  Spring Boot (versão 2.4.4)
 -  JPA/ Hibernate
