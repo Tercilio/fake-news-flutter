@@ -14,11 +14,11 @@ import 'package:basearch/src/features/auth/presentation/viewmodel/forgotpassword
 import 'package:basearch/src/features/auth/presentation/viewmodel/login_viewmodel.dart';
 import 'package:basearch/src/features/auth/presentation/viewmodel/signup_viewmodel.dart';
 import 'package:basearch/src/features/auth/presentation/viewmodel/validatorcode_viewmodel.dart';
-import 'package:basearch/src/features/main/presentation/view/page/main_page.dart';
+import 'package:basearch/src/features/home/presentation/view/page/home_page.dart';
 import 'package:basearch/src/features/onboarding/presentation/view/page/onboarding_page.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import 'presentation/view/page/home_page.dart';
+import 'presentation/view/page/main_page.dart';
 
 class HomeModule extends Module {
   @override
@@ -37,9 +37,9 @@ class HomeModule extends Module {
   @override
   List<ModularRoute> get routes => [
         ChildRoute('/', child: (_, __) => const HomePage()),
+        ChildRoute('/main', child: (_, __) => const MainPage()),
         ChildRoute('/login', child: (_, __) => const LoginPage()),
         ChildRoute('/signup', child: (_, __) => const SignUpPage()),
-        ChildRoute('/main', child: (_, __) => const MainPage()),
         ChildRoute('/onboarding', child: (_, __) => const OnboardingPage()),
         ChildRoute('/forgotpassword', child: (_, __) => const ForgotPassword()),
         ChildRoute('/forgotpasswordcode',
