@@ -61,3 +61,36 @@ isLoading: ${isLoading}
     ''';
   }
 }
+
+mixin _$LoginError on _LoginErrorBase, Store {
+  Computed<bool>? _$hasErrorsComputed;
+
+  @override
+  bool get hasErrors =>
+      (_$hasErrorsComputed ??= Computed<bool>(() => super.hasErrors,
+              name: '_LoginErrorBase.hasErrors'))
+          .value;
+
+  final _$emailAtom = Atom(name: '_LoginErrorBase.email');
+
+  @override
+  String? get email {
+    _$emailAtom.reportRead();
+    return super.email;
+  }
+
+  @override
+  set email(String? value) {
+    _$emailAtom.reportWrite(value, super.email, () {
+      super.email = value;
+    });
+  }
+
+  @override
+  String toString() {
+    return '''
+email: ${email},
+hasErrors: ${hasErrors}
+    ''';
+  }
+}

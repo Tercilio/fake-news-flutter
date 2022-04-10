@@ -19,7 +19,7 @@ class _ForgotPasswordState
   late ColorScheme _colors;
   late ThemeData _theme;
 
-    Widget get _logo => Container(
+  Widget get _logo => Container(
       margin: const EdgeInsets.fromLTRB(25, 15, 25, 5),
       width: double.infinity,
       child: Column(
@@ -44,7 +44,7 @@ class _ForgotPasswordState
         visible: store.isLoading,
       );
 
-  Widget get _insert_email=> Container(
+  Widget get _insert_email => Container(
         margin: const EdgeInsets.fromLTRB(25, 15, 25, 5),
         width: double.infinity,
         //height: 56,
@@ -52,7 +52,7 @@ class _ForgotPasswordState
           keyboardType: TextInputType.emailAddress,
           textInputAction: TextInputAction.next,
           decoration: InputDecoration(
-            //errorText: store.error.username,
+            errorText: store.error.email,
             hintText: 'reset_password_hint'.i18n(),
             prefixIcon: const Icon(Icons.email_rounded),
             contentPadding: const EdgeInsets.all(20),
@@ -82,8 +82,11 @@ class _ForgotPasswordState
           onPressed: store.isLoading
               ? null
               : () {
-                  Navigator.pop(context);
-                  Modular.to.pushNamed('/forgotpassowordcode');
+                  if (store.error.email != null) {
+                    Navigator.pop(context);
+                    Modular.to.pushNamed('/forgotpasswordcode');
+                  }
+                  store.sendEmail();
                 },
           child: Text('send_email'.i18n()),
         ),

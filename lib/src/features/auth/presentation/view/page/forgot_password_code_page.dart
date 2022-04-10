@@ -4,7 +4,6 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:localization/localization.dart';
 
-
 class ForgotPasswordCode extends StatefulWidget {
   const ForgotPasswordCode({Key? key}) : super(key: key);
 
@@ -35,7 +34,6 @@ class _ForgotPasswordCodeState
         ],
       ));
 
-
   Widget get _loadingIndicator => Visibility(
         child: const LinearProgressIndicator(
           backgroundColor: Colors.blueGrey,
@@ -51,7 +49,7 @@ class _ForgotPasswordCodeState
           keyboardType: TextInputType.emailAddress,
           textInputAction: TextInputAction.next,
           decoration: InputDecoration(
-            //errorText: store.error.username,
+            errorText: store.error.code,
             hintText: 'insert_code_hint'.i18n(),
             prefixIcon: const Icon(Icons.person),
             contentPadding: const EdgeInsets.all(20),
@@ -81,8 +79,12 @@ class _ForgotPasswordCodeState
           onPressed: store.isLoading
               ? null
               : () {
-                  Navigator.pop(context);
-                  Modular.to.pushNamed('/validatorcode');
+                  if (store.error.code != null) {
+                    store.sendEmail();
+                  } else {
+                    Navigator.pop(context);
+                    Modular.to.pushNamed('/validatorcode');
+                  }
                 },
           child: Text('continue'.i18n()),
         ),

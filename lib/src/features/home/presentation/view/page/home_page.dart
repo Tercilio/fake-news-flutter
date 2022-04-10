@@ -48,6 +48,7 @@ class _HomePageState extends State<HomePage> {
     _colors = _theme.colorScheme;
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Column(
         children: [Expanded(child: _logo, flex: 2), Expanded(child: _loading)],
       ),
