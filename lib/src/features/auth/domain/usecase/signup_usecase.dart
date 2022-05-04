@@ -1,6 +1,11 @@
+import 'package:basearch/src/features/auth/data/dto/user_input_dto.dart';
+import 'package:basearch/src/features/auth/domain/repository/singup_interface.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:localization/localization.dart';
 
 class SignUpUseCase {
+  final repository = Modular.get<ISingup>();
+
   String? validateFullname(String fullname) {
     if (fullname.isEmpty) {
       return 'fullname_required'.i18n();
@@ -35,5 +40,11 @@ class SignUpUseCase {
     }
 
     return null;
+  }
+
+  Future<UserInputDto> saveUser(
+      String fullname, String birthdate, String email, String password) {
+    return repository
+        .singup(UserInputDto(fullname, birthdate, email, password));
   }
 }

@@ -1,3 +1,4 @@
+import 'package:basearch/src/features/auth/data/dto/user_input_dto.dart';
 import 'package:basearch/src/features/auth/domain/usecase/signup_usecase.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
@@ -59,7 +60,12 @@ abstract class _SignUpViewModelBase with Store {
     if (!error.hasErrors) {
       isLoading = true;
       try {
-        await Future.delayed(const Duration(seconds: 10));
+        UserInputDto userInputDto =
+            await _usecase.saveUser(fullname, birthdate, email, password);
+
+        if (userInputDto.email != null) {
+          Modular.to.pushNamed('/login');
+        }
       } on UnimplementedError {
         error.signup = 'Função não implementada!';
       } finally {
