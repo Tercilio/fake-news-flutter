@@ -32,11 +32,17 @@ class _LoginPageState extends ModularState<LoginPage, LoginViewModel> {
         ],
       ));
 
-  Widget get _loadingIndicator => Visibility(
-        child: const LinearProgressIndicator(
-          backgroundColor: Colors.blueGrey,
+  Widget get _loadingIndicator => Container(
+        height: 56,
+        width: double.infinity,
+        margin: const EdgeInsets.fromLTRB(70, 15, 70, 5),
+        child: const Center(
+          child: Visibility(
+            child: CircularProgressIndicator(
+              backgroundColor: Colors.blueGrey,
+            ),
+          ),
         ),
-        visible: store.isLoading,
       );
 
   Widget get _email => Container(
@@ -97,7 +103,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginViewModel> {
               ),
             ),
           ),
-          onPressed: store.isLoading ? null : store.login,
+          onPressed: () => store.login(),
           child: Text('login'.i18n()),
         ),
       );
@@ -151,10 +157,9 @@ class _LoginPageState extends ModularState<LoginPage, LoginViewModel> {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   _logo,
-                  _loadingIndicator,
                   _email,
                   _password,
-                  _loginButton,
+                  store.isLoading ? _loadingIndicator : _loginButton,
                   _forgotPassword,
                   _signUp
                 ],

@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:basearch/src/features/auth/domain/model/user.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 
@@ -22,6 +24,9 @@ abstract class _LoginViewModelBase with Store {
   @observable
   bool isLoading = false;
 
+  @observable
+  bool isLogged = false;
+
   @action
   void validateEmail() {
     error.email = _usecase.validateEmail(email);
@@ -41,11 +46,14 @@ abstract class _LoginViewModelBase with Store {
     if (!error.hasErrors) {
       isLoading = true;
       try {
-        // await _usecase.login(email, password);
+        User user = await _usecase.login(email, password);
 
-        await Future.delayed(const Duration(seconds: 10));
+        if (user.token != null) {
+          isLogged = true;
+          
+          Modular.to.pushNamed('/main');
+        }
       } on UnimplementedError {
-        // TODO: Fix!!!
         error.login = 'Função não implementada!';
       } finally {
         isLoading = false;
