@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:basearch/src/features/auth/presentation/view/page/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -43,6 +46,12 @@ class _HomePageState extends State<HomePage> {
   late ThemeData _theme;
 
   @override
+  void initState() {
+    super.initState();
+    startTime();
+  }
+
+  @override
   Widget build(BuildContext context) {
     _theme = Theme.of(context);
     _colors = _theme.colorScheme;
@@ -53,5 +62,16 @@ class _HomePageState extends State<HomePage> {
         children: [Expanded(child: _logo, flex: 2), Expanded(child: _loading)],
       ),
     );
+  }
+
+  startTime() async {
+    var duration = const Duration(seconds: 2);
+    return Timer(duration, route);
+  }
+
+  route() {
+    Navigator.push(context, MaterialPageRoute(
+        builder: (context) => const LoginPage())
+    ); 
   }
 }

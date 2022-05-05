@@ -54,6 +54,21 @@ mixin _$LoginViewModel on _LoginViewModelBase, Store {
     });
   }
 
+  final _$isLoggedAtom = Atom(name: '_LoginViewModelBase.isLogged');
+
+  @override
+  bool get isLogged {
+    _$isLoggedAtom.reportRead();
+    return super.isLogged;
+  }
+
+  @override
+  set isLogged(bool value) {
+    _$isLoggedAtom.reportWrite(value, super.isLogged, () {
+      super.isLogged = value;
+    });
+  }
+
   final _$_LoginViewModelBaseActionController =
       ActionController(name: '_LoginViewModelBase');
 
@@ -84,7 +99,8 @@ mixin _$LoginViewModel on _LoginViewModelBase, Store {
     return '''
 email: ${email},
 password: ${password},
-isLoading: ${isLoading}
+isLoading: ${isLoading},
+isLogged: ${isLogged}
     ''';
   }
 }

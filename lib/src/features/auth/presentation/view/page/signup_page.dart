@@ -154,7 +154,7 @@ class _SignUpPageState extends ModularState<SignUpPage, SignUpViewModel> {
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
           ),
         ),
-        onPressed: store.isLoading ? null : store.saveUser,
+        onPressed: store.isLoading ? null : store.singup,
         child: Text('saveuser'.i18n()),
       ));
 

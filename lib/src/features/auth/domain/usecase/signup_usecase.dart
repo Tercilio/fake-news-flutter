@@ -42,7 +42,7 @@ class SignUpUseCase {
     return null;
   }
 
-  Future<UserInputDto> saveUser(
+  Future<UserInputDto> singup(
       String fullname, String birthdate, String email, String password) {
     return repository
         .singup(UserInputDto(fullname, birthdate, email, password));

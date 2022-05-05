@@ -1,3 +1,5 @@
+import 'package:basearch/src/features/auth/data/repository/singup_repository.dart';
+import 'package:basearch/src/features/auth/domain/repository/singup_interface.dart';
 import 'package:basearch/src/features/auth/domain/usecase/signup_usecase.dart';
 import 'package:basearch/src/features/auth/presentation/view/page/forgot_password_code_page.dart';
 import 'package:basearch/src/features/auth/presentation/view/page/validator_code_page.dart';
@@ -29,6 +31,7 @@ class AuthModule extends Module {
         Bind.factory((i) => SignUpUseCase()),
         Bind.factory((i) => ForgotPasswordUseCase()),
         Bind.factory<ILogin>((i) => LoginRepository()),
+        Bind.factory<ISingup>((i) => SingupRepository()),
       ];
 
   @override

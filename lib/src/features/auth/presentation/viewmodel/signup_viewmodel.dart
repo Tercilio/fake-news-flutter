@@ -49,7 +49,7 @@ abstract class _SignUpViewModelBase with Store {
     error.password = _usecase.validatePassword(password);
   }
 
-  Future<void> saveUser() async {
+  void singup() async {
     error.clear();
 
     validateFullname();
@@ -61,9 +61,9 @@ abstract class _SignUpViewModelBase with Store {
       isLoading = true;
       try {
         UserInputDto userInputDto =
-            await _usecase.saveUser(fullname, birthdate, email, password);
+            await _usecase.singup(fullname, birthdate, email, password);
 
-        if (userInputDto.email != null) {
+        if (userInputDto.email.isNotEmpty) {
           Modular.to.pushNamed('/login');
         }
       } on UnimplementedError {

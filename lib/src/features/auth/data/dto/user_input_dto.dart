@@ -16,9 +16,9 @@ class UserInputDto {
       json['fullname'], json['birthdate'], json['email'], json['password']);
 
   Map<String, dynamic> toJson() => {
-        'fullname': fullname,
-        'birthdate': birthdate,
         'email': email,
-        'password': password
+        'password': password,
+        'fullname': fullname,
+        'birthdate': birthdate.replaceAll('/', '-')
       };
 }
