@@ -1,9 +1,7 @@
 import 'dart:async';
 
-import 'package:basearch/src/features/auth/presentation/view/page/login_page.dart';
+import 'package:basearch/src/features/onboarding/presentation/view/page/onboarding_page.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -31,20 +29,19 @@ Widget get _logo => Container(
     ));
 
 Widget get _loading => Container(
-    width: double.infinity,
-    height: double.infinity,
-    color: Colors.black,
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: const [
-        Image(image: AssetImage('lib/assets/images/loading.gif'))
-      ],
-    ));
+      width: double.infinity,
+      height: double.infinity,
+      color: Colors.black,
+      child: const Center(
+        child: Visibility(
+          child: RefreshProgressIndicator(
+            backgroundColor: Colors.blueGrey,
+          ),
+        ),
+      ),
+    );
 
 class _HomePageState extends State<HomePage> {
-  late ColorScheme _colors;
-  late ThemeData _theme;
-
   @override
   void initState() {
     super.initState();
@@ -53,9 +50,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    _theme = Theme.of(context);
-    _colors = _theme.colorScheme;
-
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Column(
@@ -70,8 +64,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   route() {
-    Navigator.push(context, MaterialPageRoute(
-        builder: (context) => const LoginPage())
-    ); 
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => const OnboardingPage()));
   }
 }
