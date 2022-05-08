@@ -29,6 +29,9 @@
     "fullname_required" : "O nome completo é obrigatório!",
     "birth_required" : "A data de nascimento é obrigatória!",
 
+    "login_server_error" : "Server error!",
+    "login_invalid" : "Email ou senha inválidos!",
+    
     "email_invalid" : "O email é inválido!",
     "password_invalid" : "O senha é inválida!",
     "continue": "Continuar",

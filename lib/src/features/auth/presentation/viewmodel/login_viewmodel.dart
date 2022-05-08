@@ -1,8 +1,9 @@
-import 'dart:io';
-
+import 'package:basearch/src/exceptions/login_exception.dart';
 import 'package:basearch/src/features/auth/domain/model/user.dart';
+import 'package:basearch/src/features/auth/presentation/view/page/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:localization/localization.dart';
 import 'package:mobx/mobx.dart';
 
 import '../../domain/usecase/login_usecase.dart';
@@ -46,15 +47,17 @@ abstract class _LoginViewModelBase with Store {
     if (!error.hasErrors) {
       isLoading = true;
       try {
-        User user = await _usecase.login(email, password);
+        User? user = await _usecase.login(email, password);
 
         if (user.token != null) {
           isLogged = true;
           
           Modular.to.pushNamed('/main');
         }
-      } on UnimplementedError {
-        error.login = 'Função não implementada!';
+      } on LoginException {
+        error.login = 'login_invalid'.i18n();
+      } on Exception {
+        error.login = 'login_server_error'.i18n();
       } finally {
         isLoading = false;
       }
@@ -72,14 +75,14 @@ abstract class _LoginErrorBase with Store {
   String? password;
 
   @observable
-  String? login;
+  String login = '';
 
   @computed
-  bool get hasErrors => email != null || password != null || login != null;
+  bool get hasErrors => email != null || password != null || login.isNotEmpty;
 
   void clear() {
     email = null;
     password = null;
-    login = null;
+    login = '';
   }
 }

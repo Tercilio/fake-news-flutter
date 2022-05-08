@@ -1,3 +1,5 @@
+import 'package:basearch/src/features/auth/presentation/view/page/forgot_password_page.dart';
+import 'package:basearch/src/features/main/presentation/view/page/main_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -68,7 +70,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginViewModel> {
       );
 
   Widget get _password => Container(
-        margin: const EdgeInsets.fromLTRB(25, 15, 25, 5),
+        margin: const EdgeInsets.fromLTRB(25, 15, 25, 0),
         width: double.infinity,
         child: TextFormField(
           obscureText: true,
@@ -91,45 +93,77 @@ class _LoginPageState extends ModularState<LoginPage, LoginViewModel> {
       );
 
   Widget get _loginButton => Container(
-        height: 56,
-        width: double.infinity,
-        margin: const EdgeInsets.fromLTRB(70, 15, 70, 5),
-        child: ElevatedButton(
-          style: ButtonStyle(
-            backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
-            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(40),
+        margin: const EdgeInsets.fromLTRB(0, 15, 0, 5),
+        child: Center(
+          child: ElevatedButton(
+            style: ButtonStyle(
+              minimumSize: MaterialStateProperty.all(const Size(180, 56)),
+              backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
+              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
               ),
             ),
+            onPressed: () async {
+              store.login();
+
+              if (store.isLogged && !store.isLoading) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => const MainPage(),
+                  ),
+                );
+              }
+            },
+            child: Text('login'.i18n()),
           ),
-          onPressed: () => store.login(),
-          child: Text('login'.i18n()),
+        ),
+      );
+
+  Widget get _loginTextError => Container(
+        margin: const EdgeInsets.only(top: 15),
+        child: Center(
+          child: Visibility(
+            child: Text(
+              store.error.login,
+              style: const TextStyle(color: Colors.red, fontSize: 14),
+            ),
+            visible: store.error.login.isNotEmpty,
+          ),
         ),
       );
 
   Widget get _forgotPassword => Container(
-        width: double.infinity,
-        margin: const EdgeInsets.fromLTRB(30, 0, 30, 0),
-        child: TextButton(
-          style: TextButton.styleFrom(
-              splashFactory: NoSplash.splashFactory, primary: Colors.grey),
-          onPressed: store.isLoading
-              ? null
-              : () {
-                  Navigator.pop(context);
-                  Modular.to.pushNamed('/forgotpassword');
-                },
-          child: Text('forgot_password'.i18n()),
+        margin: const EdgeInsets.only(right: 25),
+        padding: const EdgeInsets.only(top: 10.0),
+        child: Align(
+          alignment: Alignment.topRight,
+          child: InkWell(
+            child: Text(
+              'forgot_password'.i18n(),
+              style: const TextStyle(
+                fontWeight: FontWeight.w100,
+                color: Colors.grey,
+              ),
+            ),
+            onTap: () => store.isLoading
+                ? null
+                : Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const ForgotPassword(),
+                    ),
+                  ),
+          ),
         ),
       );
 
-  Widget get _signUp => Container(
-        width: double.infinity,
-        margin: const EdgeInsets.fromLTRB(30, 0, 30, 0),
+  Widget get _signUp => Center(
         child: TextButton(
           style: TextButton.styleFrom(
-              splashFactory: NoSplash.splashFactory, primary: Colors.grey),
+            splashFactory: NoSplash.splashFactory,
+            primary: Colors.grey,
+          ),
           onPressed: store.isLoading
               ? null
               : () {
@@ -159,8 +193,9 @@ class _LoginPageState extends ModularState<LoginPage, LoginViewModel> {
                   _logo,
                   _email,
                   _password,
-                  store.isLoading ? _loadingIndicator : _loginButton,
                   _forgotPassword,
+                  _loginTextError,
+                  store.isLoading ? _loadingIndicator : _loginButton,
                   _signUp
                 ],
               ),

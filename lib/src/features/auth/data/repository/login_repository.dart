@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:basearch/src/exceptions/login_exception.dart';
 import 'package:basearch/src/features/auth/data/dto/user_dto.dart';
 import 'package:dio/dio.dart';
 
@@ -10,26 +11,30 @@ class LoginRepository implements ILogin {
   @override
   Future<User> login(User user) async {
     final dto = UserDto.fromDomain(user);
+    User? userResponse;
 
-    final response = await Dio().post(
-      'http://localhost:8080/login',
-      data: dto.toJson(),
-    );
+    try {
+      final Response response = await Dio().post(
+        'http://localhost:8080/login',
+        data: dto.toJson(),
+      );
 
-    if (response.statusCode == 200) {
       Map<String, dynamic> json = jsonDecode(response.data);
 
-      final userResponse = User.fromJson(json);
+      userResponse = User.fromJson(json);
       final token = userResponse.token;
 
-      // final email = userResponse.email;
       // final token = response.headers.value('Authorization');
 
-      final domain = User(user.email, null, token: token);
-
-      return Future.value(domain);
-    } else {
-      throw Exception("Usuário ou Senha Inválidos!");
+      userResponse = User(user.email, null, token: token);
+    } on DioError catch (e) {
+      if (e.response?.statusCode == 401 || e.response?.statusCode == 402) {
+        throw LoginException();
+      } else {
+        throw Exception();
+      }
     }
+
+    return userResponse;
   }
 }

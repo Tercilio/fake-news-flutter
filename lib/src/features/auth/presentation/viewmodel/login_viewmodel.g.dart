@@ -147,13 +147,13 @@ mixin _$LoginError on _LoginErrorBase, Store {
   final _$loginAtom = Atom(name: '_LoginErrorBase.login');
 
   @override
-  String? get login {
+  String get login {
     _$loginAtom.reportRead();
     return super.login;
   }
 
   @override
-  set login(String? value) {
+  set login(String value) {
     _$loginAtom.reportWrite(value, super.login, () {
       super.login = value;
     });
