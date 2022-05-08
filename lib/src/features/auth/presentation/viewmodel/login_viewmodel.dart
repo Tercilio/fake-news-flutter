@@ -47,7 +47,7 @@ abstract class _LoginViewModelBase with Store {
     if (!error.hasErrors) {
       isLoading = true;
       try {
-        User? user = await _usecase.login(email, password);
+        User user = await _usecase.login(email, password);
 
         if (user.token != null) {
           isLogged = true;

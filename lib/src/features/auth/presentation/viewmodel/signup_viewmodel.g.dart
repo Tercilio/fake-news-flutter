@@ -160,16 +160,16 @@ isDateSelected: ${isDateSelected}
   }
 }
 
-mixin _$LoginError on _LoginErrorBase, Store {
+mixin _$SingUpError on _SingUpErrorBase, Store {
   Computed<bool>? _$hasErrorsComputed;
 
   @override
   bool get hasErrors =>
       (_$hasErrorsComputed ??= Computed<bool>(() => super.hasErrors,
-              name: '_LoginErrorBase.hasErrors'))
+              name: '_SingUpErrorBase.hasErrors'))
           .value;
 
-  final _$fullnameAtom = Atom(name: '_LoginErrorBase.fullname');
+  final _$fullnameAtom = Atom(name: '_SingUpErrorBase.fullname');
 
   @override
   String? get fullname {
@@ -184,7 +184,7 @@ mixin _$LoginError on _LoginErrorBase, Store {
     });
   }
 
-  final _$birthdateAtom = Atom(name: '_LoginErrorBase.birthdate');
+  final _$birthdateAtom = Atom(name: '_SingUpErrorBase.birthdate');
 
   @override
   String? get birthdate {
@@ -199,7 +199,7 @@ mixin _$LoginError on _LoginErrorBase, Store {
     });
   }
 
-  final _$emailAtom = Atom(name: '_LoginErrorBase.email');
+  final _$emailAtom = Atom(name: '_SingUpErrorBase.email');
 
   @override
   String? get email {
@@ -214,7 +214,7 @@ mixin _$LoginError on _LoginErrorBase, Store {
     });
   }
 
-  final _$passwordAtom = Atom(name: '_LoginErrorBase.password');
+  final _$passwordAtom = Atom(name: '_SingUpErrorBase.password');
 
   @override
   String? get password {
@@ -229,16 +229,16 @@ mixin _$LoginError on _LoginErrorBase, Store {
     });
   }
 
-  final _$signupAtom = Atom(name: '_LoginErrorBase.signup');
+  final _$signupAtom = Atom(name: '_SingUpErrorBase.signup');
 
   @override
-  String? get signup {
+  String get signup {
     _$signupAtom.reportRead();
     return super.signup;
   }
 
   @override
-  set signup(String? value) {
+  set signup(String value) {
     _$signupAtom.reportWrite(value, super.signup, () {
       super.signup = value;
     });

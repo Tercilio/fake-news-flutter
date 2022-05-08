@@ -1,6 +1,8 @@
+import 'package:basearch/src/exceptions/singup_exception.dart';
 import 'package:basearch/src/features/auth/data/dto/user_input_dto.dart';
 import 'package:basearch/src/features/auth/domain/usecase/signup_usecase.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:localization/localization.dart';
 import 'package:mobx/mobx.dart';
 
 part 'signup_viewmodel.g.dart';
@@ -8,7 +10,7 @@ part 'signup_viewmodel.g.dart';
 class SignUpViewModel = _SignUpViewModelBase with _$SignUpViewModel;
 
 abstract class _SignUpViewModelBase with Store {
-  final error = LoginError();
+  final error = SingUpError();
   final _usecase = Modular.get<SignUpUseCase>();
 
   @observable
@@ -28,6 +30,9 @@ abstract class _SignUpViewModelBase with Store {
 
   @observable
   bool isDateSelected = false;
+
+  @observable
+  bool isAccountCreated = false;
 
   @action
   void validateFullname() {
@@ -49,7 +54,7 @@ abstract class _SignUpViewModelBase with Store {
     error.password = _usecase.validatePassword(password);
   }
 
-  void singup() async {
+  Future<bool> singup() async {
     error.clear();
 
     validateFullname();
@@ -64,20 +69,23 @@ abstract class _SignUpViewModelBase with Store {
             await _usecase.singup(fullname, birthdate, email, password);
 
         if (userInputDto.email.isNotEmpty) {
-          Modular.to.pushNamed('/login');
+          return true;
         }
-      } on UnimplementedError {
-        error.signup = 'Função não implementada!';
+      } on SingUpException {
+        error.signup = 'singup_invalid'.i18n();
+      } on Exception {
+        error.signup = 'singup_invalid'.i18n();
       } finally {
         isLoading = false;
       }
     }
+    return false;
   }
 }
 
-class LoginError = _LoginErrorBase with _$LoginError;
+class SingUpError = _SingUpErrorBase with _$SingUpError;
 
-abstract class _LoginErrorBase with Store {
+abstract class _SingUpErrorBase with Store {
   @observable
   String? fullname;
 
@@ -91,7 +99,7 @@ abstract class _LoginErrorBase with Store {
   String? password;
 
   @observable
-  String? signup;
+  String signup = '';
 
   @computed
   bool get hasErrors =>
@@ -99,13 +107,13 @@ abstract class _LoginErrorBase with Store {
       password != null ||
       email != null ||
       birthdate != null ||
-      signup != null;
+      signup.isNotEmpty;
 
   void clear() {
     fullname = null;
     email = null;
     password = null;
     birthdate = null;
-    signup = null;
+    signup = '';
   }
 }

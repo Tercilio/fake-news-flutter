@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:basearch/src/features/auth/presentation/view/page/login_page.dart';
 import 'package:basearch/src/features/auth/presentation/viewmodel/signup_viewmodel.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +16,7 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends ModularState<SignUpPage, SignUpViewModel> {
+  late bool isAccountCreated = false;
   late ColorScheme _colors;
   late ThemeData _theme;
 
@@ -34,11 +38,17 @@ class _SignUpPageState extends ModularState<SignUpPage, SignUpViewModel> {
         ],
       ));
 
-  Widget get _loadingIndicator => Visibility(
-        child: const LinearProgressIndicator(
-          backgroundColor: Colors.blueGrey,
+  Widget get _loadingIndicator => Container(
+        height: 56,
+        width: double.infinity,
+        margin: const EdgeInsets.fromLTRB(70, 15, 70, 5),
+        child: const Center(
+          child: Visibility(
+            child: CircularProgressIndicator(
+              backgroundColor: Colors.blueGrey,
+            ),
+          ),
         ),
-        visible: store.isLoading,
       );
 
   Widget get _fullname => Container(
@@ -143,20 +153,58 @@ class _SignUpPageState extends ModularState<SignUpPage, SignUpViewModel> {
         ),
       );
 
-  Widget get _saveButton => Container(
-      height: 56,
-      width: double.infinity,
-      margin: const EdgeInsets.fromLTRB(70, 15, 70, 5),
-      child: ElevatedButton(
-        style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
-          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
-          ),
+  Widget get _saveButton => Center(
+        child: Column(
+          children: [
+            Visibility(
+              child: Container(
+                margin: const EdgeInsets.fromLTRB(0, 15, 0, 5),
+                child: Text(
+                  'singup_success'.i18n(),
+                  style: const TextStyle(color: Colors.green, fontSize: 18),
+                ),
+              ),
+              visible: store.error.signup.isEmpty && isAccountCreated,
+            ),
+            Visibility(
+              child: Container(
+                margin: const EdgeInsets.fromLTRB(0, 15, 0, 5),
+                child: Text(
+                  store.error.signup,
+                  style: const TextStyle(color: Colors.red, fontSize: 18),
+                ),
+              ),
+              visible: store.error.signup.isNotEmpty,
+            ),
+            Visibility(
+              child: Container(
+                height: 56,
+                margin: const EdgeInsets.fromLTRB(0, 15, 0, 5),
+                child: ElevatedButton(
+                  style: ButtonStyle(
+                    minimumSize: MaterialStateProperty.all(const Size(180, 56)),
+                    backgroundColor:
+                        MaterialStateProperty.all<Color>(Colors.black),
+                    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                      RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(40)),
+                    ),
+                  ),
+                  onPressed: () async {
+                    isAccountCreated = await store.singup();
+
+                    if (isAccountCreated) {
+                      startTime();
+                    }
+                  },
+                  child: Text('saveuser'.i18n()),
+                ),
+              ),
+              visible: !isAccountCreated,
+            ),
+          ],
         ),
-        onPressed: store.isLoading ? null : store.singup,
-        child: Text('saveuser'.i18n()),
-      ));
+      );
 
   Widget get _login => Container(
         width: double.infinity,
@@ -199,12 +247,11 @@ class _SignUpPageState extends ModularState<SignUpPage, SignUpViewModel> {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   _logoSignUp,
-                  _loadingIndicator,
                   _fullname,
                   _birthdate,
                   _email,
                   _password,
-                  _saveButton,
+                  store.isLoading ? _loadingIndicator : _saveButton,
                   _login,
                 ],
               ),
@@ -213,5 +260,15 @@ class _SignUpPageState extends ModularState<SignUpPage, SignUpViewModel> {
         ),
       ),
     );
+  }
+
+  startTime() async {
+    var duration = const Duration(seconds: 2);
+    return Timer(duration, route);
+  }
+
+  route() {
+    Navigator.push(
+        context, MaterialPageRoute(builder: (context) => const LoginPage()));
   }
 }

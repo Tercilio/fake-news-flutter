@@ -20,6 +20,10 @@
     "login_server_error" : "Server error!",
     "login_invalid" : "Email or password invalid!",
 
+    "singup_success": "Account created successfully...",
+    "singup_server_error" : "Server error!",
+    "singup_invalid" : "Email exists!",
+
     "email_required" : "Email is required!",
     "password_required" : "Password is required!",
     "fullname_required" : "Full name is required!",
