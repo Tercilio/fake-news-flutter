@@ -1,3 +1,5 @@
+import 'package:basearch/src/features/auth/data/dto/user_input_dto.dart';
+import 'package:basearch/src/features/auth/domain/model/user.dart';
 import 'package:basearch/src/features/auth/presentation/view/page/login_page.dart';
 import 'package:basearch/src/features/main/presentation/viewmodel/main_viewmodel.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +13,6 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends ModularState<MainPage, MainViewModel> {
-
   Widget get _loading => const SizedBox(
         width: double.infinity,
         height: double.infinity,
@@ -78,18 +79,72 @@ class _MainPageState extends ModularState<MainPage, MainViewModel> {
     );
   }
 
+  Widget _drawer(BuildContext context, UserInputDto user) {
+    return Drawer(
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: <Widget>[
+          DrawerHeader(
+            padding: const EdgeInsets.all(0),
+            child: UserAccountsDrawerHeader(
+              accountName: Text(user.fullname),
+              accountEmail: Text(user.email),
+              currentAccountPicture: CircleAvatar(
+                backgroundColor: Colors.orange,
+                child: Text(
+                  user.fullname[0],
+                  style: const TextStyle(fontSize: 40.0),
+                ),
+              ),
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: AssetImage('lib/assets/images/noite.jpg'),
+                ),
+              ),
+            ),
+          ),
+          ListTile(
+            leading: const Icon(Icons.star),
+            title: const Text('Favorites'),
+            subtitle: const Text('my favorites...'),
+            trailing: const Icon(Icons.arrow_forward),
+            onTap: () => {},
+          ),
+          ListTile(
+            leading: const Icon(Icons.verified_user),
+            title: const Text('Profile'),
+            subtitle: const Text('my profile...'),
+            trailing: const Icon(Icons.arrow_forward),
+            onTap: () => {Navigator.of(context).pop()},
+          ),
+          ListTile(
+            leading: const Icon(Icons.border_color),
+            title: const Text('Feedback'),
+            subtitle: const Text('my feedbacks...'),
+            trailing: const Icon(Icons.arrow_forward),
+            onTap: () => {Navigator.of(context).pop()},
+          ),
+          ListTile(
+            leading: const Icon(Icons.exit_to_app),
+            title: const Text('Logout'),
+            onTap: () => {Navigator.of(context).pop()},
+          ),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: _buildFutureBuilder(),
+      drawer: _drawer(context,
+          const UserInputDto("Welisson", "2022-05-17", "w@gmail.com", "")),
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 135, 151, 178),
         centerTitle: true,
         title: const Text("Notícias"),
-        leading: IconButton(
-          icon: const Icon(Icons.menu, semanticLabel: 'menu'),
-          onPressed: () => print('Menu button'),
-        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.logout_rounded, semanticLabel: 'logout'),
