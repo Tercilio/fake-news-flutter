@@ -15,6 +15,9 @@ import 'package:basearch/src/features/auth/presentation/viewmodel/login_viewmode
 import 'package:basearch/src/features/auth/presentation/viewmodel/signup_viewmodel.dart';
 import 'package:basearch/src/features/auth/presentation/viewmodel/validatorcode_viewmodel.dart';
 import 'package:basearch/src/features/home/presentation/view/page/home_page.dart';
+import 'package:basearch/src/features/main/data/repository/news_repository.dart';
+import 'package:basearch/src/features/main/domain/repository/news_interface.dart';
+import 'package:basearch/src/features/main/presentation/viewmodel/main_viewmodel.dart';
 import 'package:basearch/src/features/onboarding/presentation/view/page/onboarding_page.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -29,9 +32,11 @@ class HomeModule extends Module {
         Bind.factory((i) => ValidatorCodeViewModel()),
         Bind.factory((i) => LoginViewModel()),
         Bind.factory((i) => SignUpViewModel()),
+        Bind.factory((i) => MainViewModel()),
         Bind.factory((i) => ForgotPasswordViewModel()),
         Bind.factory((i) => ForgotPasswordCodeViewModel()),
         Bind.factory<ILogin>((i) => LoginRepository()),
+        Bind.factory<INews>((i) => NewsRepository()),
       ];
 
   @override

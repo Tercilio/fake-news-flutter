@@ -1,8 +1,9 @@
 class News {
-  const News(this.id, this.title, this.body, this.author, this.url,
-      this.category, this.publicationDate);
+  const News(this.id, this.veracit, this.title, this.body, this.author,
+      this.url, this.category, this.publicationDate);
 
   final int id;
+  final bool? veracit;
   final String title;
   final String body;
   final String author;
@@ -12,6 +13,7 @@ class News {
 
   factory News.fromJson(Map<String, dynamic> json) => News(
       json['id'],
+      json['veracity'],
       json['title'],
       json['body'],
       json['author'],

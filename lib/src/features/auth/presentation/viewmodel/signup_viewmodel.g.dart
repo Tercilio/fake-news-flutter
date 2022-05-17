@@ -100,6 +100,22 @@ mixin _$SignUpViewModel on _SignUpViewModelBase, Store {
     });
   }
 
+  final _$isAccountCreatedAtom =
+      Atom(name: '_SignUpViewModelBase.isAccountCreated');
+
+  @override
+  bool get isAccountCreated {
+    _$isAccountCreatedAtom.reportRead();
+    return super.isAccountCreated;
+  }
+
+  @override
+  set isAccountCreated(bool value) {
+    _$isAccountCreatedAtom.reportWrite(value, super.isAccountCreated, () {
+      super.isAccountCreated = value;
+    });
+  }
+
   final _$_SignUpViewModelBaseActionController =
       ActionController(name: '_SignUpViewModelBase');
 
@@ -155,7 +171,8 @@ birthdate: ${birthdate},
 email: ${email},
 password: ${password},
 isLoading: ${isLoading},
-isDateSelected: ${isDateSelected}
+isDateSelected: ${isDateSelected},
+isAccountCreated: ${isAccountCreated}
     ''';
   }
 }

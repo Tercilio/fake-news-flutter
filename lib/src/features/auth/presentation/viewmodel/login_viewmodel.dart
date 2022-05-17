@@ -1,7 +1,6 @@
 import 'package:basearch/src/exceptions/login_exception.dart';
 import 'package:basearch/src/features/auth/domain/model/user.dart';
-import 'package:basearch/src/features/auth/presentation/view/page/login_page.dart';
-import 'package:flutter/material.dart';
+import 'package:basearch/src/features/auth/domain/model/user_secure_storage.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:localization/localization.dart';
 import 'package:mobx/mobx.dart';
@@ -51,7 +50,10 @@ abstract class _LoginViewModelBase with Store {
 
         if (user.token != null) {
           isLogged = true;
-          
+
+          UserSecureStorage.setUseremail(user.email);
+          UserSecureStorage.setUsertoken(user.token);
+
           Modular.to.pushNamed('/main');
         }
       } on LoginException {
