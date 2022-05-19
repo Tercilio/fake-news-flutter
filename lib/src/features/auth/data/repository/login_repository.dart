@@ -15,7 +15,7 @@ class LoginRepository implements ILogin {
 
     try {
       final Response response = await Dio().post(
-        'http://localhost:8080/login',
+        'https://api-fakenews.herokuapp.com/login',
         data: dto.toJson(),
       );
 

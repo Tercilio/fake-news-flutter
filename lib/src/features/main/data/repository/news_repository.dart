@@ -14,7 +14,8 @@ class NewsRepository implements INews {
       dio.options.headers["Authorization"] =
           "Bearer " + UserSecureStorage.getUsertoken();
 
-      final Response response = await dio.get('http://localhost:8080/api/news');
+      final Response response =
+          await dio.get('https://api-fakenews.herokuapp.com/api/news');
 
       List<dynamic> listResponse = response.data;
 

@@ -13,7 +13,7 @@ class SingupRepository implements ISingup {
 
     try {
       final response = await Dio().post(
-        'http://localhost:8080/api/user',
+        'https://api-fakenews.herokuapp.com/api/user',
         data: userInputDto.toJson(),
       );
 

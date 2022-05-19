@@ -25,7 +25,7 @@ class _MainPageState extends ModularState<MainPage, MainViewModel> {
         ),
       );
 
-  Widget newsCard(context, news) {
+  Widget _newsCard(context, news) {
     return Padding(
       padding: const EdgeInsets.only(top: 5, left: 5, right: 5),
       child: Card(
@@ -55,7 +55,7 @@ class _MainPageState extends ModularState<MainPage, MainViewModel> {
     return ListView.builder(
       itemCount: store.newsData.length,
       itemBuilder: (context, index) {
-        return newsCard(context, store.newsData[index]);
+        return _newsCard(context, store.newsData[index]);
       },
     );
   }
@@ -105,13 +105,6 @@ class _MainPageState extends ModularState<MainPage, MainViewModel> {
             ),
           ),
           ListTile(
-            leading: const Icon(Icons.star),
-            title: const Text('Favorites'),
-            subtitle: const Text('my favorites...'),
-            trailing: const Icon(Icons.arrow_forward),
-            onTap: () => {},
-          ),
-          ListTile(
             leading: const Icon(Icons.verified_user),
             title: const Text('Profile'),
             subtitle: const Text('my profile...'),
@@ -119,16 +112,25 @@ class _MainPageState extends ModularState<MainPage, MainViewModel> {
             onTap: () => {Navigator.of(context).pop()},
           ),
           ListTile(
-            leading: const Icon(Icons.border_color),
-            title: const Text('Feedback'),
-            subtitle: const Text('my feedbacks...'),
+            leading: const Icon(Icons.star),
+            title: const Text('Favorites'),
+            subtitle: const Text('my favorites news...'),
+            trailing: const Icon(Icons.arrow_forward),
+            onTap: () => {},
+          ),
+          ListTile(
+            leading: const Icon(Icons.messenger),
+            title: const Text('Chatbot'),
             trailing: const Icon(Icons.arrow_forward),
             onTap: () => {Navigator.of(context).pop()},
           ),
           ListTile(
             leading: const Icon(Icons.exit_to_app),
             title: const Text('Logout'),
-            onTap: () => {Navigator.of(context).pop()},
+            onTap: () => {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const LoginPage())),
+            },
           ),
         ],
       ),
@@ -145,15 +147,6 @@ class _MainPageState extends ModularState<MainPage, MainViewModel> {
         backgroundColor: const Color.fromARGB(255, 135, 151, 178),
         centerTitle: true,
         title: const Text("Notícias"),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.logout_rounded, semanticLabel: 'logout'),
-            onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const LoginPage()),
-            ),
-          )
-        ],
       ),
     );
   }
