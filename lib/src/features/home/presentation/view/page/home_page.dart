@@ -50,10 +50,16 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Column(
-        children: [Expanded(child: _logo, flex: 2), Expanded(child: _loading)],
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        resizeToAvoidBottomInset: false,
+        body: Column(
+          children: [
+            Expanded(child: _logo, flex: 2),
+            Expanded(child: _loading)
+          ],
+        ),
       ),
     );
   }

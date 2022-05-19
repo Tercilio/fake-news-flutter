@@ -1,6 +1,8 @@
 import 'package:basearch/src/features/auth/data/dto/user_input_dto.dart';
 import 'package:basearch/src/features/auth/domain/model/user.dart';
 import 'package:basearch/src/features/auth/presentation/view/page/login_page.dart';
+import 'package:basearch/src/features/main/domain/model/news.dart';
+import 'package:basearch/src/features/main/presentation/view/page/news.dart';
 import 'package:basearch/src/features/main/presentation/viewmodel/main_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -42,7 +44,8 @@ class _MainPageState extends ModularState<MainPage, MainViewModel> {
               title: Text(news.title, style: const TextStyle(fontSize: 16)),
               subtitle: Text(news.body, style: const TextStyle(fontSize: 12)),
               onTap: () {
-                print(news.title);
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => NewsPage(news)));
               },
             ),
           ],
@@ -145,6 +148,9 @@ class _MainPageState extends ModularState<MainPage, MainViewModel> {
           const UserInputDto("Welisson", "2022-05-17", "w@gmail.com", "")),
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 135, 151, 178),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(bottom: Radius.circular(15)),
+        ),
         centerTitle: true,
         title: const Text("Notícias"),
       ),
