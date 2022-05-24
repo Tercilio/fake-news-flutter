@@ -1,7 +1,6 @@
-import 'package:basearch/src/features/auth/data/dto/user_input_dto.dart';
-import 'package:basearch/src/features/auth/domain/model/user.dart';
+import 'package:basearch/src/features/auth/data/dto/user_output_dto.dart';
+import 'package:basearch/src/features/auth/domain/model/user_secure_storage.dart';
 import 'package:basearch/src/features/auth/presentation/view/page/login_page.dart';
-import 'package:basearch/src/features/main/domain/model/news.dart';
 import 'package:basearch/src/features/main/presentation/view/page/news.dart';
 import 'package:basearch/src/features/main/presentation/viewmodel/main_viewmodel.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +14,8 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends ModularState<MainPage, MainViewModel> {
+  final UserOutputDto _user = UserSecureStorage.getUser();
+
   Widget get _loading => const SizedBox(
         width: double.infinity,
         height: double.infinity,
@@ -82,7 +83,7 @@ class _MainPageState extends ModularState<MainPage, MainViewModel> {
     );
   }
 
-  Widget _drawer(BuildContext context, UserInputDto user) {
+  Widget _drawer(BuildContext context) {
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
@@ -90,49 +91,67 @@ class _MainPageState extends ModularState<MainPage, MainViewModel> {
           DrawerHeader(
             padding: const EdgeInsets.all(0),
             child: UserAccountsDrawerHeader(
-              accountName: Text(user.fullname),
-              accountEmail: Text(user.email),
+              accountName: Text(_user.fullname),
+              accountEmail: Text(_user.email),
               currentAccountPicture: CircleAvatar(
-                backgroundColor: Colors.orange,
-                child: Text(
-                  user.fullname[0],
-                  style: const TextStyle(fontSize: 40.0),
-                ),
+                backgroundColor: Colors.blue.shade100,
+                child: _user.photo.isEmpty
+                    ? Text(
+                        _user.fullname.isEmpty ? "" : _user.fullname[0],
+                        style: const TextStyle(fontSize: 40.0),
+                      )
+                    : ClipOval(
+                        child: Image.network(
+                          _user.photo,
+                          fit: BoxFit.cover,
+                          width: 90,
+                          height: 90,
+                        ),
+                      ),
               ),
               decoration: const BoxDecoration(
                 image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: AssetImage('lib/assets/images/noite.jpg'),
+                  fit: BoxFit.fill,
+                  image: AssetImage('lib/assets/images/profile_bg.jpg'),
                 ),
               ),
             ),
           ),
           ListTile(
-            leading: const Icon(Icons.verified_user),
+            leading: const Icon(Icons.person_rounded),
             title: const Text('Profile'),
             subtitle: const Text('my profile...'),
             trailing: const Icon(Icons.arrow_forward),
             onTap: () => {Navigator.of(context).pop()},
           ),
           ListTile(
-            leading: const Icon(Icons.star),
+            leading: const Icon(Icons.star_rounded),
             title: const Text('Favorites'),
             subtitle: const Text('my favorites news...'),
             trailing: const Icon(Icons.arrow_forward),
             onTap: () => {},
           ),
           ListTile(
-            leading: const Icon(Icons.messenger),
+            leading: const Icon(Icons.messenger_rounded),
             title: const Text('Chatbot'),
             trailing: const Icon(Icons.arrow_forward),
             onTap: () => {Navigator.of(context).pop()},
           ),
           ListTile(
-            leading: const Icon(Icons.exit_to_app),
+            leading: const Icon(Icons.map_rounded),
+            title: const Text('Maps'),
+            trailing: const Icon(Icons.arrow_forward),
+            onTap: () => {Navigator.of(context).pop()},
+          ),
+          ListTile(
+            leading: const Icon(Icons.exit_to_app_rounded),
             title: const Text('Logout'),
             onTap: () => {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const LoginPage())),
+              UserSecureStorage.resetUser(),
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const LoginPage()),
+              ),
             },
           ),
         ],
@@ -144,8 +163,7 @@ class _MainPageState extends ModularState<MainPage, MainViewModel> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: _buildFutureBuilder(),
-      drawer: _drawer(context,
-          const UserInputDto("Welisson", "2022-05-17", "w@gmail.com", "")),
+      drawer: _drawer(context),
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 135, 151, 178),
         shape: const RoundedRectangleBorder(

@@ -1,5 +1,3 @@
-import 'package:basearch/src/features/auth/data/repository/singup_repository.dart';
-import 'package:basearch/src/features/auth/domain/repository/singup_interface.dart';
 import 'package:basearch/src/features/auth/domain/usecase/signup_usecase.dart';
 import 'package:basearch/src/features/auth/presentation/view/page/forgot_password_code_page.dart';
 import 'package:basearch/src/features/auth/presentation/view/page/validator_code_page.dart';
@@ -10,8 +8,8 @@ import 'package:basearch/src/features/auth/presentation/viewmodel/validatorcode_
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../home/home_module.dart';
-import 'data/repository/login_repository.dart';
-import 'domain/repository/login_interface.dart';
+import 'data/repository/user_repository.dart';
+import 'domain/repository/user_interface.dart';
 import 'domain/usecase/forgotpassword_usecase.dart';
 import 'domain/usecase/login_usecase.dart';
 import 'presentation/view/page/forgot_password_page.dart';
@@ -30,13 +28,13 @@ class AuthModule extends Module {
         Bind.factory((i) => LoginUseCase()),
         Bind.factory((i) => SignUpUseCase()),
         Bind.factory((i) => ForgotPasswordUseCase()),
-        Bind.factory<ILogin>((i) => LoginRepository()),
-        Bind.factory<ISingup>((i) => SingupRepository()),
+        Bind.factory<IUser>((i) => UserRepository()),
       ];
 
   @override
   List<ModularRoute> get routes => [
-        ChildRoute('/forgotpasswordcode', child: (_, __) => const ForgotPasswordCode()),
+        ChildRoute('/forgotpasswordcode',
+            child: (_, __) => const ForgotPasswordCode()),
         ChildRoute('/forgotpassword', child: (_, __) => const ForgotPassword()),
         ChildRoute('/validatorcode', child: (_, __) => const ValidatorCode()),
         ChildRoute('/signup', child: (_, __) => const SignUpPage()),

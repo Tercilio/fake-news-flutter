@@ -1,5 +1,5 @@
-import 'package:basearch/src/features/auth/data/repository/login_repository.dart';
-import 'package:basearch/src/features/auth/domain/repository/login_interface.dart';
+import 'package:basearch/src/features/auth/data/repository/user_repository.dart';
+import 'package:basearch/src/features/auth/domain/repository/user_interface.dart';
 import 'package:basearch/src/features/auth/domain/usecase/forgotpassword_usecase.dart';
 import 'package:basearch/src/features/auth/domain/usecase/login_usecase.dart';
 import 'package:basearch/src/features/auth/domain/usecase/signup_usecase.dart';
@@ -21,7 +21,7 @@ class OnboardingModule extends Module {
         Bind.factory((i) => LoginViewModel()),
         Bind.factory((i) => SignUpViewModel()),
         Bind.factory((i) => ForgotPasswordViewModel()),
-        Bind.factory<ILogin>((i) => LoginRepository()),
+        Bind.factory<IUser>((i) => UserRepository()),
       ];
 
   @override

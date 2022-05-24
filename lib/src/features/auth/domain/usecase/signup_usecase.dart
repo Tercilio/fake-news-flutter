@@ -1,10 +1,10 @@
 import 'package:basearch/src/features/auth/data/dto/user_input_dto.dart';
-import 'package:basearch/src/features/auth/domain/repository/singup_interface.dart';
+import 'package:basearch/src/features/auth/domain/repository/user_interface.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:localization/localization.dart';
 
 class SignUpUseCase {
-  final repository = Modular.get<ISingup>();
+  final repository = Modular.get<IUser>();
 
   String? validateFullname(String fullname) {
     if (fullname.isEmpty) {

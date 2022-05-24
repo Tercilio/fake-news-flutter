@@ -1,5 +1,5 @@
 import 'package:basearch/src/exceptions/login_exception.dart';
-import 'package:basearch/src/features/auth/domain/model/user.dart';
+import 'package:basearch/src/features/auth/data/dto/user_output_dto.dart';
 import 'package:basearch/src/features/auth/domain/model/user_secure_storage.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:localization/localization.dart';
@@ -46,16 +46,14 @@ abstract class _LoginViewModelBase with Store {
     if (!error.hasErrors) {
       isLoading = true;
       try {
-        User user = await _usecase.login(email, password);
+        UserOutputDto user = await _usecase.login(email, password);
 
-        if (user.token != null) {
-          isLogged = true;
+        if (user.token == null) throw Exception();
 
-          UserSecureStorage.setUseremail(user.email);
-          UserSecureStorage.setUsertoken(user.token);
+        UserSecureStorage.setUser(user);
 
-          Modular.to.pushNamed('/main');
-        }
+        isLogged = true;
+        Modular.to.pushNamed('/main');
       } on LoginException {
         error.login = 'login_invalid'.i18n();
       } on Exception {

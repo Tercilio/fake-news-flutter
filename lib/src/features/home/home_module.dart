@@ -1,7 +1,5 @@
-import 'package:basearch/src/features/auth/data/repository/login_repository.dart';
-import 'package:basearch/src/features/auth/data/repository/singup_repository.dart';
-import 'package:basearch/src/features/auth/domain/repository/login_interface.dart';
-import 'package:basearch/src/features/auth/domain/repository/singup_interface.dart';
+import 'package:basearch/src/features/auth/data/repository/user_repository.dart';
+import 'package:basearch/src/features/auth/domain/repository/user_interface.dart';
 import 'package:basearch/src/features/auth/domain/usecase/forgotpassword_usecase.dart';
 import 'package:basearch/src/features/auth/domain/usecase/login_usecase.dart';
 import 'package:basearch/src/features/auth/domain/usecase/signup_usecase.dart';
@@ -38,8 +36,7 @@ class HomeModule extends Module {
         Bind.factory((i) => MainViewModel()),
         Bind.factory((i) => ForgotPasswordViewModel()),
         Bind.factory((i) => ForgotPasswordCodeViewModel()),
-        Bind.factory<ILogin>((i) => LoginRepository()),
-        Bind.factory<ISingup>((i) => SingupRepository()),
+        Bind.factory<IUser>((i) => UserRepository()),
         Bind.factory<INews>((i) => NewsRepository()),
       ];
 
