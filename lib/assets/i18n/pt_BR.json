@@ -18,11 +18,19 @@
     "change_Password" : "Confirmar", 
     "forgot_password_code": "Esqueci minha senha",
 
+    "updateuser" : "Atualizar",
     "saveuser" : "Salvar",
     "fullname": "Nome completo",
     "fullname_hint": "Informe o seu nome completo",
     
     "questionlogin_text": "Você já tem uma conta? ",
+
+    "age_label" : "Idade",
+    "fullname_label" : "Nome completo",
+    "birthdate_label" : "Data de nascimento",
+    "address_label" : "Endereço",
+    "email_label" : "Email",
+    "password_label" : "Senha",
     
     "email_required" : "O email é obrigatório!",
     "password_required" : "A senha é obrigatória!",
@@ -35,6 +43,9 @@
     "singup_success": "Conta criada com sucesso...",
     "singup_server_error" : "Erro no servidor!",
     "singup_invalid" : "Email existente!",
+
+    "updateuser_success": "Conta atualizada com sucesso...",
+    "updateuser_server_error" : "Erro no servidor!",
     
     "email_invalid" : "O email é inválido!",
     "password_invalid" : "O senha é inválida!",

@@ -126,7 +126,7 @@ class _MainPageState extends ModularState<MainPage, MainViewModel> {
             onTap: () => {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => UserProfilePage(_user)),
+                MaterialPageRoute(builder: (context) => const UserProfilePage()),
               ),
             },
           ),

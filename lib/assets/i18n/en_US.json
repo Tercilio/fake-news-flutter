@@ -11,6 +11,7 @@
     "birthdate" : "Birth date",
     "birthdate_hint" : "Type your birth date",
 
+    "updateuser" : "Update",
     "saveuser" : "Join",
     "fullname": "Full name",
     "fullname_hint": "Type your full name",
@@ -23,6 +24,16 @@
     "singup_success": "Account created successfully...",
     "singup_server_error" : "Server error!",
     "singup_invalid" : "Email exists!",
+
+    "updateuser_success": "Account updated successfully...",
+    "updateuser_server_error" : "Server error!",
+
+    "age_label" : "Age",
+    "fullname_label" : "Full name",
+    "birthdate_label" : "Birthdate",
+    "address_label" : "Address",
+    "email_label" : "Email",
+    "password_label" : "Password",
 
     "email_required" : "Email is required!",
     "password_required" : "Password is required!",
