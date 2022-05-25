@@ -2,6 +2,7 @@ import 'package:basearch/src/features/auth/data/dto/user_output_dto.dart';
 import 'package:basearch/src/features/auth/domain/model/user_secure_storage.dart';
 import 'package:basearch/src/features/auth/presentation/view/page/login_page.dart';
 import 'package:basearch/src/features/main/presentation/view/page/news.dart';
+import 'package:basearch/src/features/main/presentation/view/page/user_profile.dart';
 import 'package:basearch/src/features/main/presentation/viewmodel/main_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -122,7 +123,12 @@ class _MainPageState extends ModularState<MainPage, MainViewModel> {
             title: const Text('Profile'),
             subtitle: const Text('my profile...'),
             trailing: const Icon(Icons.arrow_forward),
-            onTap: () => {Navigator.of(context).pop()},
+            onTap: () => {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => UserProfilePage(_user)),
+              ),
+            },
           ),
           ListTile(
             leading: const Icon(Icons.star_rounded),
