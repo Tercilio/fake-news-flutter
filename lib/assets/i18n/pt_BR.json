@@ -25,6 +25,8 @@
     
     "questionlogin_text": "Você já tem uma conta? ",
 
+    "date_format": "dd/MM/yyyy",
+
     "age_label" : "Idade",
     "fullname_label" : "Nome completo",
     "birthdate_label" : "Data de nascimento",

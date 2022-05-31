@@ -28,6 +28,8 @@
     "updateuser_success": "Account updated successfully...",
     "updateuser_server_error" : "Server error!",
 
+    "date_format": "yyyy/MM/dd",
+
     "age_label" : "Age",
     "fullname_label" : "Full name",
     "birthdate_label" : "Birthdate",

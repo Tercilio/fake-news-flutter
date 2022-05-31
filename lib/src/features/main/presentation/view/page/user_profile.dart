@@ -7,6 +7,7 @@ import 'package:basearch/src/features/main/presentation/viewmodel/user_profile_v
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:intl/intl.dart';
 import 'package:localization/localization.dart';
 
 class UserProfilePage extends StatefulWidget {
@@ -99,7 +100,7 @@ class _UserProfilePage
               flex: 7,
               child: TextFormField(
                 key: Key(store.birthdate),
-                initialValue: store.birthdate,
+                initialValue: getDate(),
                 decoration: InputDecoration(
                   errorText: store.error.birthdate!.isEmpty
                       ? null
@@ -130,6 +131,7 @@ class _UserProfilePage
                           .replaceAll('-', '/')
                           .substring(0, 10);
 
+                      print("Data pick: " + dataPick.toString());
                       calcAge(dataPick);
                     });
                   }
@@ -301,6 +303,21 @@ class _UserProfilePage
     store.age = age.toString();
 
     setState(() => _controller.text = store.age);
+  }
+
+  getDate() {
+    if (store.birthdate.isEmpty && _user.birthdate.isEmpty) {
+      return "";
+    }
+
+    return store.birthdate.isEmpty
+        ? formatDate(_user.birthdate)
+        : formatDate(store.birthdate);
+  }
+
+  formatDate(String date) {
+    date = date.replaceAll('/', '-');
+    return DateFormat("date_format".i18n()).format(DateTime.parse(date));
   }
 
   startTime() async {
