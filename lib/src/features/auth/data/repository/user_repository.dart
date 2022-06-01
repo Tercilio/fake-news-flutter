@@ -5,6 +5,8 @@ import 'package:basearch/src/exceptions/singup_exception.dart';
 import 'package:basearch/src/features/auth/data/dto/user_dto.dart';
 import 'package:basearch/src/features/auth/data/dto/user_input_dto.dart';
 import 'package:basearch/src/features/auth/data/dto/user_output_dto.dart';
+import 'package:basearch/src/features/auth/domain/model/user_secure_storage.dart';
+import 'package:basearch/src/features/main/data/dto/user_input_update_dto.dart';
 import 'package:dio/dio.dart';
 
 import '../../domain/model/user.dart';
@@ -77,6 +79,32 @@ class UserRepository implements IUser {
       } else {
         throw Exception("Server error.");
       }
+    }
+
+    return userResponse;
+  }
+
+  @override
+  Future<UserOutputDto> updateUser(int idUser, UserInputUpdateDto user) async {
+    Dio dio = Dio();
+    UserOutputDto? userResponse;
+
+    try {
+      String token = UserSecureStorage.getUsertoken();
+
+      dio.options.headers["Access-Control-Allow-Origin"] = "*";
+      dio.options.headers["Authorization"] = "Bearer " + token;
+
+      final response = await dio.put(
+        'https://api-fakenews.herokuapp.com/api/user/' + idUser.toString(),
+        data: user.toJson(),
+      );
+
+      final Map<String, dynamic> json = Map.from(response.data);
+
+      userResponse = UserOutputDto.fromJsonToken(json, token);
+    } on DioError {
+      throw Exception("Server error.");
     }
 
     return userResponse;

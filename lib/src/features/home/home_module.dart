@@ -16,6 +16,7 @@ import 'package:basearch/src/features/auth/presentation/viewmodel/validatorcode_
 import 'package:basearch/src/features/main/data/repository/news_repository.dart';
 import 'package:basearch/src/features/main/domain/repository/news_interface.dart';
 import 'package:basearch/src/features/main/domain/usecase/news_usecase.dart';
+import 'package:basearch/src/features/main/domain/usecase/user_usecase.dart';
 import 'package:basearch/src/features/main/presentation/view/page/main_page.dart';
 import 'package:basearch/src/features/main/presentation/viewmodel/main_viewmodel.dart';
 import 'package:basearch/src/features/main/presentation/viewmodel/user_profile_viewmodel.dart';
@@ -31,6 +32,7 @@ class HomeModule extends Module {
         Bind.factory((i) => SignUpUseCase()),
         Bind.factory((i) => NewsUseCase()),
         Bind.factory((i) => ForgotPasswordUseCase()),
+        Bind.factory((i) => UserUseCase()),
         Bind.factory((i) => ValidatorCodeViewModel()),
         Bind.factory((i) => LoginViewModel()),
         Bind.factory((i) => SignUpViewModel()),

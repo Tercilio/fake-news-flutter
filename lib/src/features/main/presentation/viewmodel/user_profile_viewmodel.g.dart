@@ -9,6 +9,21 @@ part of 'user_profile_viewmodel.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$UserProfileViewModel on _UserProfileViewModelBase, Store {
+  final _$emailAtom = Atom(name: '_UserProfileViewModelBase.email');
+
+  @override
+  String get email {
+    _$emailAtom.reportRead();
+    return super.email;
+  }
+
+  @override
+  set email(String value) {
+    _$emailAtom.reportWrite(value, super.email, () {
+      super.email = value;
+    });
+  }
+
   final _$fullnameAtom = Atom(name: '_UserProfileViewModelBase.fullname');
 
   @override
@@ -66,6 +81,21 @@ mixin _$UserProfileViewModel on _UserProfileViewModelBase, Store {
   set photo(String value) {
     _$photoAtom.reportWrite(value, super.photo, () {
       super.photo = value;
+    });
+  }
+
+  final _$ageAtom = Atom(name: '_UserProfileViewModelBase.age');
+
+  @override
+  String get age {
+    _$ageAtom.reportRead();
+    return super.age;
+  }
+
+  @override
+  set age(String value) {
+    _$ageAtom.reportWrite(value, super.age, () {
+      super.age = value;
     });
   }
 
@@ -144,10 +174,12 @@ mixin _$UserProfileViewModel on _UserProfileViewModelBase, Store {
   @override
   String toString() {
     return '''
+email: ${email},
 fullname: ${fullname},
 birthdate: ${birthdate},
 address: ${address},
 photo: ${photo},
+age: ${age},
 isLoading: ${isLoading},
 isDateSelected: ${isDateSelected},
 isAccountUpdated: ${isAccountUpdated}
@@ -194,36 +226,6 @@ mixin _$UserProfileError on _UserProfileErrorBase, Store {
     });
   }
 
-  final _$addressAtom = Atom(name: '_UserProfileErrorBase.address');
-
-  @override
-  String? get address {
-    _$addressAtom.reportRead();
-    return super.address;
-  }
-
-  @override
-  set address(String? value) {
-    _$addressAtom.reportWrite(value, super.address, () {
-      super.address = value;
-    });
-  }
-
-  final _$photoAtom = Atom(name: '_UserProfileErrorBase.photo');
-
-  @override
-  String? get photo {
-    _$photoAtom.reportRead();
-    return super.photo;
-  }
-
-  @override
-  set photo(String? value) {
-    _$photoAtom.reportWrite(value, super.photo, () {
-      super.photo = value;
-    });
-  }
-
   final _$updateUserAtom = Atom(name: '_UserProfileErrorBase.updateUser');
 
   @override
@@ -244,8 +246,6 @@ mixin _$UserProfileError on _UserProfileErrorBase, Store {
     return '''
 fullname: ${fullname},
 birthdate: ${birthdate},
-address: ${address},
-photo: ${photo},
 updateUser: ${updateUser},
 hasErrors: ${hasErrors}
     ''';

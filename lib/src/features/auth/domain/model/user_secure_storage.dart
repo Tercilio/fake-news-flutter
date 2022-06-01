@@ -8,6 +8,7 @@ class UserSecureStorage {
   static String _valueUserPhoto = "";
   static String _valueUserBirthday = "";
   static String _valueUserEmail = "";
+  static String _valueUserAddress = "";
   static String _valueUserToken = "";
 
   static int getUserid() {
@@ -42,6 +43,14 @@ class UserSecureStorage {
     _valueUserBirthday = userbirthday;
   }
 
+  static String getUserAddress() {
+    return _valueUserAddress;
+  }
+
+  static void setUserAddress(String useraddress) {
+    _valueUserAddress = useraddress;
+  }
+
   static String getUseremail() {
     // return await _storage.read(key: _keyUserEmail);
     return _valueUserEmail;
@@ -64,7 +73,7 @@ class UserSecureStorage {
 
   static UserOutputDto getUser() {
     return UserOutputDto(_valueUserId, _valueUserName, _valueUserBirthday,
-        _valueUserEmail, _valueUserPhoto, _valueUserToken);
+        _valueUserAddress, _valueUserEmail, _valueUserPhoto, _valueUserToken);
   }
 
   static void setUser(UserOutputDto user) {
@@ -74,6 +83,7 @@ class UserSecureStorage {
     _valueUserBirthday = user.birthdate.isEmpty ? "" : user.birthdate;
     _valueUserEmail = user.email.isEmpty ? "" : user.email;
     _valueUserToken = user.token.isEmpty ? "" : user.token;
+    _valueUserAddress = user.address.isEmpty ? "" : user.address;
   }
 
   static void resetUser() {
@@ -83,5 +93,6 @@ class UserSecureStorage {
     _valueUserBirthday = "";
     _valueUserEmail = "";
     _valueUserToken = "";
+    _valueUserAddress = "";
   }
 }

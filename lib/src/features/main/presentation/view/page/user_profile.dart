@@ -5,6 +5,7 @@ import 'package:basearch/src/features/auth/domain/model/user_secure_storage.dart
 import 'package:basearch/src/features/main/presentation/view/page/main_page.dart';
 import 'package:basearch/src/features/main/presentation/viewmodel/user_profile_viewmodel.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
@@ -20,7 +21,7 @@ class UserProfilePage extends StatefulWidget {
 class _UserProfilePage
     extends ModularState<UserProfilePage, UserProfileViewModel> {
   bool isAccountUpdated = false;
-  final _controller = TextEditingController(text: '0');
+  final _controller = TextEditingController(text: '');
   final UserOutputDto _user = UserSecureStorage.getUser();
 
   Widget get _photo => CircleAvatar(
@@ -67,16 +68,28 @@ class _UserProfilePage
         ),
       );
 
+  Widget get _loadingIndicator => Container(
+        height: 56,
+        width: double.infinity,
+        margin: const EdgeInsets.fromLTRB(70, 15, 70, 5),
+        child: const Center(
+          child: Visibility(
+            child: CircularProgressIndicator(
+              backgroundColor: Colors.blueGrey,
+            ),
+          ),
+        ),
+      );
+
   Widget get _fullname => Container(
         margin: const EdgeInsets.fromLTRB(25, 20, 25, 0),
         width: double.infinity,
         child: TextFormField(
-          initialValue: _user.fullname,
+          initialValue: store.fullname,
           keyboardType: TextInputType.name,
           textInputAction: TextInputAction.next,
           decoration: InputDecoration(
-            errorText:
-                store.error.fullname!.isEmpty ? null : store.error.fullname,
+            errorText: store.error.fullname,
             labelText: 'fullname_label'.i18n(),
             errorStyle: const TextStyle(fontWeight: FontWeight.bold),
             prefixIcon: const Icon(Icons.person_rounded),
@@ -100,11 +113,9 @@ class _UserProfilePage
               flex: 7,
               child: TextFormField(
                 key: Key(store.birthdate),
-                initialValue: getDate(),
+                initialValue: store.birthdate,
                 decoration: InputDecoration(
-                  errorText: store.error.birthdate!.isEmpty
-                      ? null
-                      : store.error.birthdate,
+                  errorText: store.error.birthdate,
                   labelText: 'birthdate_label'.i18n(),
                   errorStyle: const TextStyle(fontWeight: FontWeight.bold),
                   hintText: 'birthdate_hint'.i18n(),
@@ -131,8 +142,7 @@ class _UserProfilePage
                           .replaceAll('-', '/')
                           .substring(0, 10);
 
-                      print("Data pick: " + dataPick.toString());
-                      calcAge(dataPick);
+                      calcAge(dataPick.toString());
                     });
                   }
                 },
@@ -166,10 +176,8 @@ class _UserProfilePage
         margin: const EdgeInsets.fromLTRB(25, 15, 25, 5),
         width: double.infinity,
         child: TextFormField(
-          initialValue: "",
+          initialValue: store.address,
           decoration: InputDecoration(
-            errorText:
-                store.error.address!.isEmpty ? null : store.error.address,
             labelText: 'address_label'.i18n(),
             errorStyle: const TextStyle(fontWeight: FontWeight.bold),
             prefixIcon: const Icon(Icons.room_rounded),
@@ -180,7 +188,7 @@ class _UserProfilePage
             ),
           ),
           enabled: !store.isLoading,
-          onTap: () async {},
+          onChanged: (value) => store.address = value,
         ),
       );
 
@@ -188,7 +196,7 @@ class _UserProfilePage
         margin: const EdgeInsets.fromLTRB(25, 15, 25, 5),
         width: double.infinity,
         child: TextFormField(
-          initialValue: _user.email,
+          initialValue: store.email,
           decoration: InputDecoration(
             labelText: 'email_label'.i18n(),
             prefixIcon: const Icon(Icons.email_rounded),
@@ -240,9 +248,11 @@ class _UserProfilePage
                     ),
                   ),
                   onPressed: () async {
-                    isAccountUpdated = await store.updateUser();
+                    isAccountUpdated = await store.updateUser(_user.id);
 
-                    if (isAccountUpdated) startTime();
+                    if (isAccountUpdated) {
+                      startTime();
+                    }
                   },
                   child: Text('updateuser'.i18n()),
                 ),
@@ -276,23 +286,59 @@ class _UserProfilePage
           borderRadius: BorderRadius.vertical(bottom: Radius.circular(15)),
         ),
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(vertical: 20),
-        child: Center(
-          child: Column(children: [
-            _profilePhoto,
-            _fullname,
-            _birthdate,
-            _address,
-            _email,
-            _saveButton
-          ]),
+      body: Center(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(vertical: 20),
+          child: Observer(builder: (_) {
+            return Form(
+              child: Column(
+                children: [
+                  _profilePhoto,
+                  _fullname,
+                  _birthdate,
+                  _address,
+                  _email,
+                  store.isLoading ? _loadingIndicator : _saveButton,
+                ],
+              ),
+            );
+          }),
         ),
       ),
     );
   }
 
-  calcAge(DateTime dateTime) {
+  @override
+  void initState() {
+    super.initState();
+
+    store.email = _user.email;
+    store.fullname = _user.fullname;
+    store.birthdate = getDate();
+    store.address = _user.address;
+
+    if (store.birthdate.isNotEmpty) {
+      calcAge(store.birthdate.replaceAll("/", "-"));
+    }
+  }
+
+  calcAge(String date) {
+    if (date.split("-")[0].length == 2) {
+      List<String> arrayStringDate = date.split("-");
+      String days = arrayStringDate[0];
+
+      arrayStringDate[0] = arrayStringDate[2];
+      arrayStringDate[2] = days;
+
+      date = arrayStringDate[0] +
+          "-" +
+          arrayStringDate[1] +
+          "-" +
+          arrayStringDate[2];
+    }
+
+    DateTime dateTime = DateTime.parse(date);
+
     DateTime dateToday = DateTime.now().add(const Duration(
         hours: 0, microseconds: 0, milliseconds: 0, minutes: 0, seconds: 0));
 
@@ -300,7 +346,7 @@ class _UserProfilePage
         hours: 0, microseconds: 0, milliseconds: 0, minutes: 0, seconds: 0));
 
     int age = (dateToday.difference(dateTime).inDays / 365).floor();
-    store.age = age.toString();
+    store.age = age < 0 ? "0" : age.toString();
 
     setState(() => _controller.text = store.age);
   }
