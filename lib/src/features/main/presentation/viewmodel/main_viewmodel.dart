@@ -20,8 +20,8 @@ abstract class _MainViewModelBase with Store {
     try {
       newsData = await _newsusecase.getAllNews();
       isLoading = false;
-    } on Exception {
-      print("Erro ao carregar as notícias.");
+    } on Exception catch (erro) {
+      print("Erro ao carregar as notícias: " + erro.toString());
     } finally {
       isLoading = false;
     }

@@ -1,5 +1,6 @@
 import 'package:basearch/src/features/auth/domain/model/user_secure_storage.dart';
 import 'package:basearch/src/features/main/domain/model/news.dart';
+import 'package:basearch/src/features/main/domain/model/predictions.dart';
 import 'package:dio/dio.dart';
 
 import '../../domain/repository/news_interface.dart';
@@ -8,6 +9,7 @@ class NewsRepository implements INews {
   @override
   Future<List<News>> getAllNews() async {
     Dio dio = Dio();
+
     List<News>? newsData = [];
 
     try {
@@ -20,10 +22,17 @@ class NewsRepository implements INews {
       List<dynamic> listResponse = response.data;
 
       for (var element in listResponse) {
-        newsData.add(News.fromJson(element));
+        Predictions predictions;
+
+        if (element["predictions"] != null) {
+          predictions = Predictions.fromJson(element["predictions"]);
+          newsData.add(News.fromJson(element, predictions));
+        } else {
+          newsData.add(News.fromJson(element, null));
+        }
       }
     } on DioError catch (e) {
-      print(e.message);
+      throw Exception(e.message);
     }
 
     return newsData;

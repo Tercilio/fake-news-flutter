@@ -1,6 +1,7 @@
 import 'package:basearch/src/features/auth/data/dto/user_output_dto.dart';
 import 'package:basearch/src/features/auth/domain/model/user_secure_storage.dart';
 import 'package:basearch/src/features/auth/presentation/view/page/login_page.dart';
+import 'package:basearch/src/features/main/domain/model/news.dart';
 import 'package:basearch/src/features/main/presentation/view/page/news.dart';
 import 'package:basearch/src/features/main/presentation/view/page/user_profile.dart';
 import 'package:basearch/src/features/main/presentation/viewmodel/main_viewmodel.dart';
@@ -29,7 +30,19 @@ class _MainPageState extends ModularState<MainPage, MainViewModel> {
         ),
       );
 
-  Widget _newsCard(context, news) {
+  Widget get _fakeNewsIcon => SizedBox(
+        height: 40,
+        width: 40,
+        child: Image.asset("lib/assets/images/fake_news_soft.png"),
+      );
+
+  Widget get _trueNewsIcon => SizedBox(
+        height: 40,
+        width: 40,
+        child: Image.asset("lib/assets/images/true_news_soft.png"),
+      );
+
+  Widget _newsCard(context, News news) {
     return Padding(
       padding: const EdgeInsets.only(top: 5, left: 5, right: 5),
       child: Card(
@@ -39,10 +52,11 @@ class _MainPageState extends ModularState<MainPage, MainViewModel> {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             ListTile(
-              leading: const Icon(
-                Icons.article,
-                size: 35,
-              ),
+              leading: news.predictions == null
+                  ? _fakeNewsIcon
+                  : news.predictions!.veracity == 0
+                      ? _fakeNewsIcon
+                      : _trueNewsIcon,
               title: Text(news.title, style: const TextStyle(fontSize: 16)),
               subtitle: Text(news.body, style: const TextStyle(fontSize: 12)),
               onTap: () {
@@ -126,7 +140,8 @@ class _MainPageState extends ModularState<MainPage, MainViewModel> {
             onTap: () => {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const UserProfilePage()),
+                MaterialPageRoute(
+                    builder: (context) => const UserProfilePage()),
               ),
             },
           ),
