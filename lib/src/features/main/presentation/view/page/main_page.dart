@@ -2,6 +2,7 @@ import 'package:basearch/src/features/auth/data/dto/user_output_dto.dart';
 import 'package:basearch/src/features/auth/domain/model/user_secure_storage.dart';
 import 'package:basearch/src/features/auth/presentation/view/page/login_page.dart';
 import 'package:basearch/src/features/main/domain/model/news.dart';
+import 'package:basearch/src/features/main/presentation/view/page/chatbot_page.dart';
 import 'package:basearch/src/features/main/presentation/view/page/news.dart';
 import 'package:basearch/src/features/main/presentation/view/page/user_profile.dart';
 import 'package:basearch/src/features/main/presentation/viewmodel/main_viewmodel.dart';
@@ -156,7 +157,12 @@ class _MainPageState extends ModularState<MainPage, MainViewModel> {
             leading: const Icon(Icons.messenger_rounded),
             title: const Text('Chatbot'),
             trailing: const Icon(Icons.arrow_forward),
-            onTap: () => {Navigator.of(context).pop()},
+            onTap: () => {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => ChatbotPage()),
+              ),
+            },
           ),
           ListTile(
             leading: const Icon(Icons.map_rounded),
