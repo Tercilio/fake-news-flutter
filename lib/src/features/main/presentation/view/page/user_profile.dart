@@ -4,12 +4,14 @@ import 'package:basearch/src/features/auth/data/dto/user_output_dto.dart';
 import 'package:basearch/src/features/auth/domain/model/user_secure_storage.dart';
 import 'package:basearch/src/features/main/presentation/view/page/main_page.dart';
 import 'package:basearch/src/features/main/presentation/viewmodel/user_profile_viewmodel.dart';
+import 'package:basearch/src/features/theme/theme_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import 'package:localization/localization.dart';
+import 'package:provider/provider.dart';
 
 class UserProfilePage extends StatefulWidget {
   const UserProfilePage({Key? key}) : super(key: key);
@@ -23,6 +25,8 @@ class _UserProfilePage
   bool isAccountUpdated = false;
   final _controller = TextEditingController(text: '');
   final UserOutputDto _user = UserSecureStorage.getUser();
+  late ThemeChanger themeChanger;
+  late bool systemIsDark;
 
   Widget get _photo => CircleAvatar(
         child: _user.photo.isEmpty
@@ -275,13 +279,17 @@ class _UserProfilePage
 
   @override
   Widget build(BuildContext context) {
+    themeChanger = Provider.of<ThemeChanger>(context, listen: false);
+    systemIsDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
+
+    bool darkThemeEnabled = Provider.of<ThemeChanger>(context).isDak();
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
         centerTitle: true,
         title: const Text("Profile"),
-        backgroundColor: const Color.fromARGB(255, 135, 151, 178),
-        iconTheme: const IconThemeData(color: Colors.black),
+        // backgroundColor: const Color.fromARGB(255, 135, 151, 178),
+        // iconTheme: const IconThemeData(color: Colors.black),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(bottom: Radius.circular(15)),
         ),

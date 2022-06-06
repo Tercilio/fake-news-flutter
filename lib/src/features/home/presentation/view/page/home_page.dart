@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:basearch/src/features/onboarding/presentation/view/page/onboarding_page.dart';
+import 'package:basearch/src/features/theme/theme_config.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -42,16 +44,28 @@ Widget get _loading => Container(
     );
 
 class _HomePageState extends State<HomePage> {
+  // late ThemeChanger themeChanger;
+  // late bool systemIsDark;
+
   @override
   void initState() {
     super.initState();
+    // WidgetsBinding.instance?.addPostFrameCallback((_) {
+    //   themeChanger.setDarkStatus(systemIsDark);
+    // });
+
     startTime();
   }
 
   @override
   Widget build(BuildContext context) {
+    // themeChanger = Provider.of<ThemeChanger>(context, listen: false);
+    // systemIsDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
+
+    // bool darkThemeEnabled = Provider.of<ThemeChanger>(context).isDak();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      themeMode: ,
       home: Scaffold(
         resizeToAvoidBottomInset: false,
         body: Column(

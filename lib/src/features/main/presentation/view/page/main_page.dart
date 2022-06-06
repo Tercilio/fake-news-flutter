@@ -5,8 +5,10 @@ import 'package:basearch/src/features/main/domain/model/news.dart';
 import 'package:basearch/src/features/main/presentation/view/page/news.dart';
 import 'package:basearch/src/features/main/presentation/view/page/user_profile.dart';
 import 'package:basearch/src/features/main/presentation/viewmodel/main_viewmodel.dart';
+import 'package:basearch/src/features/theme/theme_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:provider/provider.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
@@ -16,7 +18,10 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends ModularState<MainPage, MainViewModel> {
+  late MainViewModel mainViewModel;
   final UserOutputDto _user = UserSecureStorage.getUser();
+  late ThemeChanger themeChanger;
+  late bool systemIsDark;
 
   Widget get _loading => const SizedBox(
         width: double.infinity,
@@ -40,6 +45,37 @@ class _MainPageState extends ModularState<MainPage, MainViewModel> {
         height: 40,
         width: 40,
         child: Image.asset("lib/assets/images/true_news_soft.png"),
+      );
+
+  Widget get _themeRowIcon => Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            GestureDetector(
+              onTap: () {
+                themeChanger.setDarkStatus(false);
+              },
+              child: Icon(
+                Icons.light_mode_outlined,
+                color: themeChanger.isDak() ? Colors.grey : Colors.black,
+                size: 25,
+              ),
+            ),
+            const SizedBox(
+              width: 10,
+            ),
+            GestureDetector(
+              onTap: () {
+                themeChanger.setDarkStatus(true);
+              },
+              child: Icon(
+                Icons.dark_mode_outlined,
+                color: themeChanger.isDak() ? Colors.white : Colors.grey,
+                size: 25,
+              ),
+            )
+          ],
+        ),
       );
 
   Widget _newsCard(context, News news) {
@@ -132,6 +168,7 @@ class _MainPageState extends ModularState<MainPage, MainViewModel> {
               ),
             ),
           ),
+          _themeRowIcon,
           ListTile(
             leading: const Icon(Icons.person_rounded),
             title: const Text('Profile'),
@@ -145,13 +182,13 @@ class _MainPageState extends ModularState<MainPage, MainViewModel> {
               ),
             },
           ),
-          ListTile(
-            leading: const Icon(Icons.star_rounded),
-            title: const Text('Favorites'),
-            subtitle: const Text('my favorites news...'),
-            trailing: const Icon(Icons.arrow_forward),
-            onTap: () => {},
-          ),
+          // ListTile(
+          //   leading: const Icon(Icons.star_rounded),
+          //   title: const Text('Favorites'),
+          //   subtitle: const Text('my favorites news...'),
+          //   trailing: const Icon(Icons.arrow_forward),
+          //   onTap: () => {},
+          // ),
           ListTile(
             leading: const Icon(Icons.messenger_rounded),
             title: const Text('Chatbot'),
@@ -182,16 +219,32 @@ class _MainPageState extends ModularState<MainPage, MainViewModel> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _buildFutureBuilder(),
-      drawer: _drawer(context),
-      appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 135, 151, 178),
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(bottom: Radius.circular(15)),
+    themeChanger = Provider.of<ThemeChanger>(context, listen: false);
+    systemIsDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
+
+    bool darkThemeEnabled = Provider.of<ThemeChanger>(context).isDak();
+
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        brightness: Brightness.light,
+        primarySwatch: Colors.blueGrey,
+      ),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+        primarySwatch: Colors.blueGrey,
+      ),
+      themeMode: darkThemeEnabled ? ThemeMode.dark : ThemeMode.light,
+      home: Scaffold(
+        body: _buildFutureBuilder(),
+        drawer: _drawer(context),
+        appBar: AppBar(
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(bottom: Radius.circular(15)),
+          ),
+          centerTitle: true,
+          title: const Text("Notícias"),
         ),
-        centerTitle: true,
-        title: const Text("Notícias"),
       ),
     );
   }
