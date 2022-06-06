@@ -18,7 +18,6 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends ModularState<MainPage, MainViewModel> {
-  late MainViewModel mainViewModel;
   final UserOutputDto _user = UserSecureStorage.getUser();
   late ThemeChanger themeChanger;
   late bool systemIsDark;
@@ -226,15 +225,7 @@ class _MainPageState extends ModularState<MainPage, MainViewModel> {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        brightness: Brightness.light,
-        primarySwatch: Colors.blueGrey,
-      ),
-      darkTheme: ThemeData(
-        brightness: Brightness.dark,
-        primarySwatch: Colors.blueGrey,
-      ),
-      themeMode: darkThemeEnabled ? ThemeMode.dark : ThemeMode.light,
+      theme: darkThemeEnabled ? ThemeData.dark() : ThemeData.light(),
       home: Scaffold(
         body: _buildFutureBuilder(),
         drawer: _drawer(context),

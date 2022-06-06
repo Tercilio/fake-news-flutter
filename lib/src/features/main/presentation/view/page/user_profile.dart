@@ -288,7 +288,9 @@ class _UserProfilePage
         elevation: 0,
         centerTitle: true,
         title: const Text("Profile"),
-        // backgroundColor: const Color.fromARGB(255, 135, 151, 178),
+        backgroundColor: darkThemeEnabled
+            ? ThemeData.dark().backgroundColor
+            : ThemeData.light().backgroundColor,
         // iconTheme: const IconThemeData(color: Colors.black),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(bottom: Radius.circular(15)),
