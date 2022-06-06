@@ -25,8 +25,7 @@ class _UserProfilePage
   bool isAccountUpdated = false;
   final _controller = TextEditingController(text: '');
   final UserOutputDto _user = UserSecureStorage.getUser();
-  late ThemeChanger themeChanger;
-  late bool systemIsDark;
+  late ThemeData _themeData;
 
   Widget get _photo => CircleAvatar(
         child: _user.photo.isEmpty
@@ -279,40 +278,48 @@ class _UserProfilePage
 
   @override
   Widget build(BuildContext context) {
-    themeChanger = Provider.of<ThemeChanger>(context, listen: false);
-    systemIsDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
+    bool darkThemeEnabled = Provider.of<ThemeChanger>(context).isDark;
 
-    bool darkThemeEnabled = Provider.of<ThemeChanger>(context).isDak();
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        centerTitle: true,
-        title: const Text("Profile"),
-        backgroundColor: darkThemeEnabled
-            ? ThemeData.dark().backgroundColor
-            : ThemeData.light().backgroundColor,
-        // iconTheme: const IconThemeData(color: Colors.black),
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(bottom: Radius.circular(15)),
+    _themeData = darkThemeEnabled ? ThemeData.dark() : ThemeData.light();
+
+    return MaterialApp(
+      theme: _themeData,
+      home: Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          centerTitle: true,
+          title: const Text("Profile"),
+          leading: TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Icon(
+              Icons.arrow_back,
+              color: _themeData.iconTheme.color,
+            ),
+          ),
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(15),
+            ),
+          ),
         ),
-      ),
-      body: Center(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(vertical: 20),
-          child: Observer(builder: (_) {
-            return Form(
-              child: Column(
-                children: [
-                  _profilePhoto,
-                  _fullname,
-                  _birthdate,
-                  _address,
-                  _email,
-                  store.isLoading ? _loadingIndicator : _saveButton,
-                ],
-              ),
-            );
-          }),
+        body: Center(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(vertical: 20),
+            child: Observer(builder: (_) {
+              return Form(
+                child: Column(
+                  children: [
+                    _profilePhoto,
+                    _fullname,
+                    _birthdate,
+                    _address,
+                    _email,
+                    store.isLoading ? _loadingIndicator : _saveButton,
+                  ],
+                ),
+              );
+            }),
+          ),
         ),
       ),
     );

@@ -18,6 +18,7 @@ import 'package:basearch/src/features/main/domain/repository/news_interface.dart
 import 'package:basearch/src/features/main/domain/usecase/news_usecase.dart';
 import 'package:basearch/src/features/main/domain/usecase/user_usecase.dart';
 import 'package:basearch/src/features/main/presentation/view/page/main_page.dart';
+import 'package:basearch/src/features/main/presentation/view/page/user_profile.dart';
 import 'package:basearch/src/features/main/presentation/viewmodel/main_viewmodel.dart';
 import 'package:basearch/src/features/main/presentation/viewmodel/user_profile_viewmodel.dart';
 import 'package:basearch/src/features/onboarding/presentation/view/page/onboarding_page.dart';
@@ -55,5 +56,6 @@ class HomeModule extends Module {
         ChildRoute('/forgotpasswordcode',
             child: (_, __) => const ForgotPasswordCode()),
         ChildRoute('/validatorcode', child: (_, __) => const ValidatorCode()),
+        ChildRoute('/userprofile', child: (_, __) => const UserProfilePage()),
       ];
 }

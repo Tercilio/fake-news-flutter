@@ -56,7 +56,7 @@ class _MainPageState extends ModularState<MainPage, MainViewModel> {
               },
               child: Icon(
                 Icons.light_mode_outlined,
-                color: themeChanger.isDak() ? Colors.grey : Colors.black,
+                color: themeChanger.isDark ? Colors.grey : Colors.black,
                 size: 25,
               ),
             ),
@@ -69,7 +69,7 @@ class _MainPageState extends ModularState<MainPage, MainViewModel> {
               },
               child: Icon(
                 Icons.dark_mode_outlined,
-                color: themeChanger.isDak() ? Colors.white : Colors.grey,
+                color: themeChanger.isDark ? Colors.white : Colors.grey,
                 size: 25,
               ),
             )
@@ -181,13 +181,6 @@ class _MainPageState extends ModularState<MainPage, MainViewModel> {
               ),
             },
           ),
-          // ListTile(
-          //   leading: const Icon(Icons.star_rounded),
-          //   title: const Text('Favorites'),
-          //   subtitle: const Text('my favorites news...'),
-          //   trailing: const Icon(Icons.arrow_forward),
-          //   onTap: () => {},
-          // ),
           ListTile(
             leading: const Icon(Icons.messenger_rounded),
             title: const Text('Chatbot'),
@@ -221,7 +214,7 @@ class _MainPageState extends ModularState<MainPage, MainViewModel> {
     themeChanger = Provider.of<ThemeChanger>(context, listen: false);
     systemIsDark = MediaQuery.of(context).platformBrightness == Brightness.dark;
 
-    bool darkThemeEnabled = Provider.of<ThemeChanger>(context).isDak();
+    bool darkThemeEnabled = Provider.of<ThemeChanger>(context).isDark;
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
