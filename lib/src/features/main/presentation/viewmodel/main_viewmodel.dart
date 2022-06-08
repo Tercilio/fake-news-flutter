@@ -27,4 +27,8 @@ abstract class _MainViewModelBase with Store {
     }
     return newsData;
   }
+
+  Future<List<News>> getNewsData() async {
+    return newsData;
+  }
 }

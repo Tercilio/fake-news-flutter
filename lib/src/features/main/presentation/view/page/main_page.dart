@@ -116,7 +116,7 @@ class _MainPageState extends ModularState<MainPage, MainViewModel> {
 
   _buildFutureBuilder() {
     return FutureBuilder(
-      future: store.getAllNews(),
+      future: store.newsData.isEmpty ? store.getAllNews() : store.getNewsData(),
       builder: (context, snaphot) {
         switch (snaphot.connectionState) {
           case ConnectionState.none:
@@ -144,7 +144,6 @@ class _MainPageState extends ModularState<MainPage, MainViewModel> {
               accountName: Text(_user.fullname),
               accountEmail: Text(_user.email),
               currentAccountPicture: CircleAvatar(
-                backgroundColor: Colors.blue.shade100,
                 child: _user.photo.isEmpty
                     ? Text(
                         _user.fullname.isEmpty ? "" : _user.fullname[0],
