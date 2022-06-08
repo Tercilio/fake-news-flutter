@@ -8,6 +8,7 @@ import 'package:basearch/src/features/main/presentation/viewmodel/main_viewmodel
 import 'package:basearch/src/features/theme/theme_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class MainPage extends StatefulWidget {
@@ -81,25 +82,25 @@ class _MainPageState extends ModularState<MainPage, MainViewModel> {
     return Padding(
       padding: const EdgeInsets.only(top: 5, left: 5, right: 5),
       child: Card(
-        borderOnForeground: true,
+        clipBehavior: Clip.antiAliasWithSaveLayer,
         elevation: 5,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            ListTile(
-              leading: news.predictions == null
-                  ? _fakeNewsIcon
-                  : news.predictions!.veracity == 0
-                      ? _fakeNewsIcon
-                      : _trueNewsIcon,
-              title: Text(news.title, style: const TextStyle(fontSize: 16)),
-              subtitle: Text(news.body, style: const TextStyle(fontSize: 12)),
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => NewsPage(news)));
-              },
-            ),
-          ],
+        child: SizedBox(
+          height: 60,
+          child: ListTile(
+            leading: news.predictions == null
+                ? _fakeNewsIcon
+                : news.predictions!.veracity == 0
+                    ? _fakeNewsIcon
+                    : _trueNewsIcon,
+            title: Text(news.title,
+                style: const TextStyle(fontSize: 16), maxLines: 1),
+            subtitle: Text(news.body,
+                style: const TextStyle(fontSize: 12), maxLines: 2),
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => NewsPage(news)));
+            },
+          ),
         ),
       ),
     );
