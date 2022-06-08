@@ -17,8 +17,13 @@ class NewsPage extends StatelessWidget {
         ),
       ),
       body: Container(
-        padding: const EdgeInsets.all(10),
-        child: Text(_news.body),
+        padding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
+        child: SingleChildScrollView(
+          child: Text(
+            _news.body,
+            textAlign: TextAlign.justify,
+          ),
+        ),
       ),
     );
   }
