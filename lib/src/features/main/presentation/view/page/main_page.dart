@@ -9,6 +9,8 @@ import 'package:basearch/src/features/main/presentation/viewmodel/main_viewmodel
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
+import 'mapa_page copy.dart';
+
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
 
@@ -154,7 +156,7 @@ class _MainPageState extends ModularState<MainPage, MainViewModel> {
             onTap: () => {},
           ),
           ListTile(
-            leading: const Icon(Icons.messenger_rounded),
+            leading: const Icon(Icons.chat),
             title: const Text('Chatbot'),
             trailing: const Icon(Icons.arrow_forward),
             onTap: () => {
@@ -168,7 +170,12 @@ class _MainPageState extends ModularState<MainPage, MainViewModel> {
             leading: const Icon(Icons.map_rounded),
             title: const Text('Maps'),
             trailing: const Icon(Icons.arrow_forward),
-            onTap: () => {Navigator.of(context).pop()},
+            onTap: () => {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => MapaPage()),
+              ),
+            },
           ),
           ListTile(
             leading: const Icon(Icons.exit_to_app_rounded),
