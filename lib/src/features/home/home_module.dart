@@ -20,6 +20,7 @@ import 'package:basearch/src/features/main/domain/usecase/user_usecase.dart';
 import 'package:basearch/src/features/main/presentation/view/page/main_page.dart';
 import 'package:basearch/src/features/main/presentation/view/page/user_profile.dart';
 import 'package:basearch/src/features/main/presentation/viewmodel/main_viewmodel.dart';
+import 'package:basearch/src/features/main/presentation/viewmodel/news_detector_viewmodel.dart';
 import 'package:basearch/src/features/main/presentation/viewmodel/user_profile_viewmodel.dart';
 import 'package:basearch/src/features/onboarding/presentation/view/page/onboarding_page.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -40,6 +41,7 @@ class HomeModule extends Module {
         Bind.factory((i) => MainViewModel()),
         Bind.factory((i) => ForgotPasswordViewModel()),
         Bind.factory((i) => ForgotPasswordCodeViewModel()),
+        Bind.factory((i) => NewsDetectorViewModel()),
         Bind.factory((i) => UserProfileViewModel()),
         Bind.factory<IUser>((i) => UserRepository()),
         Bind.factory<INews>((i) => NewsRepository()),

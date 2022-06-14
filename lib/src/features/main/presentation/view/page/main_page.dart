@@ -4,6 +4,7 @@ import 'package:basearch/src/features/auth/presentation/view/page/login_page.dar
 import 'package:basearch/src/features/main/domain/model/news.dart';
 import 'package:basearch/src/features/main/presentation/view/page/chatbot_page.dart';
 import 'package:basearch/src/features/main/presentation/view/page/news.dart';
+import 'package:basearch/src/features/main/presentation/view/page/news_detector.dart';
 import 'package:basearch/src/features/main/presentation/view/page/user_profile.dart';
 import 'package:basearch/src/features/main/presentation/viewmodel/main_viewmodel.dart';
 import 'package:basearch/src/features/theme/theme_config.dart';
@@ -184,7 +185,18 @@ class _MainPageState extends ModularState<MainPage, MainViewModel> {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.chat),
+            leading: const Icon(Icons.newspaper_rounded),
+            title: const Text('Fake News detector'),
+            trailing: const Icon(Icons.arrow_forward),
+            onTap: () => {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const NewsDetectorPage()),
+              ),
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.chat_rounded),
             title: const Text('Chatbot'),
             trailing: const Icon(Icons.arrow_forward),
             onTap: () => {
