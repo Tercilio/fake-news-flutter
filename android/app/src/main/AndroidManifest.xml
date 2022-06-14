@@ -4,6 +4,9 @@
         android:label="Fake News"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
+
+        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyCX5LfABHyCbBjKjG6SliDeBhvzGe-1k3U"/>  
+
         <activity
             android:name=".MainActivity"
             android:exported="true"
