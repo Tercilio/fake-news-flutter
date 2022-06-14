@@ -9,7 +9,7 @@ import 'package:basearch/src/features/main/presentation/viewmodel/main_viewmodel
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-import 'mapa_page copy.dart';
+import 'mapa_page.dart';
 
 class MainPage extends StatefulWidget {
   const MainPage({Key? key}) : super(key: key);
