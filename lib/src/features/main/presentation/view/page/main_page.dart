@@ -31,7 +31,7 @@ class _MainPageState extends ModularState<MainPage, MainViewModel> {
         child: Center(
           child: Visibility(
             child: RefreshProgressIndicator(
-              backgroundColor: Colors.blueGrey,
+              backgroundColor: Color.fromARGB(255, 135, 151, 178),
             ),
           ),
         ),
@@ -235,6 +235,7 @@ class _MainPageState extends ModularState<MainPage, MainViewModel> {
         body: _buildFutureBuilder(),
         drawer: _drawer(context),
         appBar: AppBar(
+          backgroundColor: const Color.fromARGB(255, 135, 151, 178),
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(bottom: Radius.circular(15)),
           ),
