@@ -3,21 +3,25 @@
     
     "skip" : "Pular",
     "email" : "Email",
+
+    "body_hint" : "Digite a notícia",
     "email_hint" : "Informe o seu email",
-    "password" : "Senha",
     "password_hint" : "Informe a sua senha",
-    "login" : "Login",
-    "forgot_password" : "Esqueci a senha!",
     "reset_password_hint":"Informe o e-mail cadastrado",
-    "send_email":"Enviar e-mail",
-    "birthdate" : "Data de nascimento",
     "birthdate_hint" : "Informe a sua data de nascimento",
     "insert_code_hint": "Código",
     "new_password_hint": "Infrome sua nova senha",
     "new_password_confirm_hint":"Confirma a nova senha",
+    
+    "login" : "Login",
+    "password" : "Senha",
+    "send_email":"Enviar e-mail",
+    "birthdate" : "Data de nascimento",
+    "forgot_password" : "Esqueci a senha!",
     "change_Password" : "Confirmar", 
     "forgot_password_code": "Esqueci minha senha",
 
+    "send_news": "Enviar", 
     "updateuser" : "Atualizar",
     "saveuser" : "Salvar",
     "fullname": "Nome completo",
@@ -27,6 +31,7 @@
 
     "date_format": "dd/MM/yyyy",
 
+    "body_label" : "Noticia",
     "age_label" : "Idade",
     "fullname_label" : "Nome completo",
     "birthdate_label" : "Data de nascimento",
@@ -34,6 +39,7 @@
     "email_label" : "Email",
     "password_label" : "Senha",
     
+    "body_required" : "A notícia é obrigatória!",
     "email_required" : "O email é obrigatório!",
     "password_required" : "A senha é obrigatória!",
     "fullname_required" : "O nome completo é obrigatório!",
@@ -48,7 +54,8 @@
 
     "updateuser_success": "Conta atualizada com sucesso...",
     "updateuser_server_error" : "Erro no servidor!",
-    
+
+    "body_invalid" : "A notícia tem que ter no mínimo 100 palavras.",
     "email_invalid" : "O email é inválido!",
     "password_invalid" : "O senha é inválida!",
     "continue": "Continuar",

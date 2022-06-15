@@ -39,11 +39,58 @@ mixin _$NewsDetectorViewModel on _NewsDetectorViewModelBase, Store {
     });
   }
 
+  final _$_NewsDetectorViewModelBaseActionController =
+      ActionController(name: '_NewsDetectorViewModelBase');
+
+  @override
+  void validateBody() {
+    final _$actionInfo = _$_NewsDetectorViewModelBaseActionController
+        .startAction(name: '_NewsDetectorViewModelBase.validateBody');
+    try {
+      return super.validateBody();
+    } finally {
+      _$_NewsDetectorViewModelBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
 body: ${body},
 isLoading: ${isLoading}
+    ''';
+  }
+}
+
+mixin _$NewsDetectorError on _NewsDetectorErrorBase, Store {
+  Computed<bool>? _$hasErrorsComputed;
+
+  @override
+  bool get hasErrors =>
+      (_$hasErrorsComputed ??= Computed<bool>(() => super.hasErrors,
+              name: '_NewsDetectorErrorBase.hasErrors'))
+          .value;
+
+  final _$bodyAtom = Atom(name: '_NewsDetectorErrorBase.body');
+
+  @override
+  String? get body {
+    _$bodyAtom.reportRead();
+    return super.body;
+  }
+
+  @override
+  set body(String? value) {
+    _$bodyAtom.reportWrite(value, super.body, () {
+      super.body = value;
+    });
+  }
+
+  @override
+  String toString() {
+    return '''
+body: ${body},
+hasErrors: ${hasErrors}
     ''';
   }
 }

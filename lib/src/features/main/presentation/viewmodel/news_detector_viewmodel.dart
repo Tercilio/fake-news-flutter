@@ -9,27 +9,55 @@ class NewsDetectorViewModel = _NewsDetectorViewModelBase
     with _$NewsDetectorViewModel;
 
 abstract class _NewsDetectorViewModelBase with Store {
-  final _detectorusecase = Modular.get<NewsUseCase>();
+  final error = NewsDetectorError();
+  final _usecase = Modular.get<NewsUseCase>();
 
   @observable
   String body = "";
 
   @observable
-  bool isLoading = true;
+  bool isLoading = false;
+
+  @action
+  void validateBody() {
+    error.body = _usecase.validateBody(body);
+  }
 
   Future<bool> detectorFakeNews() async {
-    try {
-      NewsDetectorOutput detectorOutput =
-          await _detectorusecase.detectorFakeNews(body);
-      isLoading = false;
+    error.clear();
 
-      return detectorOutput.predictions!.veracity == 0 ? false : true;
-    } on Exception catch (erro) {
-      print("Erro ao detectar a notícias: " + erro.toString());
-    } finally {
-      isLoading = false;
+    validateBody();
+
+    if (!error.hasErrors) {
+      isLoading = true;
+
+      try {
+        NewsDetectorOutput detectorOutput =
+            await _usecase.detectorFakeNews(body);
+        isLoading = false;
+
+        return detectorOutput.predictions!.veracity == 0 ? false : true;
+      } on Exception catch (erro) {
+        print("Erro ao detectar a notícias: " + erro.toString());
+      } finally {
+        isLoading = false;
+      }
     }
 
     return false;
+  }
+}
+
+class NewsDetectorError = _NewsDetectorErrorBase with _$NewsDetectorError;
+
+abstract class _NewsDetectorErrorBase with Store {
+  @observable
+  String? body;
+
+  @computed
+  bool get hasErrors => body != null;
+
+  void clear() {
+    body = null;
   }
 }

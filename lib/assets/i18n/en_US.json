@@ -3,18 +3,22 @@
 
     "skip" : "Skip",
     "email": "email",
-    "email_hint": "Type your email",
-    "password": "Password",
-    "password_hint": "Type your password",
-    "login" : "Login",
-    "forgot_password" : "Forgot password!",
-    "birthdate" : "Birth date",
-    "birthdate_hint" : "Type your birth date",
 
+    "email_hint": "Type your email",
+    "password_hint": "Type your password",
+    "birthdate_hint" : "Type your birth date",
+    "fullname_hint": "Type your full name",
+    "body_hint" : "Type the news",
+    
+    "login" : "Login",
+    "password": "Password",
+    "birthdate" : "Birth date",
+    "forgot_password" : "Forgot password!",
+
+    "send_news" : "Send",
     "updateuser" : "Update",
     "saveuser" : "Join",
     "fullname": "Full name",
-    "fullname_hint": "Type your full name",
 
     "questionlogin_text": "Do you have an account? ",
     
@@ -30,6 +34,7 @@
 
     "date_format": "yyyy/MM/dd",
 
+    "body_label" : "News",
     "age_label" : "Age",
     "fullname_label" : "Full name",
     "birthdate_label" : "Birthdate",
@@ -37,11 +42,13 @@
     "email_label" : "Email",
     "password_label" : "Password",
 
+    "body_required" : "News is required!",
     "email_required" : "Email is required!",
     "password_required" : "Password is required!",
     "fullname_required" : "Full name is required!",
     "birth_required" : "Birth date is required!",
 
+    "body_invalid" : "News is invalid!",
     "email_invalid" : "Email is invalid!",
     "password_invalid" : "Password is invalid!",
 

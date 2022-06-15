@@ -49,12 +49,14 @@ class NewsRepository implements INews {
       dio.options.headers["Authorization"] =
           "Bearer " + UserSecureStorage.getUsertoken();
 
-      final response = await dio.put(
+      final response = await dio.post(
         'https://api-fakenews.herokuapp.com/api/news/predict',
         data: detector.toJson(),
       );
 
       final Map<String, dynamic> json = Map.from(response.data);
+      json['predictions'] =
+          Predictions.fromJson(Map.from(response.data['predictions']));
 
       return NewsDetectorOutput.fromJson(json);
     } on DioError catch (e) {
