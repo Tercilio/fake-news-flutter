@@ -29,6 +29,7 @@ class _NewsDetectorPage
           elevation: 0,
           centerTitle: true,
           title: const Text("Fake News detector"),
+          backgroundColor: const Color.fromARGB(255, 135, 151, 178),
           leading: TextButton(
             onPressed: () => Navigator.pop(context),
             child: Icon(

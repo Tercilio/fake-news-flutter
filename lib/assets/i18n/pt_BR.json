@@ -7,7 +7,7 @@
     "password" : "Senha",
     "password_hint" : "Informe a sua senha",
     "login" : "Login",
-    "forgot_password" : "Esqueci a senha!",
+    "forgot_password" : "Esqueceu a senha?",
     "reset_password_hint":"Informe o e-mail cadastrado",
     "send_email":"Enviar e-mail",
     "birthdate" : "Data de nascimento",
