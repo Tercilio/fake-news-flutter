@@ -119,7 +119,7 @@ class _OnboardingState extends State<OnboardingPage> {
                 child: Align(
                   alignment: Alignment.topCenter,
                   child: Text(
-                    'Verifique o indicador no canto superior esquerdo do card da notícia, para saber se a notícia é verdadeira ou falsa.',
+                    'Verifique o selo no canto superior esquerdo do card da notícia, para saber se a notícia é verdadeira ou falsa.',
                     style: TextStyle(
                       fontSize: 20.0,
                       letterSpacing: 1,
