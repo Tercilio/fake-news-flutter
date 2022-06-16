@@ -78,7 +78,7 @@ class _UserProfilePage
         child: const Center(
           child: Visibility(
             child: CircularProgressIndicator(
-              backgroundColor: Colors.blueGrey,
+              backgroundColor: Color.fromARGB(255, 135, 151, 178),
             ),
           ),
         ),
@@ -288,7 +288,8 @@ class _UserProfilePage
         appBar: AppBar(
           elevation: 0,
           centerTitle: true,
-          title: const Text("Profile"),
+          title: const Text("Perfil"),
+          backgroundColor: const Color.fromARGB(255, 135, 151, 178),
           leading: TextButton(
             onPressed: () => Navigator.pop(context),
             child: const Icon(

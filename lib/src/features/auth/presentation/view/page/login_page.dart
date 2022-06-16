@@ -143,7 +143,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginViewModel> {
               'forgot_password'.i18n(),
               style: const TextStyle(
                 fontWeight: FontWeight.w100,
-                color: Colors.grey,
+                color: Color.fromARGB(255, 138, 138, 138),
               ),
             ),
             onTap: () => store.isLoading
@@ -162,7 +162,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginViewModel> {
         child: TextButton(
           style: TextButton.styleFrom(
             splashFactory: NoSplash.splashFactory,
-            primary: Colors.grey,
+            primary: Color.fromARGB(255, 138, 138, 138),
           ),
           onPressed: store.isLoading
               ? null

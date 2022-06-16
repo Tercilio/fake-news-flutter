@@ -32,7 +32,7 @@ class _MainPageState extends ModularState<MainPage, MainViewModel> {
         child: Center(
           child: Visibility(
             child: RefreshProgressIndicator(
-              backgroundColor: Colors.blueGrey,
+              backgroundColor: Color.fromARGB(255, 135, 151, 178),
             ),
           ),
         ),
@@ -173,8 +173,8 @@ class _MainPageState extends ModularState<MainPage, MainViewModel> {
           _themeRowIcon,
           ListTile(
             leading: const Icon(Icons.person_rounded),
-            title: const Text('Profile'),
-            subtitle: const Text('my profile...'),
+            title: const Text('Perfil'),
+            subtitle: const Text('meu perfil...'),
             trailing: const Icon(Icons.arrow_forward),
             onTap: () => {
               Navigator.push(
@@ -191,7 +191,8 @@ class _MainPageState extends ModularState<MainPage, MainViewModel> {
             onTap: () => {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const NewsDetectorPage()),
+                MaterialPageRoute(
+                    builder: (context) => const NewsDetectorPage()),
               ),
             },
           ),
@@ -208,7 +209,7 @@ class _MainPageState extends ModularState<MainPage, MainViewModel> {
           ),
           ListTile(
             leading: const Icon(Icons.map_rounded),
-            title: const Text('Maps'),
+            title: const Text('Mapa'),
             trailing: const Icon(Icons.arrow_forward),
             onTap: () => {
               Navigator.push(
@@ -219,7 +220,7 @@ class _MainPageState extends ModularState<MainPage, MainViewModel> {
           ),
           ListTile(
             leading: const Icon(Icons.exit_to_app_rounded),
-            title: const Text('Logout'),
+            title: const Text('Sair'),
             onTap: () => {
               UserSecureStorage.resetUser(),
               Navigator.push(
@@ -247,6 +248,7 @@ class _MainPageState extends ModularState<MainPage, MainViewModel> {
         body: _buildFutureBuilder(),
         drawer: _drawer(context),
         appBar: AppBar(
+          backgroundColor: const Color.fromARGB(255, 135, 151, 178),
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(bottom: Radius.circular(15)),
           ),

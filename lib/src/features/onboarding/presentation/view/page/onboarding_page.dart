@@ -55,7 +55,7 @@ class _OnboardingState extends State<OnboardingPage> {
                 child: Align(
                   alignment: Alignment.topCenter,
                   child: Text(
-                    'Texto com ideia do app',
+                    'Atualmente a disseminação de fakes news tem se tornado um grande desafio. Este modelo de desinformação deve ser combatido.',
                     style: TextStyle(
                       fontSize: 20.0,
                       letterSpacing: 1,
@@ -86,7 +86,7 @@ class _OnboardingState extends State<OnboardingPage> {
                 child: Align(
                   alignment: Alignment.topCenter,
                   child: Text(
-                    'Texto para explicar um pouco sobre a fake news',
+                    'Fake news são notícias falsas publicadas por veículos de comunicação como se fossem reais.',
                     style: TextStyle(
                       fontSize: 20.0,
                       letterSpacing: 1,
@@ -119,7 +119,7 @@ class _OnboardingState extends State<OnboardingPage> {
                 child: Align(
                   alignment: Alignment.topCenter,
                   child: Text(
-                    'Texto para explicar sobre que estará no canto da notícia',
+                    'Verifique o indicador no canto superior esquerdo do card da notícia, para saber se a notícia é verdadeira ou falsa.',
                     style: TextStyle(
                       fontSize: 20.0,
                       letterSpacing: 1,
