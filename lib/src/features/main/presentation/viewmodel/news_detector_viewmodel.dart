@@ -16,6 +16,9 @@ abstract class _NewsDetectorViewModelBase with Store {
   String body = "";
 
   @observable
+  bool isNewsDetected = false;
+
+  @observable
   bool isLoading = false;
 
   @action
@@ -30,12 +33,13 @@ abstract class _NewsDetectorViewModelBase with Store {
 
     if (!error.hasErrors) {
       isLoading = true;
+      isNewsDetected = false;
 
       try {
         NewsDetectorOutput detectorOutput =
             await _usecase.detectorFakeNews(body);
-        isLoading = false;
 
+        isNewsDetected = true;
         return detectorOutput.predictions!.veracity == 0 ? false : true;
       } on Exception catch (erro) {
         print("Erro ao detectar a notícias: " + erro.toString());

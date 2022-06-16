@@ -291,9 +291,9 @@ class _UserProfilePage
           title: const Text("Profile"),
           leading: TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Icon(
+            child: const Icon(
               Icons.arrow_back,
-              color: _themeData.iconTheme.color,
+              color: Colors.white,
             ),
           ),
           shape: const RoundedRectangleBorder(

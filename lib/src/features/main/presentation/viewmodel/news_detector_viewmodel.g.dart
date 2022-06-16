@@ -24,6 +24,22 @@ mixin _$NewsDetectorViewModel on _NewsDetectorViewModelBase, Store {
     });
   }
 
+  final _$isNewsDetectedAtom =
+      Atom(name: '_NewsDetectorViewModelBase.isNewsDetected');
+
+  @override
+  bool get isNewsDetected {
+    _$isNewsDetectedAtom.reportRead();
+    return super.isNewsDetected;
+  }
+
+  @override
+  set isNewsDetected(bool value) {
+    _$isNewsDetectedAtom.reportWrite(value, super.isNewsDetected, () {
+      super.isNewsDetected = value;
+    });
+  }
+
   final _$isLoadingAtom = Atom(name: '_NewsDetectorViewModelBase.isLoading');
 
   @override
@@ -57,6 +73,7 @@ mixin _$NewsDetectorViewModel on _NewsDetectorViewModelBase, Store {
   String toString() {
     return '''
 body: ${body},
+isNewsDetected: ${isNewsDetected},
 isLoading: ${isLoading}
     ''';
   }

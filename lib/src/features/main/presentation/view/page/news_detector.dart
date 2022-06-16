@@ -17,7 +17,43 @@ class _NewsDetectorPage
     extends ModularState<NewsDetectorPage, NewsDetectorViewModel> {
   final _controller = TextEditingController(text: ' ');
   late ThemeData _themeData;
-  late bool isNewsDetected = false;
+  late bool isNewsFake = false;
+
+  Widget get _loading => Container(
+        margin: const EdgeInsets.only(top: 20),
+        child: const Center(
+          child: Visibility(
+            child: RefreshProgressIndicator(
+              backgroundColor: Colors.blueGrey,
+            ),
+          ),
+        ),
+      );
+
+  Widget get _fakeNewsIcon => SizedBox(
+        height: 40,
+        width: 40,
+        child: store.isNewsDetected && isNewsFake
+            ? Image.asset("lib/assets/images/fake_news_soft.png")
+            : Image.asset("lib/assets/images/fake_news_soft_grey.png"),
+      );
+
+  Widget get _trueNewsIcon => SizedBox(
+        height: 40,
+        width: 40,
+        child: store.isNewsDetected && !isNewsFake
+            ? Image.asset("lib/assets/images/true_news_soft.png")
+            : Image.asset("lib/assets/images/true_news_soft_grey.png"),
+      );
+
+  Widget get _statusNewsIcon => Container(
+        margin: const EdgeInsets.fromLTRB(25, 20, 25, 0),
+        width: double.infinity,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [_fakeNewsIcon, _trueNewsIcon],
+        ),
+      );
 
   Widget get _body => Container(
         margin: const EdgeInsets.fromLTRB(25, 20, 25, 0),
@@ -42,7 +78,10 @@ class _NewsDetectorPage
               ),
             ),
             enabled: !store.isLoading,
-            onChanged: (value) => store.body = value,
+            onChanged: (value) {
+              isNewsFake = false;
+              store.body = value;
+            },
           ),
         ),
       );
@@ -59,7 +98,8 @@ class _NewsDetectorPage
             ),
           ),
           onPressed: () async {
-            isNewsDetected = await store.detectorFakeNews();
+            store.isNewsDetected = false;
+            isNewsFake = !await store.detectorFakeNews();
           },
           child: Text('send_news'.i18n()),
         ),
@@ -80,9 +120,9 @@ class _NewsDetectorPage
           title: const Text("Fake News detector"),
           leading: TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Icon(
+            child: const Icon(
               Icons.arrow_back,
-              color: _themeData.iconTheme.color,
+              color: Colors.white,
             ),
           ),
           shape: const RoundedRectangleBorder(
@@ -96,7 +136,11 @@ class _NewsDetectorPage
             builder: (_) {
               return Form(
                 child: Column(
-                  children: [_body, _newsDetectorButton],
+                  children: [
+                    _statusNewsIcon,
+                    _body,
+                    store.isLoading ? _loading : _newsDetectorButton
+                  ],
                 ),
               );
             },
