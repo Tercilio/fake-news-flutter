@@ -1,5 +1,7 @@
+import 'package:basearch/src/features/theme/theme_config.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 
 // ignore: use_key_in_widget_constructors
 class ChatbotPage extends StatelessWidget {
@@ -7,12 +9,16 @@ class ChatbotPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isDark = Provider.of<ThemeChanger>(context, listen: false).isDark;
+
     return Scaffold(
         appBar: AppBar(
           elevation: 0,
           centerTitle: true,
           title: const Text("FakeBot"),
-          backgroundColor: const Color.fromARGB(255, 135, 151, 178),
+          backgroundColor: isDark
+              ? ThemeData.dark().backgroundColor
+              : const Color.fromARGB(255, 135, 151, 178),
           iconTheme: const IconThemeData(color: Colors.black),
         ),
         body: Container(

@@ -289,7 +289,9 @@ class _UserProfilePage
           elevation: 0,
           centerTitle: true,
           title: const Text("Perfil"),
-          backgroundColor: const Color.fromARGB(255, 135, 151, 178),
+          backgroundColor: darkThemeEnabled
+              ? ThemeData.dark().backgroundColor
+              : const Color.fromARGB(255, 135, 151, 178),
           leading: TextButton(
             onPressed: () => Navigator.pop(context),
             child: const Icon(
