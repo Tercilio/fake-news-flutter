@@ -1,101 +1,96 @@
-import 'package:basearch/src/features/theme/theme_config.dart';
+import 'package:dialog_flowtter/dialog_flowtter.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'Messages.dart';
+import 'package:basearch/src/features/theme/theme_config.dart';
 import 'package:provider/provider.dart';
 
 // ignore: use_key_in_widget_constructors
-class ChatbotPage extends StatelessWidget {
-  final messageController = TextEditingController();
+
+class ChatbotPage extends StatefulWidget {
+  const ChatbotPage({Key? key}) : super(key: key);
+
+  @override
+  _ChatbotPageState createState() => _ChatbotPageState();
+}
+
+class _ChatbotPageState extends State<ChatbotPage> {
+  late DialogFlowtter dialogFlowtter;
+  final TextEditingController _controller = TextEditingController();
+
+  List<Map<String, dynamic>> messages = [];
+
+  @override
+  void initState() {
+    DialogFlowtter.fromFile().then((instance) => dialogFlowtter = instance);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     bool isDark = Provider.of<ThemeChanger>(context, listen: false).isDark;
-
     return Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          centerTitle: true,
-          title: const Text("FakeBot"),
-          backgroundColor: isDark
-              ? ThemeData.dark().backgroundColor
-              : const Color.fromARGB(255, 135, 151, 178),
-          iconTheme: const IconThemeData(color: Colors.black),
+      appBar: AppBar(
+        elevation: 0,
+        centerTitle: true,
+        title: const Text("FakeBot"),
+        backgroundColor: isDark
+            ? ThemeData.dark().backgroundColor
+            : const Color.fromARGB(255, 135, 151, 178),
+        iconTheme: const IconThemeData(color: Colors.black),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(
+            bottom: Radius.circular(15),
+          ),
         ),
-        body: Container(
-            child: Column(
+      ),
+      body: Container(
+        child: Column(
           children: [
-            Center(
-              child: Container(
-                padding: const EdgeInsets.only(top: 15, bottom: 10),
-                child: Text(
-                  "Today, ${DateFormat("Hm").format(DateTime.now())}",
-                  style: const TextStyle(fontSize: 20),
-                ),
-              ),
-            ),
-            Flexible(
-              child: ListView.builder(
-                reverse: true,
-                itemCount: 0,
-                itemBuilder: (context, index) {
-                  return build(context);
-                },
-              ),
-            ),
-            const Divider(
-              height: 5,
-              color: Colors.greenAccent,
-            ),
+            Expanded(child: MessagesScreen(messages: messages)),
             Container(
-              child: ListTile(
-                leading: IconButton(
-                  icon: const Icon(
-                    Icons.camera_alt,
-                    color: Color.fromARGB(255, 5, 5, 5),
-                    size: 35,
-                  ),
-                  onPressed: () {},
-                ),
-                title: Container(
-                  height: 35,
-                  decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(15)),
-                      color: Color.fromRGBO(220, 220, 220, 1)),
-                  padding: const EdgeInsets.only(left: 15),
-                  child: TextFormField(
-                    controller: messageController,
-                    decoration: const InputDecoration(
-                      hintText: "Escreva sua mensagem",
-                      hintStyle: TextStyle(color: Colors.black26),
-                      border: InputBorder.none,
-                      focusedBorder: InputBorder.none,
-                      enabledBorder: InputBorder.none,
-                      errorBorder: InputBorder.none,
-                      disabledBorder: InputBorder.none,
-                    ),
-                    style: const TextStyle(fontSize: 16, color: Colors.black),
-                  ),
-                ),
-                trailing: IconButton(
-                  icon: const Icon(
-                    Icons.send,
-                    size: 30,
-                    color: Color.fromARGB(255, 0, 0, 0),
-                  ),
-                  onPressed: () {
-                    if (messageController.text.isEmpty) {
-                      // ignore: avoid_print
-                      print("Mensagem vazia!");
-                    } else {
-                      setState(() {});
-                    }
-                  },
-                ),
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+              color: const Color.fromARGB(255, 135, 151, 178),
+              child: Row(
+                children: [
+                  Expanded(
+                      child: TextField(
+                    controller: _controller,
+                    style: const TextStyle(color: Colors.white),
+                  )),
+                  IconButton(
+                      onPressed: () {
+                        sendMessage(_controller.text);
+                        _controller.clear();
+                      },
+                      icon: const Icon(Icons.send))
+                ],
               ),
-            ),
+            )
           ],
-        )));
+        ),
+      ),
+    );
   }
 
-  void setState(Null Function() param0) {}
+  sendMessage(String text) async {
+    if (text.isEmpty) {
+      // ignore: avoid_print
+      print('Message is empty');
+    } else {
+      setState(() {
+        addMessage(Message(text: DialogText(text: [text])), true);
+      });
+
+      DetectIntentResponse response = await dialogFlowtter.detectIntent(
+          queryInput: QueryInput(text: TextInput(text: text)));
+      if (response.message == null) return;
+      setState(() {
+        addMessage(response.message!);
+      });
+    }
+  }
+
+  addMessage(Message message, [bool isUserMessage = false]) {
+    messages.add({'message': message, 'isUserMessage': isUserMessage});
+  }
 }
