@@ -14,6 +14,7 @@ class ChatbotPage extends StatefulWidget {
 }
 
 class _ChatbotPageState extends State<ChatbotPage> {
+  late ThemeData _themeData;
   late DialogFlowtter dialogFlowtter;
   final TextEditingController _controller = TextEditingController();
 
@@ -28,41 +29,49 @@ class _ChatbotPageState extends State<ChatbotPage> {
   @override
   Widget build(BuildContext context) {
     bool isDark = Provider.of<ThemeChanger>(context, listen: false).isDark;
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        centerTitle: true,
-        title: const Text("FakeBot"),
-        backgroundColor: isDark
-            ? ThemeData.dark().backgroundColor
-            : const Color.fromARGB(255, 135, 151, 178),
-        iconTheme: const IconThemeData(color: Colors.black),
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(15),
+    _themeData = isDark ? ThemeData.dark() : ThemeData.light();
+
+    return MaterialApp(
+      theme: _themeData,
+      home: Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          centerTitle: true,
+          title: const Text("FakeBot"),
+          backgroundColor: isDark
+              ? ThemeData.dark().backgroundColor
+              : const Color.fromARGB(255, 135, 151, 178),
+          leading: TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: const Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            ),
+          ),
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(15),
+            ),
           ),
         ),
-      ),
-      body: Container(
-        child: Column(
+        body: Column(
           children: [
             Expanded(child: MessagesScreen(messages: messages)),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-              color: const Color.fromARGB(255, 135, 151, 178),
               child: Row(
                 children: [
-                  Expanded(
-                      child: TextField(
-                    controller: _controller,
-                    style: const TextStyle(color: Colors.white),
-                  )),
-                  IconButton(
+                  Expanded(child: TextField(controller: _controller)),
+                  Container(
+                    margin: const EdgeInsets.only(bottom: 15),
+                    child: IconButton(
                       onPressed: () {
                         sendMessage(_controller.text);
                         _controller.clear();
                       },
-                      icon: const Icon(Icons.send))
+                      icon: const Icon(Icons.send),
+                    ),
+                  )
                 ],
               ),
             )

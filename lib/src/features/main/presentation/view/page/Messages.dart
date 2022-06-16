@@ -1,4 +1,6 @@
+import 'package:basearch/src/features/theme/theme_config.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class MessagesScreen extends StatefulWidget {
   final List messages;
@@ -11,6 +13,12 @@ class MessagesScreen extends StatefulWidget {
 class _MessagesScreenState extends State<MessagesScreen> {
   @override
   Widget build(BuildContext context) {
+    bool isDark = Provider.of<ThemeChanger>(context, listen: false).isDark;
+
+    var colorBoxMensage = isDark
+        ? ThemeData.dark().backgroundColor
+        : const Color.fromARGB(255, 135, 151, 178);
+
     var w = MediaQuery.of(context).size.width;
     return ListView.separated(
         itemBuilder: (context, index) {
@@ -22,26 +30,24 @@ class _MessagesScreenState extends State<MessagesScreen> {
                   : MainAxisAlignment.start,
               children: [
                 Container(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 14, horizontal: 14),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                          bottomLeft: const Radius.circular(
-                            20,
-                          ),
-                          topRight: const Radius.circular(20),
-                          bottomRight: Radius.circular(
-                              widget.messages[index]['isUserMessage'] ? 0 : 20),
-                          topLeft: Radius.circular(
-                              widget.messages[index]['isUserMessage'] ? 20 : 0),
-                        ),
-                        color: widget.messages[index]['isUserMessage']
-                            ? const Color.fromARGB(255, 135, 151, 178)
-                            : const Color.fromARGB(255, 130, 144, 168)
-                                .withOpacity(0.8)),
-                    constraints: BoxConstraints(maxWidth: w * 2 / 3),
-                    child:
-                        Text(widget.messages[index]['message'].text.text[0])),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 14, horizontal: 14),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: const Radius.circular(20),
+                      topRight: const Radius.circular(20),
+                      bottomRight: Radius.circular(
+                          widget.messages[index]['isUserMessage'] ? 0 : 20),
+                      topLeft: Radius.circular(
+                          widget.messages[index]['isUserMessage'] ? 20 : 0),
+                    ),
+                    color: widget.messages[index]['isUserMessage']
+                        ? colorBoxMensage
+                        : colorBoxMensage.withOpacity(0.6),
+                  ),
+                  constraints: BoxConstraints(maxWidth: w * 2 / 3),
+                  child: Text(widget.messages[index]['message'].text.text[0]),
+                ),
               ],
             ),
           );
