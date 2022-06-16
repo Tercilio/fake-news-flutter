@@ -13,7 +13,7 @@
     "login" : "Login",
     "password": "Password",
     "birthdate" : "Birth date",
-    "forgot_password" : "Forgot password!",
+    "forgot_password" : "Forgot your password?",
 
     "send_news" : "Send",
     "updateuser" : "Update",

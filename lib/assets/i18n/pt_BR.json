@@ -17,7 +17,7 @@
     "password" : "Senha",
     "send_email":"Enviar e-mail",
     "birthdate" : "Data de nascimento",
-    "forgot_password" : "Esqueci a senha!",
+    "forgot_password" : "Esqueceu a senha?",
     "change_Password" : "Confirmar", 
     "forgot_password_code": "Esqueci minha senha",
 
