@@ -10,7 +10,7 @@
     "reset_password_hint":"Informe o e-mail cadastrado",
     "birthdate_hint" : "Informe a sua data de nascimento",
     "insert_code_hint": "Código",
-    "new_password_hint": "Infrome sua nova senha",
+    "new_password_hint": "Informe sua nova senha",
     "new_password_confirm_hint":"Confirma a nova senha",
     
     "login" : "Login",

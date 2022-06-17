@@ -1,4 +1,3 @@
-import 'package:basearch/src/common/form_text_field.dart';
 import 'package:basearch/src/features/auth/presentation/viewmodel/forgotpassword_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -53,8 +52,30 @@ class _ForgotPasswordState
           textInputAction: TextInputAction.next,
           decoration: InputDecoration(
             errorText: store.error.email,
-            hintText: 'reset_password_hint'.i18n(),
+            hintText: 'email_hint'.i18n(),
             prefixIcon: const Icon(Icons.email_rounded),
+            contentPadding: const EdgeInsets.all(20),
+            border: OutlineInputBorder(
+              borderSide: const BorderSide(color: Colors.black, width: 4.0),
+              borderRadius: BorderRadius.circular(10),
+            ),
+          ),
+          enabled: !store.isLoading,
+          onChanged: (value) => store.email = value,
+        ),
+      );
+
+  Widget get _insert_data => Container(
+        margin: const EdgeInsets.fromLTRB(25, 15, 25, 5),
+        width: double.infinity,
+        //height: 56,
+        child: TextFormField(
+          keyboardType: TextInputType.emailAddress,
+          textInputAction: TextInputAction.next,
+          decoration: InputDecoration(
+            errorText: store.error.email,
+            hintText: 'birthdate_label'.i18n(),
+            prefixIcon: const Icon(Icons.date_range_rounded),
             contentPadding: const EdgeInsets.all(20),
             border: OutlineInputBorder(
               borderSide: const BorderSide(color: Colors.black, width: 4.0),
@@ -88,7 +109,7 @@ class _ForgotPasswordState
                   }
                   store.sendEmail();
                 },
-          child: Text('send_email'.i18n()),
+          child: Text('change_Password'.i18n()),
         ),
       );
   @override
@@ -112,6 +133,7 @@ class _ForgotPasswordState
                   const SizedBox(height: 5),
                   _logo,
                   _insert_email,
+                  _insert_data,
                   _forgotButton,
                 ],
               ),

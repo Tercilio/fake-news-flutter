@@ -50,7 +50,28 @@ class _ForgotPasswordCodeState
           textInputAction: TextInputAction.next,
           decoration: InputDecoration(
             errorText: store.error.code,
-            hintText: 'insert_code_hint'.i18n(),
+            hintText: 'new_password_hint'.i18n(),
+            prefixIcon: const Icon(Icons.person),
+            contentPadding: const EdgeInsets.all(20),
+            border: OutlineInputBorder(
+              borderSide: const BorderSide(color: Colors.black, width: 4.0),
+              borderRadius: BorderRadius.circular(10),
+            ),
+          ),
+          enabled: !store.isLoading,
+          onChanged: (value) => store.code = value,
+        ),
+      );
+  Widget get _comfirm_code => Container(
+        margin: const EdgeInsets.fromLTRB(25, 15, 25, 5),
+        width: double.infinity,
+        //height: 56,
+        child: TextFormField(
+          keyboardType: TextInputType.emailAddress,
+          textInputAction: TextInputAction.next,
+          decoration: InputDecoration(
+            errorText: store.error.code,
+            hintText: 'new_password_confirm_hint'.i18n(),
             prefixIcon: const Icon(Icons.person),
             contentPadding: const EdgeInsets.all(20),
             border: OutlineInputBorder(
@@ -110,6 +131,7 @@ class _ForgotPasswordCodeState
                   const SizedBox(height: 5),
                   _logo,
                   _code,
+                  _comfirm_code,
                   _continueButton,
                 ],
               ),
