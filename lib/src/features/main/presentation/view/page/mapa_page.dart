@@ -1,6 +1,7 @@
 import 'package:basearch/src/features/theme/theme_config.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:localization/localization.dart';
 import 'package:provider/provider.dart';
 
 class MapaPage extends StatefulWidget {
@@ -28,7 +29,7 @@ class _MapaPageState extends State<MapaPage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text("Google Maps"),
+        title: Text('maps_bar'.i18n()),
         backgroundColor: isDark
             ? ThemeData.dark().backgroundColor
             : const Color.fromARGB(255, 135, 151, 178),

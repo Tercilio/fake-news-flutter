@@ -193,7 +193,7 @@ class _LoginPageState extends ModularState<LoginPage, LoginViewModel> {
                   _logo,
                   _email,
                   _password,
-                  _forgotPassword,
+                  // _forgotPassword,
                   _loginTextError,
                   store.isLoading ? _loadingIndicator : _loginButton,
                   _signUp

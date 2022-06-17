@@ -14,9 +14,12 @@ abstract class _MainViewModelBase with Store {
   List<News> newsData = [];
 
   @observable
-  bool isLoading = true;
+  bool isLoading = false;
 
   Future<List<News>> getAllNews() async {
+    newsData = [];
+    isLoading = true;
+
     try {
       newsData = await _newsusecase.getAllNews();
       isLoading = false;

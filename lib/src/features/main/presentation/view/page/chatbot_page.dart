@@ -1,5 +1,6 @@
 import 'package:dialog_flowtter/dialog_flowtter.dart';
 import 'package:flutter/material.dart';
+import 'package:localization/localization.dart';
 import 'Messages.dart';
 import 'package:basearch/src/features/theme/theme_config.dart';
 import 'package:provider/provider.dart';
@@ -37,7 +38,7 @@ class _ChatbotPageState extends State<ChatbotPage> {
         appBar: AppBar(
           elevation: 0,
           centerTitle: true,
-          title: const Text("FakeBot"),
+          title: Text('chatbot_bar'.i18n()),
           backgroundColor: isDark
               ? ThemeData.dark().backgroundColor
               : const Color.fromARGB(255, 135, 151, 178),

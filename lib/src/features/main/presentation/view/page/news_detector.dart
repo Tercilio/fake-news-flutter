@@ -117,7 +117,7 @@ class _NewsDetectorPage
         appBar: AppBar(
           elevation: 0,
           centerTitle: true,
-          title: const Text("Fake News detector"),
+          title: Text('fakenews_detector_bar'.i18n()),
           backgroundColor: darkThemeEnabled
               ? ThemeData.dark().backgroundColor
               : const Color.fromARGB(255, 135, 151, 178),

@@ -10,6 +10,7 @@ import 'package:basearch/src/features/main/presentation/viewmodel/main_viewmodel
 import 'package:basearch/src/features/theme/theme_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:localization/localization.dart';
 import 'package:provider/provider.dart';
 
 import 'mapa_page.dart';
@@ -23,7 +24,9 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends ModularState<MainPage, MainViewModel> {
   final UserOutputDto _user = UserSecureStorage.getUser();
+  late GlobalKey refreshkey = GlobalKey<RefreshIndicatorState>();
   late ThemeChanger themeChanger;
+  late List<News> newsData = [];
   late bool systemIsDark;
 
   Widget get _loading => const SizedBox(
@@ -111,29 +114,8 @@ class _MainPageState extends ModularState<MainPage, MainViewModel> {
 
   ListView _listView(BuildContext context) {
     return ListView.builder(
-      itemCount: store.newsData.length,
-      itemBuilder: (context, index) {
-        return _newsCard(context, store.newsData[index]);
-      },
-    );
-  }
-
-  _buildFutureBuilder() {
-    return FutureBuilder(
-      future: store.newsData.isEmpty ? store.getAllNews() : store.getNewsData(),
-      builder: (context, snaphot) {
-        switch (snaphot.connectionState) {
-          case ConnectionState.none:
-          case ConnectionState.waiting:
-            return _loading;
-          default:
-            if (snaphot.hasData) {
-              return _listView(context);
-            } else {
-              return const Center(child: Text("Erro ao carregar."));
-            }
-        }
-      },
+      itemCount: newsData.length,
+      itemBuilder: (context, index) => _newsCard(context, newsData[index]),
     );
   }
 
@@ -148,19 +130,10 @@ class _MainPageState extends ModularState<MainPage, MainViewModel> {
               accountName: Text(_user.fullname),
               accountEmail: Text(_user.email),
               currentAccountPicture: CircleAvatar(
-                child: _user.photo.isEmpty
-                    ? Text(
-                        _user.fullname.isEmpty ? "" : _user.fullname[0],
-                        style: const TextStyle(fontSize: 40.0),
-                      )
-                    : ClipOval(
-                        child: Image.network(
-                          _user.photo,
-                          fit: BoxFit.cover,
-                          width: 90,
-                          height: 90,
-                        ),
-                      ),
+                child: Text(
+                  _user.fullname.isEmpty ? "" : _user.fullname[0],
+                  style: const TextStyle(fontSize: 40.0),
+                ),
               ),
               decoration: const BoxDecoration(
                 image: DecorationImage(
@@ -173,65 +146,78 @@ class _MainPageState extends ModularState<MainPage, MainViewModel> {
           _themeRowIcon,
           ListTile(
             leading: const Icon(Icons.person_rounded),
-            title: const Text('Perfil'),
-            subtitle: const Text('meu perfil...'),
+            title: Text('profile_bar'.i18n()),
             trailing: const Icon(Icons.arrow_forward),
             onTap: () => {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => const UserProfilePage()),
+                  builder: (context) => const UserProfilePage(),
+                ),
               ),
             },
           ),
           ListTile(
             leading: const Icon(Icons.newspaper_rounded),
-            title: const Text('Fake News detector'),
+            title: Text('fakenews_detector_bar'.i18n()),
             trailing: const Icon(Icons.arrow_forward),
             onTap: () => {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => const NewsDetectorPage()),
+                  builder: (context) => const NewsDetectorPage(),
+                ),
               ),
             },
           ),
           ListTile(
             leading: const Icon(Icons.chat_rounded),
-            title: const Text('Chatbot'),
+            title: Text('chatbot_bar'.i18n()),
             trailing: const Icon(Icons.arrow_forward),
             onTap: () => {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => ChatbotPage()),
+                MaterialPageRoute(
+                  builder: (context) => const ChatbotPage(),
+                ),
               ),
             },
           ),
           ListTile(
             leading: const Icon(Icons.map_rounded),
-            title: const Text('Mapa'),
+            title: Text('maps_bar'.i18n()),
             trailing: const Icon(Icons.arrow_forward),
             onTap: () => {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => MapaPage()),
+                MaterialPageRoute(
+                  builder: (context) => const MapaPage(),
+                ),
               ),
             },
           ),
           ListTile(
             leading: const Icon(Icons.exit_to_app_rounded),
-            title: const Text('Sair'),
+            title: Text('leave_bar'.i18n()),
             onTap: () => {
               UserSecureStorage.resetUser(),
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const LoginPage()),
+                MaterialPageRoute(
+                  builder: (context) => const LoginPage(),
+                ),
               ),
             },
           ),
         ],
       ),
     );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _refreshListNews();
   }
 
   @override
@@ -245,7 +231,6 @@ class _MainPageState extends ModularState<MainPage, MainViewModel> {
       debugShowCheckedModeBanner: false,
       theme: darkThemeEnabled ? ThemeData.dark() : ThemeData.light(),
       home: Scaffold(
-        body: _buildFutureBuilder(),
         drawer: _drawer(context),
         appBar: AppBar(
           backgroundColor: darkThemeEnabled
@@ -254,10 +239,27 @@ class _MainPageState extends ModularState<MainPage, MainViewModel> {
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(bottom: Radius.circular(15)),
           ),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.update_rounded),
+              onPressed: () => _refreshListNews(),
+            )
+          ],
           centerTitle: true,
-          title: const Text("Notícias"),
+          title: Text('news_bar'.i18n()),
+        ),
+        body: RefreshIndicator(
+          onRefresh: _refreshListNews,
+          key: refreshkey,
+          child: store.isLoading ? _loading : _listView(context),
         ),
       ),
     );
+  }
+
+  Future<void> _refreshListNews() async {
+    List<News> list = await store.getAllNews();
+
+    setState(() => newsData = list);
   }
 }

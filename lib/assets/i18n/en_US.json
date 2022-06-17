@@ -34,6 +34,13 @@
 
     "date_format": "yyyy/MM/dd",
 
+    "leave_bar" : "Logout",
+    "news_bar" : "News",
+    "maps_bar" : "Maps",
+    "chatbot_bar" : "Chatbot",
+    "profile_bar" : "Profile",
+    "fakenews_detector_bar" : "Fake News detector",
+
     "body_label" : "News",
     "age_label" : "Age",
     "fullname_label" : "Full name",

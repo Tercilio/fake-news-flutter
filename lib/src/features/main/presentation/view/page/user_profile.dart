@@ -218,6 +218,7 @@ class _UserProfilePage
           children: [
             Visibility(
               child: Container(
+                height: 56,
                 margin: const EdgeInsets.fromLTRB(0, 15, 0, 5),
                 child: Text(
                   'updateuser_success'.i18n(),
@@ -272,7 +273,10 @@ class _UserProfilePage
         child: Stack(
           clipBehavior: Clip.none,
           fit: StackFit.expand,
-          children: [_photo, _cameraIcon],
+          children: [
+            _photo,
+            // _cameraIcon,
+          ],
         ),
       );
 
@@ -388,11 +392,6 @@ class _UserProfilePage
 
   startTime() async {
     var duration = const Duration(seconds: 2);
-    return Timer(duration, route);
-  }
-
-  route() {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => const MainPage()));
+    return Timer(duration, () => setState(() => isAccountUpdated = false));
   }
 }
